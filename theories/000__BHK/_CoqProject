@@ -1,0 +1,8 @@
+-q
+
+# If you want a logical root, uncomment and pick one:
+# -Q . proofcase
+
+P0_S__bhk.v
+P1_R__PCC.v
+P1_S__PCC.v
