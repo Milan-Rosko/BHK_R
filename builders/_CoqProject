@@ -1,0 +1,58 @@
+# root
+-docroot proofcase
+
+# Logical paths
+-Q theories/C000__BHK_R BHK_R.C000
+-Q theories/C001__Carryless_Pairing Carryless_Pairing.C001
+-Q theories/C002__Additive_Theory_of_Provability ATP.C002
+-Q theories/C003__Carryless_Diagonal_Lemma Diagonallemma.C003
+-Q theories/C004__Mirror_Lemma ATP.C004__Mirror_Lemma
+-Q theories/C005__Adversarial_Barrier Adversarial_Barrier.C005
+
+# C000
+theories/C000__BHK_R/P0__BHK.v
+theories/C000__BHK_R/P0__Reflexica.v
+
+# C001
+theories/C001__Carryless_Pairing/P1_S__Substrate.v
+theories/C001__Carryless_Pairing/P2_R__Carryless.v
+theories/C001__Carryless_Pairing/P2_S__Carryless.v
+theories/C001__Carryless_Pairing/P3_R__Injectivity.v
+theories/C001__Carryless_Pairing/P3_S__Injectivity.v
+theories/C001__Carryless_Pairing/P4_R__Pairing.v
+theories/C001__Carryless_Pairing/P4_S__Pairing.v
+theories/C001__Carryless_Pairing/P5_T__Carryless_Pairing.v
+theories/C001__Carryless_Pairing/P5_T__Effectivity.v
+theories/C001__Carryless_Pairing/P6_A__Reflexica_Certificate.v
+
+# C002
+theories/C002__Additive_Theory_of_Provability/P1_S__Kernel_Spec.v
+theories/C002__Additive_Theory_of_Provability/P2_R__Hilbert_Kernel.v
+theories/C002__Additive_Theory_of_Provability/P2_S__Provability_Interface.v
+theories/C002__Additive_Theory_of_Provability/P3_R__Additive_Laws.v
+theories/C002__Additive_Theory_of_Provability/P3_S__Additive_Theory.v
+theories/C002__Additive_Theory_of_Provability/P4_R__Coding_Nucleus.v
+theories/C002__Additive_Theory_of_Provability/P4_R__Coding_Carryless.v
+theories/C002__Additive_Theory_of_Provability/P4_S__Coding.v
+theories/C002__Additive_Theory_of_Provability/P5_T__Proof_Theory.v
+theories/C002__Additive_Theory_of_Provability/P5_T__Effectivity.v
+
+# C003
+theories/C003__Carryless_Diagonal_Lemma/P1_S__Syntax.v
+theories/C003__Carryless_Diagonal_Lemma/P2_R__Backend.v
+theories/C003__Carryless_Diagonal_Lemma/P2_R__Compiler.v
+theories/C003__Carryless_Diagonal_Lemma/P5_T__Diagonal.v
+
+# C004
+theories/C004__Mirror_Lemma/P1_S__Context.v
+theories/C004__Mirror_Lemma/P2_R__Mirror_Core.v
+theories/C004__Mirror_Lemma/P2_R__Mirror_Transport.v
+theories/C004__Mirror_Lemma/P2_S__Mirror_Lemma.v
+theories/C004__Mirror_Lemma/P3_S__Recursive_Mirror_Lemma.v
+theories/C004__Mirror_Lemma/P5_T__Weakforcing.v
+
+# C005
+theories/C005__Adversarial_Barrier/P1_S__Barrier_Definition.v
+theories/C005__Adversarial_Barrier/P2_R__Barrier_Proof.v
+theories/C005__Adversarial_Barrier/P3_T__Barrier.v
+theories/C005__Adversarial_Barrier/P3_T__Mirror_Instance.v

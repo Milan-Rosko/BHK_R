@@ -1,7 +1,0 @@
--arg -q
-
-# If you want a logical root, uncomment and pick one:
-# -Q . proofcase
-
-S01__BHKCore.v
-S02__PCC.v

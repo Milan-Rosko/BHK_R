@@ -1,9 +1,0 @@
--q
-
-# If you want a logical root, uncomment and pick one:
-# -Q . proofcase
-
-P0_S__bhk.v
-P1_R__carryless__A.v
-P1_R__carryless__B.v
-P1_S__carryless.v
