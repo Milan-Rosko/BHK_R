@@ -1,0 +1,272 @@
+Textfile (v.2.1) triggered by a shell-script if a 'makefile' run was successful.
+
+ . . . . . . . . .....*************************.                           
+. . . . . ... ..... ....***************************.                       
+ . . . . . . . . . . .. ... .. ... .....**************                     
+. . . . . .. .. .. .....********************************                   
+ . . . . ... ..... ......********************************                  
+. . . . . . . . . . .. .... .... ....*********************                 
+ . . . . . . ... .... .....**********************   *******                
+. . . . . . . .  .... ....*********************************.               
+ . . . . .. .. ..... ....***********************************               
+. . . ... ... ..... .....***********************************               
+ . . . .. ... ..... .....***********************************               
+. . . . .. ... ..... .....******************          *****                
+ . . . . .. ... ..... .....***************              ***                
+. . . . . .. ... ..... .....************                 *                 
+ . . . ..d8888b.. ..... .....*********                                     
+. . . .d88P..Y88b. ..... ......******                                      
+ . . . Y88b... ... ...... .......**                                        
+        Y888b.   888  888  .d8888b .d8888b .d88b.  .d8888b  .d8888b        
+          ”Y88b. 888  888 d88P”   d88P”   d8P  Y8b 88K      88K            
+            ”888 888  888 888     888     88888888 ”Y8888b. ”Y8888b.       
+      Y88b  d88P Y88b 888 Y88b.   Y88b.   Y8b.          X88      X88  d8b  
+       ”Y8888P”   ”Y88888  ”Y8888P ”Y8888P ”Y8888   88888P'  88888P'  Y8P  
+
+
+                    Date (UTC): 2026-01-26T16:20:26Z,
+
+                   Rocq version: The Coq Proof Assistant, version 8.20.1
+                   Method: isolated shadow, scratch folder
+
+---------------------------------------------------------------------------
+DISCIPLINE REPORT:
+---------------------------------------------------------------------------
+
+Status: Verified.
+Details:
+1 authorized axiom + 1 exact contract placeholder (allowed).
+Authorized: theories/M001__BHK_R_Arithmetic/C001__Carryless_Pairing/P6_A__Reflexica_Certificate.v:98:    Axiom axiom : REFLEXICA.
+Contract: theories/M004__Conservation_of_Hardness/C014__Fermat_Machine/contracts/P1_T__Encoding_Bridge.v:18:Axiom witness_solvable_from_machine :
+
+---------------------------------------------------------------------------
+
+_CoqProject file contents:
+
+=== BEGIN ===
+
+   # root 
+   -docroot proofcase 
+    
+   # Logical Path Mappings 
+    
+   -Q theories/M001__BHK_R_Arithmetic/C000__BHK_R BHK_R.C000 
+   -Q theories/M001__BHK_R_Arithmetic/C001__Carryless_Pairing Carryless_Pairing.C001 
+   -Q theories/M001__BHK_R_Arithmetic/C002__Additive_Hilbert_System ATP.C002 
+   -Q theories/M002__Carryless_Proof_Theory/C003__Carryless_Diagonal_Lemma Diagonallemma.C003 
+   -Q theories/M002__Carryless_Proof_Theory/C004__Mirror_Lemma ATP.C004__Mirror_Lemma 
+   -Q theories/M003__Delian_Barrier/C005__Adversarial_Barrier Adversarial_Barrier.C005 
+   -Q theories/M003__Delian_Barrier/C006__Audit_Barrier Audit_Barrier.C006 
+   -Q theories/M003__Delian_Barrier/C007__Resistance_Law Resistance_Law.C007 
+   -Q theories/M003__Delian_Barrier/C008__Reflexica_Normalization Reflexica_Normalization.C008 
+   -Q theories/M004__Conservation_of_Hardness/C009__SAT_Reduction SAT.C009 
+   -Q theories/M004__Conservation_of_Hardness/C010__Solvability_Thesis Solvability_Thesis.C010 
+   -Q theories/M004__Conservation_of_Hardness/C011__Quintic_Hardness Quintic_Hardness.C011 
+   -Q theories/M004__Conservation_of_Hardness/C012__Cubic_Incompleteness Cubic_Incompleteness.C012 
+   -Q theories/M004__Conservation_of_Hardness/C013__Logical_Cryptography Logical_Crypt.C012 
+   -Q theories/M004__Conservation_of_Hardness/C014__Fermat_Machine Fermat_Machine.C014 
+    
+   # File List 
+    
+   # C000 
+    
+   theories/M001__BHK_R_Arithmetic/C000__BHK_R/P0__BHK.v 
+   theories/M001__BHK_R_Arithmetic/C000__BHK_R/P0__Reflexica.v 
+    
+   # C001 
+    
+   theories/M001__BHK_R_Arithmetic/C001__Carryless_Pairing/P1_S__Substrate.v 
+   theories/M001__BHK_R_Arithmetic/C001__Carryless_Pairing/P2_R__Carryless.v 
+   theories/M001__BHK_R_Arithmetic/C001__Carryless_Pairing/P2_S__Carryless.v 
+   theories/M001__BHK_R_Arithmetic/C001__Carryless_Pairing/P3_R__Injectivity.v 
+   theories/M001__BHK_R_Arithmetic/C001__Carryless_Pairing/P3_S__Injectivity.v 
+   theories/M001__BHK_R_Arithmetic/C001__Carryless_Pairing/P4_R__Pairing.v 
+   theories/M001__BHK_R_Arithmetic/C001__Carryless_Pairing/P4_S__Pairing.v 
+   theories/M001__BHK_R_Arithmetic/C001__Carryless_Pairing/P5_T__Carryless_Pairing.v 
+   theories/M001__BHK_R_Arithmetic/C001__Carryless_Pairing/P5_T__Effectivity.v 
+   theories/M001__BHK_R_Arithmetic/C001__Carryless_Pairing/P6_A__Reflexica_Certificate.v 
+    
+   # C002 
+    
+   theories/M001__BHK_R_Arithmetic/C002__Additive_Hilbert_System/P1_S__Kernel_Spec.v 
+   theories/M001__BHK_R_Arithmetic/C002__Additive_Hilbert_System/P2_R__Hilbert_Kernel.v 
+   theories/M001__BHK_R_Arithmetic/C002__Additive_Hilbert_System/P2_S__Provability_Interface.v 
+   theories/M001__BHK_R_Arithmetic/C002__Additive_Hilbert_System/P3_R__Additive_Laws.v 
+   theories/M001__BHK_R_Arithmetic/C002__Additive_Hilbert_System/P3_S__Additive_Theory.v 
+   theories/M001__BHK_R_Arithmetic/C002__Additive_Hilbert_System/P4_R__Coding_Nucleus.v 
+   theories/M001__BHK_R_Arithmetic/C002__Additive_Hilbert_System/P4_R__Coding_Carryless.v 
+   theories/M001__BHK_R_Arithmetic/C002__Additive_Hilbert_System/P4_S__Coding.v 
+   theories/M001__BHK_R_Arithmetic/C002__Additive_Hilbert_System/P5_T__Proof_Theory.v 
+   theories/M001__BHK_R_Arithmetic/C002__Additive_Hilbert_System/P6_P__Effectivity.v 
+    
+   # C003 
+    
+   theories/M002__Carryless_Proof_Theory/C003__Carryless_Diagonal_Lemma/P1_S__Syntax.v 
+   theories/M002__Carryless_Proof_Theory/C003__Carryless_Diagonal_Lemma/P2_R__Backend.v 
+   theories/M002__Carryless_Proof_Theory/C003__Carryless_Diagonal_Lemma/P2_R__Compiler.v 
+   theories/M002__Carryless_Proof_Theory/C003__Carryless_Diagonal_Lemma/P2_T__Diagonal.v 
+    
+   # C004 
+    
+   theories/M002__Carryless_Proof_Theory/C004__Mirror_Lemma/P1_S__Context.v 
+   theories/M002__Carryless_Proof_Theory/C004__Mirror_Lemma/P2_R__Mirror_Core.v 
+   theories/M002__Carryless_Proof_Theory/C004__Mirror_Lemma/P2_R__Mirror_Transport.v 
+   theories/M002__Carryless_Proof_Theory/C004__Mirror_Lemma/P2_S__Mirror_Lemma.v 
+   theories/M002__Carryless_Proof_Theory/C004__Mirror_Lemma/P3_S__Recursive_Mirror_Lemma.v 
+   theories/M002__Carryless_Proof_Theory/C004__Mirror_Lemma/P3_T__Weakforcing.v 
+    
+   # C005 
+    
+   theories/M003__Delian_Barrier/C005__Adversarial_Barrier/P1_S__Barrier_Definition.v 
+   theories/M003__Delian_Barrier/C005__Adversarial_Barrier/P2_R__Barrier_Proof.v 
+   theories/M003__Delian_Barrier/C005__Adversarial_Barrier/P2_T__Barrier.v 
+   theories/M003__Delian_Barrier/C005__Adversarial_Barrier/P2_T__Mirror_Instance.v 
+    
+   # C006 
+    
+   theories/M003__Delian_Barrier/C006__Audit_Barrier/P1_S__Context.v 
+   theories/M003__Delian_Barrier/C006__Audit_Barrier/P2_R__Audit_Logic.v 
+   theories/M003__Delian_Barrier/C006__Audit_Barrier/P2_T__Audit_Barrier.v 
+   theories/M003__Delian_Barrier/C006__Audit_Barrier/P2_T__Audit_Adapter.v 
+    
+   # C007 
+    
+   theories/M003__Delian_Barrier/C007__Resistance_Law/P1_S__Separation.v 
+   theories/M003__Delian_Barrier/C007__Resistance_Law/P2_R__Resistance_Proof.v 
+   theories/M003__Delian_Barrier/C007__Resistance_Law/P2_T__Resistance.v 
+    
+   # C008 
+    
+   theories/M003__Delian_Barrier/C008__Reflexica_Normalization/P1_S__Core_Goal.v 
+   theories/M003__Delian_Barrier/C008__Reflexica_Normalization/P2_R__The_Bridge.v 
+   theories/M003__Delian_Barrier/C008__Reflexica_Normalization/P2_T__Reflexica_Derived.v 
+   theories/M003__Delian_Barrier/C008__Reflexica_Normalization/P2_T__Public_Surface.v 
+    
+   # C009 
+    
+   theories/M004__Conservation_of_Hardness/C009__SAT_Reduction/P1_S__CNF_Syntax.v 
+   theories/M004__Conservation_of_Hardness/C009__SAT_Reduction/P2_R__Reduction.v 
+   theories/M004__Conservation_of_Hardness/C009__SAT_Reduction/P3_T__Structural_Integrity.v 
+   theories/M004__Conservation_of_Hardness/C009__SAT_Reduction/P1_S__Syntax.v 
+   theories/M004__Conservation_of_Hardness/C009__SAT_Reduction/P2_R__Substitution.v 
+   theories/M004__Conservation_of_Hardness/C009__SAT_Reduction/P3_R__Kernel.v 
+   theories/M004__Conservation_of_Hardness/C009__SAT_Reduction/P3_T__FOL.v 
+   theories/M004__Conservation_of_Hardness/C009__SAT_Reduction/P4_T__Kernel_Sanity.v 
+   theories/M004__Conservation_of_Hardness/C009__SAT_Reduction/P4_T__Mechanism.v 
+    
+   # C010 
+    
+   theories/M004__Conservation_of_Hardness/C010__Solvability_Thesis/P1_S__Thesis_Definition.v 
+   theories/M004__Conservation_of_Hardness/C010__Solvability_Thesis/P2_R__Triviality_Proof.v 
+   theories/M004__Conservation_of_Hardness/C010__Solvability_Thesis/P2_T__Normalization.v 
+    
+   # C011 
+    
+   theories/M004__Conservation_of_Hardness/C011__Quintic_Hardness/P1_S__Diophantine_Basis.v 
+   theories/M004__Conservation_of_Hardness/C011__Quintic_Hardness/P2_T__The_Quintic_Barrier.v 
+    
+   # C012 
+    
+   theories/M004__Conservation_of_Hardness/C012__Cubic_Incompleteness/P1_S__Structure.v 
+   theories/M004__Conservation_of_Hardness/C012__Cubic_Incompleteness/P2_S__Barrier.v 
+   theories/M004__Conservation_of_Hardness/C012__Cubic_Incompleteness/P3_T__Theorem.v 
+    
+   # C013 
+    
+   theories/M004__Conservation_of_Hardness/C013__Logical_Cryptography/P1_T__Trapdoor_Theorem.v 
+    
+   # C014 
+    
+   theories/M004__Conservation_of_Hardness/C014__Fermat_Machine/P1_T__Fermat_Machine.v 
+   theories/M004__Conservation_of_Hardness/C014__Fermat_Machine/C014_Interface.v 
+   theories/M004__Conservation_of_Hardness/C014__Fermat_Machine/P1_T__Barrier_Theorems.v 
+   theories/M004__Conservation_of_Hardness/C014__Fermat_Machine/P1_T__Legacy_Instance.v 
+   theories/M004__Conservation_of_Hardness/C014__Fermat_Machine/P1_T__Legacy_Ribet_Modularity.v 
+   theories/M004__Conservation_of_Hardness/C014__Fermat_Machine/P1_T__C005_Instance.v 
+   theories/M004__Conservation_of_Hardness/C014__Fermat_Machine/contracts/P1_T__Encoding_Bridge.v 
+   theories/M004__Conservation_of_Hardness/C014__Fermat_Machine/P1_T__C012_Instance.v 
+   theories/M004__Conservation_of_Hardness/C014__Fermat_Machine/P2_T__Sumbool_Extraction.v 
+
+=== END ===
+
+------------------------
+
+Hash(es) (SHA-256) of 74 Files:
+
+   5b635621a553097a46d5c92e812bf01ca137386f4fb890bd473a19258819b4e9  theories/M001__BHK_R_Arithmetic/C000__BHK_R/P0__BHK.v
+   e60d543e8811fc828f96f26ae4c620746afdb8b431f3355e924af970ef7f9318  theories/M001__BHK_R_Arithmetic/C000__BHK_R/P0__Reflexica.v
+   804688f704d6a09b76fbfad35ce681e65c34f3d7809d54215ccdc5215de1bdcc  theories/M001__BHK_R_Arithmetic/C001__Carryless_Pairing/P1_S__Substrate.v
+   ee3513a5d5b778fe778cf386e0f0f3fa0bb6ae983f8ab63895db969ee166c242  theories/M001__BHK_R_Arithmetic/C001__Carryless_Pairing/P2_R__Carryless.v
+   7ce7557a75928ebe83f80442bceea0ce303c2f5073c397dc9575088653c4d4a0  theories/M001__BHK_R_Arithmetic/C001__Carryless_Pairing/P2_S__Carryless.v
+   2bb13dd9bd50deadd24fea0c60900d599a5733b9d31832b46c81ec3bc2a1c46c  theories/M001__BHK_R_Arithmetic/C001__Carryless_Pairing/P3_R__Injectivity.v
+   5b7cfe55d50aae81d41b7c5867f39cf7fa3dc50ff36e8ad0ada71c2420216619  theories/M001__BHK_R_Arithmetic/C001__Carryless_Pairing/P3_S__Injectivity.v
+   048abedce8816454496bf9a811f59f527dc8f748ff81c45b3c1ff6680a3b0bc6  theories/M001__BHK_R_Arithmetic/C001__Carryless_Pairing/P4_R__Pairing.v
+   ffe8a71b53169c51dd5d9a56ab1bc27b45e70c2774734563f006edaa61ebe476  theories/M001__BHK_R_Arithmetic/C001__Carryless_Pairing/P4_S__Pairing.v
+   fb4ed557d99f812c13e59991ebcab786cea800a6a17995e2189d4df3730b423e  theories/M001__BHK_R_Arithmetic/C001__Carryless_Pairing/P5_T__Carryless_Pairing.v
+   23b9ecc2b2fdee555a3e95deb1dbc30efeab249628fe1bf31167c3f138f33b12  theories/M001__BHK_R_Arithmetic/C001__Carryless_Pairing/P5_T__Effectivity.v
+   3dcbf4be8746e4003492b87db30334d0ba1382591c75441700e55c55c08ec07b  theories/M001__BHK_R_Arithmetic/C001__Carryless_Pairing/P6_A__Reflexica_Certificate.v
+   f83c14a57da2a150a1fe7ca39823298fa19364c746e9e4f393d7bda48266ef51  theories/M001__BHK_R_Arithmetic/C002__Additive_Hilbert_System/P1_S__Kernel_Spec.v
+   3c59c2f4262d7995fb5fc6401e800fb0a20430499bf15ed5a8a203598435f11c  theories/M001__BHK_R_Arithmetic/C002__Additive_Hilbert_System/P2_R__Hilbert_Kernel.v
+   59946782b402864d212c95ef19136ff1667963e5f07375c94196fefae5c850c4  theories/M001__BHK_R_Arithmetic/C002__Additive_Hilbert_System/P2_S__Provability_Interface.v
+   2eaf0cbba92b6516d64adf6f3e6cc828cb33a27cb47197adf78cd4a2f2696645  theories/M001__BHK_R_Arithmetic/C002__Additive_Hilbert_System/P3_R__Additive_Laws.v
+   3e386e2c3c47117e1792b34a644a190247c8e277e52206fa7dc4a54d39583ce3  theories/M001__BHK_R_Arithmetic/C002__Additive_Hilbert_System/P3_S__Additive_Theory.v
+   2a0abc210b1d74916d10275119685068c4a0156e162f8857b00ae736ff141aa2  theories/M001__BHK_R_Arithmetic/C002__Additive_Hilbert_System/P4_R__Coding_Carryless.v
+   679d9d57c70649063c30a5dc5596f25920658feef7e43a3c9821db01f26497af  theories/M001__BHK_R_Arithmetic/C002__Additive_Hilbert_System/P4_R__Coding_Nucleus.v
+   1f87c9a8ebc81e991fcbb4f4e4934530705c874c43ec9362f393117d1a1ce94b  theories/M001__BHK_R_Arithmetic/C002__Additive_Hilbert_System/P4_S__Coding.v
+   93123a5acc5e7e747bbc6b4418315d06dc3570d52d3112ebfd4edaf9b73a31b8  theories/M001__BHK_R_Arithmetic/C002__Additive_Hilbert_System/P5_T__Proof_Theory.v
+   43f2802582529b86219b1e09dcd79587866d6547c3925dce3378fb565ffe087a  theories/M001__BHK_R_Arithmetic/C002__Additive_Hilbert_System/P6_P__Effectivity.v
+   4eebf8a40bbee8f0423178636560eafbfbce04c2bc97bd7b215e24656278413a  theories/M002__Carryless_Proof_Theory/C003__Carryless_Diagonal_Lemma/P1_S__Syntax.v
+   4e9cc80d166e510e2b92eeeb44f5d4298d0b32c67c6e7ea823fc50f1f1086843  theories/M002__Carryless_Proof_Theory/C003__Carryless_Diagonal_Lemma/P2_R__Backend.v
+   18b3f9dee49f9afaceb4814b0ed3f86a0b0f8590361cb983ed2e2a1acc648ae2  theories/M002__Carryless_Proof_Theory/C003__Carryless_Diagonal_Lemma/P2_R__Compiler.v
+   b02f2dc7ec0f31fab72c8f93f140ce1c923b0fbb5ca5371f786badb88d987fcb  theories/M002__Carryless_Proof_Theory/C003__Carryless_Diagonal_Lemma/P2_T__Diagonal.v
+   ddb093e2299d9a0430770c75e1038cc8adddc92be3aa07966f91eca28e120177  theories/M002__Carryless_Proof_Theory/C004__Mirror_Lemma/P1_S__Context.v
+   078cf2c571e931361a49032a7e82274ad055483c6104cb32748ab4dd87c2e791  theories/M002__Carryless_Proof_Theory/C004__Mirror_Lemma/P2_R__Mirror_Core.v
+   7f0d5e3bf590da50f474c8bfe96de3f02d7d08dd0b570265a4eef13374da1469  theories/M002__Carryless_Proof_Theory/C004__Mirror_Lemma/P2_R__Mirror_Transport.v
+   0841b1d9a29ae1dffede772594901fa471693bab17540e905a8916d85ae8820b  theories/M002__Carryless_Proof_Theory/C004__Mirror_Lemma/P2_S__Mirror_Lemma.v
+   d1e85a26395cb5e034638d7854805dc4830663516a872375851588eedbf12193  theories/M002__Carryless_Proof_Theory/C004__Mirror_Lemma/P3_S__Recursive_Mirror_Lemma.v
+   5f18cad1938f90636b38a641f8a9041366dad6e9ac9f569ebff6c66dbccbace2  theories/M002__Carryless_Proof_Theory/C004__Mirror_Lemma/P3_T__Weakforcing.v
+   99fe363cea67bbfb7361ba1eda140e9742303c345880f32e278efad0cf66dc81  theories/M003__Delian_Barrier/C005__Adversarial_Barrier/P1_S__Barrier_Definition.v
+   f43b5c71598238e8925073772b4de2e4ac5a32ba7955003e864258c4b3f0c5b1  theories/M003__Delian_Barrier/C005__Adversarial_Barrier/P2_R__Barrier_Proof.v
+   b1147a922fffe720aac6c84045f464f8eb630aa67eefa3815b57e62eed3b75e9  theories/M003__Delian_Barrier/C005__Adversarial_Barrier/P2_T__Barrier.v
+   31504dc8d445f5bf2377b608b8dfe8740ee34a71b3e6cae906309a1ee4a43a2e  theories/M003__Delian_Barrier/C005__Adversarial_Barrier/P2_T__Mirror_Instance.v
+   b6127f78db6326997b9256412388d860ebf6fd2259b9c16eab8b5b2d034ee29f  theories/M003__Delian_Barrier/C006__Audit_Barrier/P1_S__Context.v
+   ab408168da73735a5105251a42600dd5045426ebad62773441092d698d7ed7a8  theories/M003__Delian_Barrier/C006__Audit_Barrier/P2_R__Audit_Logic.v
+   5ff14610f0e773c28b6877061cc9b38f3aa824f63c84dda3e9f99ecff6b7114c  theories/M003__Delian_Barrier/C006__Audit_Barrier/P2_T__Audit_Adapter.v
+   4b24038981a4a04153981ba30c886cd3ee9a6ff4540f1caa83236db6c6013787  theories/M003__Delian_Barrier/C006__Audit_Barrier/P2_T__Audit_Barrier.v
+   3281d9e8b8b2bb959c32356bc964acfe48a056c2f5b5c4a763b07c994bdda12e  theories/M003__Delian_Barrier/C007__Resistance_Law/P1_S__Separation.v
+   0d7e3e6f7410949f5b678ef1c8f114a43238a943cbd49cf3f287faa559f28e78  theories/M003__Delian_Barrier/C007__Resistance_Law/P2_R__Resistance_Proof.v
+   6569d8596c2b96e4f1849325f7b01cade51b86ac8ab721291f0873ffdbcc8420  theories/M003__Delian_Barrier/C007__Resistance_Law/P2_T__Resistance.v
+   98999f58d0cf6b1c1f41abf2930d1fee91ba031cf99102a0ff9f798955eec405  theories/M003__Delian_Barrier/C008__Reflexica_Normalization/P1_S__Core_Goal.v
+   25bf32662026d6c36e16f90b38d4b4f88d93211b13f07f5e07cf73112c44116c  theories/M003__Delian_Barrier/C008__Reflexica_Normalization/P2_R__The_Bridge.v
+   fb9150579ea6519285f867c9913fb4cfb6d1d841b554e8f70c38e25bbe845800  theories/M003__Delian_Barrier/C008__Reflexica_Normalization/P2_T__Public_Surface.v
+   e449d0d05ae4a0e778a34f53ad565aaeb3703f1a54ca13d971975511f19161f0  theories/M003__Delian_Barrier/C008__Reflexica_Normalization/P2_T__Reflexica_Derived.v
+   ec3942ed5ab488a4a6472022c6169b52e0e921115e784a5e78f7a9ec6a22d4ee  theories/M004__Conservation_of_Hardness/C009__SAT_Reduction/P1_S__CNF_Syntax.v
+   61e0242cb297dc0a0576e59e56155bd37012b06bf55bcad69e4b49932ff65142  theories/M004__Conservation_of_Hardness/C009__SAT_Reduction/P1_S__Syntax.v
+   70c5a5c6ab4d1466dd04ee2dc4230bbf8352ed3934dcacb12e6598d84aa4eb0a  theories/M004__Conservation_of_Hardness/C009__SAT_Reduction/P2_R__Reduction.v
+   52c640344e9ac2773987585a38d9f7b61d69afc821735ce28d67a129e3602f22  theories/M004__Conservation_of_Hardness/C009__SAT_Reduction/P2_R__Substitution.v
+   dbfe8800e78902605829eef7685d7de10545ac63dd59a6564e07fe116221bf24  theories/M004__Conservation_of_Hardness/C009__SAT_Reduction/P3_R__Kernel.v
+   ec25784ccb53b0d95807a11dc3279203c4e258b5824ae3f17237745771983f5b  theories/M004__Conservation_of_Hardness/C009__SAT_Reduction/P3_T__FOL.v
+   ad6f91c66aca122ad7dd199471a072faf8d11cfc083f8a1709b90b0be9f4e6b2  theories/M004__Conservation_of_Hardness/C009__SAT_Reduction/P3_T__Structural_Integrity.v
+   24a96b0f4c99d8b5d8980aa7c68a22252bd1b876a183dc985eefa1b0129e846b  theories/M004__Conservation_of_Hardness/C009__SAT_Reduction/P4_T__Kernel_Sanity.v
+   8803b02fdf8bd326ec8ed8a2432f7535787bff6605e4c22a140ceb39528c96ea  theories/M004__Conservation_of_Hardness/C009__SAT_Reduction/P4_T__Mechanism.v
+   530a9094573102ebc058b5ddd91a78729f6e8f983c550e0bbff363df901f96a8  theories/M004__Conservation_of_Hardness/C010__Solvability_Thesis/P1_S__Thesis_Definition.v
+   232ccc551d7a0df06d12d2fe797512e6bf4c14b6e7a487dd60135e690c069dc3  theories/M004__Conservation_of_Hardness/C010__Solvability_Thesis/P2_R__Triviality_Proof.v
+   d390606038b74216e666451f2ba3c60a27a05c37f64ab540e327e90aadaa3bad  theories/M004__Conservation_of_Hardness/C010__Solvability_Thesis/P2_T__Normalization.v
+   f42ada1781f7a8f70e1e213d72224578eb1bf54f2cada33193d6bd18ec858186  theories/M004__Conservation_of_Hardness/C011__Quintic_Hardness/P1_S__Diophantine_Basis.v
+   ab5159cf58cbcbf2bdd9dc854ac182d9801847a37f1703235f16674c4e7e8974  theories/M004__Conservation_of_Hardness/C011__Quintic_Hardness/P2_T__The_Quintic_Barrier.v
+   69a08a1af7cb471c834c2d3d32ecfcac1df8745effe684f5716d42be80851bbf  theories/M004__Conservation_of_Hardness/C012__Cubic_Incompleteness/P1_S__Structure.v
+   7f2194bf12843228bd583eb4dae8117076f5cf11a12507158e210f9bf12ccd28  theories/M004__Conservation_of_Hardness/C012__Cubic_Incompleteness/P2_S__Barrier.v
+   de9ca2214a4dc5d4dc0cbf5e44a44d2e62a578314b795463240b61ef6fcc35f4  theories/M004__Conservation_of_Hardness/C012__Cubic_Incompleteness/P3_T__Theorem.v
+   9f538818813f6acf10e85150827a0fb4c18a9454bdfa78edd6af0826176f1819  theories/M004__Conservation_of_Hardness/C013__Logical_Cryptography/P1_T__Trapdoor_Theorem.v
+   b2e310f4db944de71ef42c21592a63b2c592cfadec41157314625cd8e1a5d214  theories/M004__Conservation_of_Hardness/C014__Fermat_Machine/C014_Interface.v
+   fe72c0ab7c15b94bcda02904d9c1f590eabe21749c5a7753595040cbb884fce2  theories/M004__Conservation_of_Hardness/C014__Fermat_Machine/P1_T__Barrier_Theorems.v
+   58e17ddea879558425c2baf2232d098543141c366fef87f0321f3f6aa3f78f54  theories/M004__Conservation_of_Hardness/C014__Fermat_Machine/P1_T__C005_Instance.v
+   15b6826a730334be55c4a297510b2575555ded480b2a388b5191d75754796b84  theories/M004__Conservation_of_Hardness/C014__Fermat_Machine/P1_T__C012_Instance.v
+   3908aad50d9bb8dcfbb1a70c412d8bd259a0f9eb8d366b26d71daea8c07d8207  theories/M004__Conservation_of_Hardness/C014__Fermat_Machine/P1_T__Fermat_Machine.v
+   a4f75aa1a75c842be9becbc496e29795e60e831b89a4b1ca89c7f7ce6881509c  theories/M004__Conservation_of_Hardness/C014__Fermat_Machine/P1_T__Legacy_Instance.v
+   0d5e51b1c535eb05b17d45ca034d5f9239b0dcdb14199744e14f6a12ffd4603d  theories/M004__Conservation_of_Hardness/C014__Fermat_Machine/P1_T__Legacy_Ribet_Modularity.v
+   7939a00cf8006b08003537682b0384c585d2e3d10a2a70bf1bbfc0822f84fc0c  theories/M004__Conservation_of_Hardness/C014__Fermat_Machine/P2_T__Sumbool_Extraction.v
+   81dda4d2704d03dd4ae6cfc173d8f2f04b60c430ebb09210e2dbb376b00fc011  theories/M004__Conservation_of_Hardness/C014__Fermat_Machine/contracts/P1_T__Encoding_Bridge.v
+
+------------------------
+
