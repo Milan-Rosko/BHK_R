@@ -80,15 +80,15 @@
 
     Roles:
 
-    `S` = Semantics / interaction layer (interfaces, interoperability, translations)
-    `R` = Realization (implementations / realizers / computational content)
-    `T` = Phase-free public surface (only stable façades)
-    `A` = Opt-in certificate layer (explicit meta commitments, quarantined) 
+    `S` = Proof semantics
+    `R` = Realization
+    `T` = Stable façades, Theorems
+    `A` = Certificate layers
 
 4 - Literature
+    ----------
 
-    Consult,
-
+    For expostion, consult:
 
       @book{russell27,
         title        = {{Principia Mathematica}},
@@ -125,7 +125,7 @@
         edition      = {5th}
       }
 
-    Further our previous work,
+    For motivation, consult our previous work:
 
       @misc{rosko2025fractal,
         title        = {{The Fractal Logic of $\Phi$-adic Recursion}},
