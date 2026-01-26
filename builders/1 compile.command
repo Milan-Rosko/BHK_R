@@ -89,7 +89,7 @@ AXIOM_COUNT="$(echo "${ALL_AXIOMS_RAW}" | sed '/^$/d' | wc -l | tr -d ' ')"
 if [ "${AXIOM_COUNT}" -eq 1 ]; then
     # Check if the single axiom is in a valid layer
     # Note: we check the relative path here
-    BAD_AXIOMS="$(echo "${ALL_AXIOMS}" | rg -v 'theories/C0[^/]+/(P\d+_A__|P\d+_TA__)' || true)"
+    BAD_AXIOMS="$(echo "${ALL_AXIOMS}" | rg -v 'theories/M001__BHK_R_Arithmetic/C0[^/]+/(P\d+_A__|P\d+_TA__)' || true)"
     
     if [ -n "${BAD_AXIOMS}" ]; then
         DISCIPLINE_STATUS="WARNING"
