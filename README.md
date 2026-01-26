@@ -1,6 +1,12 @@
 # proofcase
 
-`proofcase ( v.0.2)` is a collection of self-contained Rocq (Coq) developments written in a deliberately minimal constructive style. The repository follows a BHK-oriented discipline: proofs live in a small core environment; computation is by kernel conversion 
+`proofcase (v.0.2)` is a collection of self-contained formal developments written in a deliberately minimal style. Proofs live in the Rocq proof environment:
+
+<p align="center"> <img src="appendix/assets/rocq_logo.png" width="150" alt="Rocq Logo"> <br> <b>Rocq, https://rocq-prover.org</b></p>
+
+Methodologically, the repository is intuitionistic in spirit (cf. Troelstra 1988). Proofs are treated as explicit inhabitants (realizers), so computation is the primary proof engine.
+
+Concretely, equalities are intended to be witnessed by kernel conversion—normalization under
 
 ```
 
@@ -8,45 +14,41 @@
 
 ```
 
-plus explicitly defined recursion; and we avoid classical axioms and heavyweight numeric towers unless a subproject explicitly opts in.
+together with explicitly defined primitive recursion. Classical axioms, extensional principles, and heavyweight numeric towers are avoided.
 
-The guiding idea is that the 
+The core system is denoted `BHK_R`. Here `R` refers to *Reflexica*, a named certificate layer which acts as a witness The guiding idea is that the *Brouwer–Heyting–Kolmogorov interpretation* of proofs (BHK) is not merely an external interpretation of the code, **it is** the organizing principle of the code. Types express meaning, and inhabitation is the only proof notion assumed at the base.
 
-*Brouwer–Heyting–Kolmogorov interpretation* of provability (BHK)
+## Folder Structure
 
-is not merely an external interpretation of the code, **it is** the organizing principle of the code. Types express meaning, and inhabitation is the only proof notion assumed at the base.
-
-- **Important Note:** All language in this repository that seemingly invokes non-constructive principles (e.g., “arithmetic truth”) corresponds either to a trivial lambda-definable notion or is purely pedagogical. The logic herein remains strictly constructive (until explicitly said otherwise).
+* **`theorems/`**: The primary source directory. Contains all `.v` (Rocq) files organized by semantic units (e.g., `M004__Conservation_of_Hardness`).
+* **`builders/`**: Automation tools. Contains `.command` scripts (tested for macOS) that streamline the build process, managing dependencies and copying temporary files to the `scratch/` folder to prevent clutter.
+* **`appendix/`**: Accompanying technical artifacts and extended documentation.
+    * **`proofextraction/`**: A specialized sub-folder containing the OCaml realizations of the "Fermat Machine." These files represent the **Witness Extraction** phase where logical results are converted into executable code.
 
 ## Main Innovations
 
-This repository implements several novel constructive mechanisms to enforce hardness and barrier results without classical axioms:
+
+- **Important Note:** language that sounds non-constructive (e.g. “arithmetic truth”) is either pedagogical or refers to trivial notions. The core logic remains strictly constructive unless explicitly stated otherwise.
+
+Our repository implements several novel constructive mechanisms to enforce hardness and barrier results without classical axioms:
 
 * (i) **Carryless Pairing**: A structural arithmetic coding scheme that avoids prime factorization and multiplicative number theory, relying instead on Fibonacci growth and Zeckendorf supports, see https://milanrosko.com/carryless.html.
 
 * (ii) **Reflexica Axiom**: A switchable consistency certificate that acts as an "opt-in" truth anchor (first realization), separating computational realization from global inversion laws.
 
-
 * (iii) **BHK_R Semantics**: A lambda-definable local logic that serves as the organizing principle for the entire repository.
-
 
 * (iv) **Mirror Lemma**: A mechanism for weak local forcing derived strictly from reflection principles, allowing "As-If" reasoning within the constructive core.
 
-
 * (v) **The Adversarial and Audit Barrier**: Impossibility results for certified separators and self-auditing systems, showing that certain decision procedures cannot coexist with their own verification.
 
-## On BHK_R
-
-Our main “engine” `BHK_R` (reflexica) treats BHK not as an external interpretation but as a design constraint: proofs are inhabitants, and meaning is given by introduction forms plus reduction. As a result, the repository is organized so that computation (kernel conversion + explicit recursion) is the default proof engine, and large arithmetic libraries are avoided unless explicitly required.
-
-A central methodological choice follows from this constraint: we avoid the classical prime-power Gödel coding route. Prime-based arithmetization is elegant in classical settings, but it silently imports a heavy multiplicative number-theoretic substrate (unique factorization, divisibility infrastructure, gcd/normalization lemmas, etc.). In a minimal constructive kernel this is not “free”; it forces a large arithmetic tower just to represent finitary syntax.
+A central methodological choice follows from a constraint: we avoid the classical prime-power Gödel coding route. Prime-based arithmetization is elegant in classical settings, but it silently imports a heavy multiplicative number-theoretic substrate (unique factorization, divisibility infrastructure, gcd/normalization lemmas, etc.). In a minimal constructive kernel this is not “free”; it forces a large arithmetic tower just to represent finitary syntax.
 
 Instead, `BHK_R` shifts coding to an additive substrate based on Fibonacci growth and Zeckendorf-style supports. Concretely, the repository implements a carryless pairing discipline in which codes are assembled as additive sums of Fibonacci values indexed in disjoint “bands.” Separation is enforced by parity (even vs odd indices) and a rank/band offset function, rather than by multiplicative properties of primes.
 
-
 ## Effectiveness
 
-We aim for effectiveness in the everyday Kleene sense: constructions are explicit, terminating, and compute what they claim to compute. Proofs do not rely on hidden axioms or untracked gaps.
+Constructions are explicit, terminating, and compute what they claim to compute. Proofs do not rely on hidden axioms or untracked gaps.
 
 * No `admit` or `Admitted`. Gaps are treated as incomplete work and are not left in committed files.
 * Constructions are explicit (`Fixpoint`/`Definition`), so intended computation is visible and checkable by normalization.

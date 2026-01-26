@@ -286,6 +286,35 @@ Section FLT_Witness.
     (* Simplified: 4*m, where m = max(a,b). *)
     N.mul four (maxN a b).
 
+  Lemma Bridge_Iso_Max : forall n m, to_Z (maxN n m) = Z.max (to_Z n) (to_Z m).
+  Proof.
+    induction n as [|n IH]; intro m.
+    - destruct m; simpl.
+      + reflexivity.
+      + rewrite Z.max_r; [reflexivity | pose proof (to_Z_nonneg m); lia].
+    - destruct m; simpl.
+      + rewrite Z.max_l; [reflexivity | exact (to_Z_nonneg (N.S n))].
+      + rewrite (IH m).
+        destruct (Z_le_gt_dec (to_Z n) (to_Z m)) as [Hle|Hgt].
+        * rewrite Z.max_r; [|assumption].
+          rewrite Z.max_r; [reflexivity | lia].
+        * rewrite Z.max_l; [|lia].
+          rewrite Z.max_l; [reflexivity | lia].
+  Qed.
+
+  Lemma Bridge_Iso_j : forall t,
+    to_Z (j_Invariant t) =
+      (4 * Z.max (to_Z (fst (fst t))) (to_Z (snd (fst t))))%Z.
+  Proof.
+    destruct t as [[a b] c].
+    cbn [fst snd].
+    unfold j_Invariant.
+    rewrite Bridge_Iso_Mul.
+    rewrite Bridge_Iso_Max.
+    cbn [four three two to_Z].
+    reflexivity.
+  Qed.
+
   (*
     The Golden Ratio (Phi) density proxy (e.g. φ^n)
   *)
