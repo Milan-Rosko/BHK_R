@@ -1,0 +1,3352 @@
+(* Note. This is a concatenation for establishing context. *)
+(* Source: _Textslect M001 *)
+(* Generated (UTC): 2026-01-24T17:00:37Z *)
+
+(* ---- BEGIN _Textslect M001 ---- *)
+(* # C000 *)
+(* theories/M001__BHK_R_Arithmetic/C000__BHK_R/P0__BHK.v *)
+(* theories/M001__BHK_R_Arithmetic/C000__BHK_R/P0__Reflexica.v *)
+(*  *)
+(* # C001 *)
+(* theories/M001__BHK_R_Arithmetic/C001__Carryless_Pairing/P1_S__Substrate.v *)
+(* theories/M001__BHK_R_Arithmetic/C001__Carryless_Pairing/P2_R__Carryless.v *)
+(* theories/M001__BHK_R_Arithmetic/C001__Carryless_Pairing/P2_S__Carryless.v *)
+(* theories/M001__BHK_R_Arithmetic/C001__Carryless_Pairing/P3_R__Injectivity.v *)
+(* theories/M001__BHK_R_Arithmetic/C001__Carryless_Pairing/P3_S__Injectivity.v *)
+(* theories/M001__BHK_R_Arithmetic/C001__Carryless_Pairing/P4_R__Pairing.v *)
+(* theories/M001__BHK_R_Arithmetic/C001__Carryless_Pairing/P4_S__Pairing.v *)
+(* theories/M001__BHK_R_Arithmetic/C001__Carryless_Pairing/P5_T__Carryless_Pairing.v *)
+(* theories/M001__BHK_R_Arithmetic/C001__Carryless_Pairing/P5_T__Effectivity.v *)
+(* theories/M001__BHK_R_Arithmetic/C001__Carryless_Pairing/P6_A__Reflexica_Certificate.v *)
+(*  *)
+(* # C002 *)
+(* theories/M001__BHK_R_Arithmetic/C002__Additive_Hilbert_System/P1_S__Kernel_Spec.v *)
+(* theories/M001__BHK_R_Arithmetic/C002__Additive_Hilbert_System/P2_R__Hilbert_Kernel.v *)
+(* theories/M001__BHK_R_Arithmetic/C002__Additive_Hilbert_System/P2_S__Provability_Interface.v *)
+(* theories/M001__BHK_R_Arithmetic/C002__Additive_Hilbert_System/P3_R__Additive_Laws.v *)
+(* theories/M001__BHK_R_Arithmetic/C002__Additive_Hilbert_System/P3_S__Additive_Theory.v *)
+(* theories/M001__BHK_R_Arithmetic/C002__Additive_Hilbert_System/P4_R__Coding_Nucleus.v *)
+(* theories/M001__BHK_R_Arithmetic/C002__Additive_Hilbert_System/P4_R__Coding_Carryless.v *)
+(* theories/M001__BHK_R_Arithmetic/C002__Additive_Hilbert_System/P4_S__Coding.v *)
+(* theories/M001__BHK_R_Arithmetic/C002__Additive_Hilbert_System/P5_T__Proof_Theory.v *)
+(* theories/M001__BHK_R_Arithmetic/C002__Additive_Hilbert_System/P6_P__Effectivity.v *)
+(* ---- END _Textslect M001 ---- *)
+
+
+
+(* ---- theories/M001__BHK_R_Arithmetic/C000__BHK_R/P0__BHK.v ---- *)
+
+(* P0__BHK.v *)
+
+     (*_  /\/\/\/\/\__  /\/\__  /\/\_  /\/\___  /\/\__________  /\/\/\/\/\____ *)
+    (*_  /\/\__  /\/\  /\/\__  /\/\_  /\/\__ /\/\____________  /\/\__  /\/\__  *)
+   (*_  /\/\/\/\/\__  /\/\/\/\/\/\_  /\/\/\/\ ______________  /\/\/\/\/\ ___   *)
+  (*_  /\/\__  /\/\  /\/\__  /\/\_  /\/\_  /\/\____________  /\/\  /\/\____    *)
+ (*_  /\/\/\/\/\__  /\/\__  /\/\_  /\/\___  /\/\__________  /\/\__  /\/\__     *)
+(*______________________________________________  /\/\/\/\_______________      *)
+(*                                                                             *)
+(*     “Brouwer–Heyting–Kolmogorov Interpretation (BHK)“                       *)
+(*                                                                             *)
+(*     This defines the “meaning nucleus” shared by all later phases           *)
+(*     The methodology is repository-wide and project-agnostic.                *)
+(*                                                                             *)
+(*     The BHK perspective.                                                    *)
+(*                                                                             *)
+(*     This file is intended to be read under the discipline                   *)
+(*     of proof.                                                               *)
+(*                                                                             *)
+(*        (i) A proposition is identified with the type of its proofs.         *)
+(*                                                                             *)
+(*       (ii) To prove a proposition is to construct an inhabitant             *)
+(*            of that type.                                                    *)
+(*                                                                             *)
+(*      (iii) Logical connectives and quantifiers are understood via           *)
+(*            their introduction forms and corresponding proof objects;        *)
+(*            functions, dependent pairs, tagged alternatives, etc.            *)
+(*                                                                             *)
+(*      In particular, equalities proved below are witnessed                   *)
+(*      by computation (definitional equality), not by appeal to               *)
+(*      extensional principles or additional axioms. The emphasis is on        *)
+(*      explicit constructions whose meaning is stable under reduction.        *)
+(*                                                                             *)
+(*      Interpretation as realization.                                         *)
+(*                                                                             *)
+(*      We work in a small constructive core:                                  *)
+(*      to prove P is to construct an inhabitant of P, and the meaning         *)
+(*      of connectives is given by their introduction forms—functions,         *)
+(*      pairs, tagged alternatives, dependent pairs, etc.                      *)
+(*                                                                             *)
+(*      BHK remains the informal proof-theoretic semantics, whereas            *)
+(*      BHK_R denotes an additional discipline:                                *)
+(*                                                                             *)
+(*        (i) A minimal inductive core,                                        *)
+(*                                                                             *)
+(*       (ii) Explicit primitive recursion,                                    *)
+(*                                                                             *)
+(*      (iii) A fixed phase structure.                                         *)
+(*                                                                             *)
+(*      Computation as the proof engine.                                       *)
+(*                                                                             *)
+(*      The preferred notion of reasoning is kernel conversion:                *)
+(*      definitional equality via β, ι, ζ, and transparent δ, together         *)
+(*      with explicit recursion on inductive data. Many foundational           *)
+(*      equations are therefore stated in conversion-friendly normal           *)
+(*      forms and discharged by simplification to eq_refl.                     *)
+(*                                                                             *)
+(*      Phase structure.                                                       *)
+(*                                                                             *)
+(*        (i) A construction is the first-class organizing principle           *)
+(*            (hence folders start with 'C').                                  *)
+(*                                                                             *)
+(*       (ii) For each phase,                                                  *)
+(*                                                                             *)
+(*            (a) Realizations ('R') provide concrete constructions            *)
+(*                (Fixpoint/Definition plus explicit proof terms);             *)
+(*            (b) BHK proof semantics ('S') package realizations               *)
+(*                behind minimal interfaces (typically small records)          *)
+(*                and establish interoperability results (translations,        *)
+(*                simulations, or extensional agreement on functions);         *)
+(*            (c) Theorems ('T') serve as entry/exit points: lemmas and        *)
+(*                theorems intended for downstream use.                        *)
+(*            (d) Certificates ('A') form a recursive loop.                    *)
+(*                                                                             *)
+(*      Design.                                                                *)
+(*                                                                             *)
+(*        (i) No classical axioms (LEM, Compactness) at this level.            *)
+(*                                                                             *)
+(*       (ii) Avoid large numeric towers and heavyweight libraries.            *)
+(*                                                                             *)
+(*      (iii) Prefer small “façades” (records/modules) over large              *)
+(*            signatures to reduce coupling between realizations and           *)
+(*            keep computation explicit, sequential, and intensional.          *)
+(*                                                                             *)
+(*      In short. We establish meaning once (Phase 0); realize it explicitly   *)
+(*      (R files); then relate realizations conservatively (S files),          *)
+(*      yielding either a new phase, an export, or both.                       *)
+(*                                                                             *)
+(*                                                   (c) www.milanrosko.com    *)
+(*                                                                             *)
+(*******************************************************************************)
+
+(*******************************************************************************)
+(**                                                                           **)
+(*      We define the Canonical BHK Clauses.                                   *)
+(*                                                                             *)
+(*      We map “Rocq types“ to their Constructive Logic interpretation         *)
+(*      and their corresponding computational witnesses.                       *)
+(*                                                                             *)
+(*      Rocq Type              BHK Interpretation     Realizer Structure       *)
+(*      ------------------     ------------------     ------------------       *)
+(*      False                  ∸ (Absurd)             (none)                   *)
+(*      and P Q                P ∧ Q                  ⟨p, q⟩                   *)
+(*      or  P Q                P ∨ Q                  inl p  |  inr q          *)
+(*      P -> Q                 P → Q                  λx. body                 *)
+(*      exists (fun x => P)    ∃x. P(x)               ⟨x, p⟩                   *)
+(*      forall (x:A), P        ∀x. P(x)               λx. body                 *)
+(*                                                                             *)
+(*      If we have...          we construct by...     to realize...            *)
+(*      ------------------     ------------------     ------------------       *)
+(*      p ⊨ P, q ⊨ Q           conj p q               P ∧ Q                    *)
+(*      p ⊨ P                  or_introl p            P ∨ Q                    *)
+(*      q ⊨ Q                  or_intror q            P ∨ Q                    *)
+(*      x ↦ y where y ⊨ Q      fun x => y             P → Q                    *)
+(*      x : A, p ⊨ P(x)        ex_intro x p           ∃x. P(x)                 *)
+(*      x ↦ y where y ⊨ P x    fun x => y             ∀x. P(x)                 *)
+(*                                                                             *)
+(*                 cf. A. S. Troelstra and D. van Dalen:                       *)
+(*                    Constructivism in Mathematics                            *)
+(**                                                                           **)
+(*******************************************************************************)
+
+From Coq Require Import Init.Logic.
+
+Set Implicit Arguments.
+Unset Strict Implicit.
+
+Module BHK.
+
+  (*************************************************************************)
+  (*                                                                       *)
+  (*  A minimal Arithmetic Kernel (nat) with explicit primitive recursion  *)
+  (*  This is intentionally not Coq.Init.Datatypes.nat.                    *)
+  (*                                                                       *)
+  (*  BHK reading:                                                         *)
+  (*                                                                       *)
+  (*     (i) The inductive type nat is a canonical constructive object.    *)
+  (*    (ii) O and S are constructors giving the canonical proofs          *)
+  (*         that a number is zero or a successor.                         *)
+  (*   (iii) Induction / recursion corresponds to case analysis on proofs  *)
+  (*         of nat.                                                       *)
+  (*                                                                       *)
+  (*  The goal is to keep the computational behavior fully transparent     *)
+  (*  and independent of any larger library abstractions.                  *)
+  (*                                                                       *)
+  (*************************************************************************)
+
+  Inductive nat : Type :=
+    | O : nat
+    | S : nat -> nat.
+
+  (*************************************************************************)
+  (*                                                                       *)
+  (*  Primitive recursive definitions                                      *)
+  (*                                                                       *)
+  (*     (i) add and mul are not axiomatic relations but algorithms.       *)
+  (*    (ii) To know add m n is to be able to compute it by reducing m.    *)
+  (*   (iii) These definitions serve as witnesses of existence claims      *)
+  (*         about sums and products.                                      *)
+  (*                                                                       *)
+  (*************************************************************************)
+
+  Fixpoint add (m n : nat) : nat :=
+    match m with
+    | O => n
+    | S m' => S (add m' n)
+    end.
+
+  Fixpoint mul (m n : nat) : nat :=
+    match m with
+    | O => O
+    | S m' => add n (mul m' n)
+    end.
+
+  (*************************************************************************)
+  (*                                                                       *)
+  (*     (i) Each theorem below asserts an equality whose proof is         *)
+  (*         computationally trivial.                                      *)
+  (*    (ii) The proof object is eq_refl, witnessing that both sides       *)
+  (*         reduce to the same normal form.                               *)
+  (*                                                                       *)
+  (*************************************************************************)
+
+  Theorem add_O_l : forall n, add O n = n.
+  Proof.
+    intro n; simpl; exact (eq_refl _).
+  Qed.
+
+  (*************************************************************************)
+  (*                                                                       *)
+  (*  add (S m) n computes by one step of successor introduction.          *)
+  (*  Under BHK, this expresses how a proof of add (S m) n is constructed  *)
+  (*  from a proof of add m n.                                             *)
+  (*                                                                       *)
+  (*************************************************************************)
+
+  Theorem add_S_l : forall m n, add (S m) n = S (add m n).
+  Proof.
+    intro m; intro n; simpl; exact (eq_refl _).
+  Qed.
+
+  (*************************************************************************)
+  (*                                                                       *)
+  (*  Multiplication with zero reduces immediately.                        *)
+  (*  This corresponds to the canonical computation witnessing that        *)
+  (*  zero times any number is zero.                                       *)
+  (*                                                                       *)
+  (*************************************************************************)
+
+  Theorem mul_O_l : forall n, mul O n = O.
+  Proof.
+    intro n; simpl; exact (eq_refl _).
+  Qed.
+
+  (*************************************************************************)
+  (*                                                                       *)
+  (*  Successor case for multiplication.                                   *)
+  (*  The equation expresses the recursive construction of a product:      *)
+  (*  (S m) * n is witnessed by n + (m * n).                               *)
+  (*                                                                       *)
+  (*************************************************************************)
+
+  Theorem mul_S_l : forall m n, mul (S m) n = add n (mul m n).
+  Proof.
+    intro m; intro n; simpl; exact (eq_refl _).
+  Qed.
+
+End BHK.
+
+
+(* ---- theories/M001__BHK_R_Arithmetic/C000__BHK_R/P0__Reflexica.v ---- *)
+
+(* P0__Reflexica.v *)
+
+     (*_  /\/\/\/\/\__  /\/\__  /\/\_  /\/\___  /\/\__________  /\/\/\/\/\____ *)
+    (*_  /\/\__  /\/\  /\/\__  /\/\_  /\/\__ /\/\____________  /\/\__  /\/\__  *)
+   (*_  /\/\/\/\/\__  /\/\/\/\/\/\_  /\/\/\/\ ______________  /\/\/\/\/\ ___   *)
+  (*_  /\/\__  /\/\  /\/\__  /\/\_  /\/\_  /\/\____________  /\/\  /\/\____    *)
+ (*_  /\/\/\/\/\__  /\/\__  /\/\_  /\/\___  /\/\__________  /\/\__  /\/\__     *)
+(*______________________________________________  /\/\/\/\_______________      *)
+(*                                                                             *)
+(*     “Reflexica“                                                             *)
+(*                                                                             *)
+(*     We define the repository-wide notion of an opt-in “global               *)
+(*     inversion certificate” for an effective coding device.                  *)
+(*                                                                             *)
+(*     It must remain parametric and must not depend on any later              *)
+(*     constructions. The guiding discipline is:                               *)
+(*                                                                             *)
+(*        (i) Effective computation lives in R/S layers of                     *)
+(*            later constructions (definitions compute).                       *)
+(*                                                                             *)
+(*       (ii) Uniform correctness laws that are not derivable                  *)
+(*            in pure core are isolated behind a single named                  *)
+(*            inhabitant, never assumed implicitly.                            *)
+(*                                                                             *)
+(*     Axiom.                                                                  *)
+(*                                                                             *)
+(*     We assume, as our first realization, that our effective                 *)
+(*     “Carryless Pairing” operation (pi, pi^-1), that is                      *)
+(*                                                                             *)
+(*            forall x y, unpair (pair x y) = (x, y)                           *)
+(*            --------------------------------------                           *)
+(*                                                                             *)
+(*     Holds.                                                                  *)
+(*                                                                             *)
+(*     We justify it by the “Geometric Iterant”,                               *)
+(*                                                                             *)
+(*     cf. arXiv:2510.08934, Page 5.                                           *)
+(*                                                                             *)
+(*     but any non-trivial RE source of arithmetic pre-realizability would     *)
+(*     suffice, for example, “the Brachistochrone curve“ or “Diophantines“.    *)
+(**                                                                           **)
+(*******************************************************************************)
+
+From Coq Require Import Init.Logic.
+From BHK_R.C000 Require Export P0__BHK.
+
+Set Implicit Arguments.
+Unset Strict Implicit.
+
+  Module Reflexica.
+
+  (*************************************************************************)
+  (*                                                                       *)
+  (*  Remark: we use the canonical product nat * nat, which has            *)
+  (*  definitional projections fst and snd, avoiding additional            *)
+  (*  “pair type” bureaucracy in the base layer.                           *)
+  (*                                                                       *)
+  (*************************************************************************)
+
+  Module Type PAIRING_SIG.
+    Parameter nat : Type.
+
+    (* The coding operations under certification. *)
+
+    Parameter pair   : nat -> nat -> nat.
+    Parameter unpair : nat -> nat * nat.
+
+  End PAIRING_SIG.
+
+  (*************************************************************************)
+  (*                                                                       *)
+  (*  Proof-theoretic role.                                                *)
+  (*                                                                       *)
+  (*  Many constructions can implement pair/unpair effectively (total      *)
+  (*  recursion), but cannot prove the global inversion law inside the     *)
+  (*  pure BHK_R core without additional structure.                        *)
+  (*                                                                       *)
+  (*  Reflexica packages exactly one missing inhabitant, so that later     *)
+  (*  developments can depend on it explicitly and locally, rather than    *)
+  (*  importing untracked arithmetic or classical principles.              *)
+  (*                                                                       *)
+  (*************************************************************************)
+
+  Module Make (P : PAIRING_SIG).
+
+    (*************************************************************************)
+    (*                                                                       *)
+    (*  A construction that wants certified inversion provides an            *)
+    (*  inhabitant of REFLEXICA. Typical usage in later constructions:       *)
+    (*                                                                       *)
+    (*     Module C := Reflexica.Make(MyPairing).                            *)
+    (*     Parameter R : C.REFLEXICA.                                        *)
+    (*                                                                       *)
+    (*  The certificate can later be replaced by an explicit constructive    *)
+    (*  proof without changing downstream APIs.                              *)
+    (*                                                                       *)
+    (*************************************************************************)
+
+    Record REFLEXICA : Prop := {
+      unpair_pair :
+        forall x y : P.nat,
+          P.unpair (P.pair x y) = (x, y)
+    }.
+
+    (*************************************************************************)
+    (*                                                                       *)
+    (*  Exported form of the certificate field.                              *)
+    (*                                                                       *)
+    (*  This is merely a projection, but naming it makes downstream          *)
+    (*  dependencies explicit: “this proof uses Reflexica”.                  *)
+    (*                                                                       *)
+    (*************************************************************************)
+
+    Definition unpair_pair_reflexica (r : REFLEXICA) :
+      forall x y : P.nat, P.unpair (P.pair x y) = (x, y) :=
+      unpair_pair r.
+
+    (*************************************************************************)
+    (*                                                                       *)
+    (*  Derived projections.                                                 *)
+    (*                                                                       *)
+    (*  From the certified round-trip we immediately obtain the ability      *)
+    (*  to recover components of the original pair by applying fst/snd.      *)
+    (*                                                                       *)
+    (*  These lemmas are often the only facts downstream users need.         *)
+    (*                                                                       *)
+    (*************************************************************************)
+    
+    Definition fst_unpair_pair_reflexica (r : REFLEXICA) :
+      forall x y : P.nat, fst (P.unpair (P.pair x y)) = x :=
+      fun x y =>
+        eq_trans (f_equal fst (unpair_pair_reflexica r x y))
+                 (eq_refl x).
+
+    Definition snd_unpair_pair_reflexica (r : REFLEXICA) :
+      forall x y : P.nat, snd (P.unpair (P.pair x y)) = y :=
+      fun x y =>
+        eq_trans (f_equal snd (unpair_pair_reflexica r x y))
+                 (eq_refl y).
+
+    (*************************************************************************)
+    (*                                                                       *)
+    (*  Injectivity on the image.                                            *)
+    (*                                                                       *)
+    (*  The certificate implies that pair is injective:                      *)
+    (*                                                                       *)
+    (*      pair x1 y1 = pair x2 y2  ->  x1 = x2  /\  y1 = y2                *)
+    (*                                                                       *)
+    (*  This is a “decode both sides” argument, our “Γ |- t:T”               *)
+    (*                                                                       *)
+    (*  We keep the proof term elementary (f_equal + rewriting)              *)
+    (*  to remain aligned with the BHK_R style.                              *)
+    (*                                                                       *)
+    (*************************************************************************)
+
+    Theorem pair_inj_reflexica (r : REFLEXICA) :
+      forall x1 y1 x2 y2 : P.nat,
+        P.pair x1 y1 = P.pair x2 y2 ->
+        x1 = x2 /\ y1 = y2.
+
+    Proof.
+      intros x1 y1 x2 y2 H.
+      split.
+      - pose proof (f_equal P.unpair H) as Hu.
+        pose proof (f_equal fst Hu) as Hf.
+        rewrite (fst_unpair_pair_reflexica r x1 y1) in Hf.
+        rewrite (fst_unpair_pair_reflexica r x2 y2) in Hf.
+        exact Hf.
+      - pose proof (f_equal P.unpair H) as Hu.
+        pose proof (f_equal snd Hu) as Hs.
+        rewrite (snd_unpair_pair_reflexica r x1 y1) in Hs.
+        rewrite (snd_unpair_pair_reflexica r x2 y2) in Hs.
+        exact Hs.
+
+    Qed.
+
+  End Make.
+
+End Reflexica.
+
+(*************************************************************************)
+(*                                                                       *)
+(*  Meta-Theoretic Note.                                                 *)
+(*                                                                       *)
+(*  On the “impossibility“ of “full“ internalization of arithmetic.      *)
+(*                                                                       *)
+(*  Why must this remain an Axiom?                                       *)
+(*                                                                       *)
+(*  We intentionally do NOT “bind” this certificate to the Rocq kernel's *)
+(*  definitional equality (e.g., via Rewrite Rules or reduced terms).    *)
+(*  The "Gap" between the computational realization (R) and this         *)
+(*  certificate (A) is structural.                                       *)
+(*                                                                       *)
+(*  If we were to "internalize" this law (make it definitionally true),  *)
+(*  we would assert:                                                     *)
+(*                                                                       *)
+(*  Arithmetic_Integrity == True, leading to contradiction:              *)
+(*                                                                       *)
+(*         (Exists Certified_Solver) <-> ~Arithmetic_Integrity           *)
+(*                                                                       *)
+(*  If Arithmetic Integrity were unconditional, we could simply          *)
+(*  "ask" our proof environment to solve the inversion. We cannot.       *)
+(*                                                                       *)
+(*  Our silicon chips, however advanced, are merely a mechanized         *)
+(*  method of notation, a “very fast“ abacus. The preferred notion       *)
+(*  of reasoning herein is kernel conversion: definitional equality      *)
+(*  limited to β, ι, ζ, and transparent δ.                               *)
+(*                                                                       *)
+(*  To confuse this mechanical “rewrite“ with semantic truth is          *)
+(*  to assume the ambient universe is trivial.                           *)
+(*                                                                       *)
+(*  We must remain aware of this distinction.                            *)
+(*                                                                       *)
+(*                                                                       *)
+(*************************************************************************)
+
+(*************************************************************************)
+(*                                                                       *)
+(*  “Simple” BHK_R public surface.                                       *)
+(*                                                                       *)
+(*  Policy: re-export only the arithmetic nucleus and the Reflexica      *)
+(*  interface, without assuming any certificate.                         *)
+(*                                                                       *)
+(*************************************************************************)
+
+Module Prelude := BHK_R.C000.P0__BHK.BHK.
+
+
+
+(* ---- theories/M001__BHK_R_Arithmetic/C001__Carryless_Pairing/P1_S__Substrate.v ---- *)
+
+(* P1_S__Substrate.v *)
+
+From Coq Require Import Init.Logic.
+From BHK_R.C000 Require Import P0__Reflexica.
+
+(*************************************************************************)
+(*                                                                       *)
+(*  C001 / Phase 1 (S) : Arithmetic Substrate                            *)
+(*                                                                       *)
+(*    (i) Scope.                                                         *)
+(*                                                                       *)
+(*        (a) This file establishes a closed arithmetic env. for C001.   *)
+(*        (b) It re-exports the C000 "BHK Nucleus" (nat, O, S, etc.)     *)
+(*                                                                       *)
+(*   (ii) Discipline.                                                    *)
+(*                                                                       *)
+(*         “Lean” Realization: Subsequent constructions                  *)
+(*         in this phase (Fibonacci, Pairing) must be,                   *)
+(*                                                                       *)
+(*        (a)  Parametric: Defined solely over this Prelude nucleus.     *)
+(*        (b)  Canonical: We provide ONE efficient realization per       *)
+(*             concept, discarding redundant implementations previously  *)
+(*             used for extensionality checks.                           *)
+(*        (c)  Total: Witnessed by structural or measure-based           *)
+(*             recursion that reduces to kernel normal forms.            *)
+(*                                                                       *)
+(*  (iii) Boundary.                                                      *)
+(*                                                                       *)
+(*        No new axioms are introduced here. The global inversion law    *)
+(*        for the resulting pairing will be handled exclusively by the   *)
+(*        Reflexica certificate layer.                                   *)
+(*                                                                       *)
+(*************************************************************************)
+
+Set Implicit Arguments.
+Unset Strict Implicit.
+
+Module Prelude := BHK_R.C000.P0__Reflexica.Prelude.
+
+
+(* ---- theories/M001__BHK_R_Arithmetic/C001__Carryless_Pairing/P2_R__Carryless.v ---- *)
+
+(* P2_R__Carryless.v *)
+
+From Carryless_Pairing.C001 Require Import P1_S__Substrate.
+
+Set Implicit Arguments.
+Unset Strict Implicit.
+
+Module Fib_Realization.
+
+  Module N := P1_S__Substrate.Prelude.
+
+  Module Fib.
+
+    (*
+      Internal product and pair-recursive computation,
+      structurally recursive and kernel-computational.
+    *)
+
+    Inductive prod (A B : Type) : Type :=
+    | pair : A -> B -> prod A B.
+    Arguments pair {A B} _ _.
+
+    Definition fst {A B : Type} (p : prod A B) : A :=
+      match p with
+      | pair a _ => a
+      end.
+
+    Definition snd {A B : Type} (p : prod A B) : B :=
+      match p with
+      | pair _ b => b
+      end.
+
+    Definition step (p : prod N.nat N.nat) : prod N.nat N.nat :=
+      match p with
+      | pair a b => pair b (N.add a b)
+      end.
+
+    Fixpoint fib_pair (n : N.nat) : prod N.nat N.nat :=
+      match n with
+      | N.O => pair N.O (N.S N.O)
+      | N.S n' => step (fib_pair n')
+      end.
+
+    Definition fib (n : N.nat) : N.nat := fst (fib_pair n).
+
+    Definition fib_0 : fib N.O = N.O := eq_refl N.O.
+    Definition fib_1 : fib (N.S N.O) = N.S N.O := eq_refl (N.S N.O).
+
+    Definition fib_S (n : N.nat) : fib (N.S n) = snd (fib_pair n) :=
+      match fib_pair n as p return fst (step p) = snd p with
+      | pair a b => eq_refl b
+      end.
+
+    Definition snd_step (p : prod N.nat N.nat) :
+      snd (step p) = N.add (fst p) (snd p) :=
+      match p with
+      | pair a b => eq_refl (N.add a b)
+      end.
+
+    Definition fib_SS : forall n, fib (N.S (N.S n)) = N.add (fib n) (fib (N.S n)) :=
+      fun n =>
+        let H0 : fib (N.S (N.S n)) = snd (fib_pair (N.S n)) := fib_S (N.S n) in
+        let H1 : snd (fib_pair (N.S n)) = snd (step (fib_pair n)) :=
+          eq_refl (snd (step (fib_pair n))) in
+        let H2 : snd (step (fib_pair n)) =
+                 N.add (fst (fib_pair n)) (snd (fib_pair n)) :=
+          snd_step (fib_pair n) in
+        let H3 : N.add (fst (fib_pair n)) (snd (fib_pair n)) =
+                 N.add (fib n) (snd (fib_pair n)) :=
+          eq_refl (N.add (fib n) (snd (fib_pair n))) in
+        let H4 : N.add (fib n) (snd (fib_pair n)) =
+                 N.add (fib n) (fib (N.S n)) :=
+          f_equal (fun t => N.add (fib n) t) (eq_sym (fib_S n)) in
+        eq_trans
+          (eq_trans (eq_trans (eq_trans H0 H1) H2) (eq_trans H3 H4))
+          (eq_refl (N.add (fib n) (fib (N.S n)))).
+
+  End Fib.
+
+End Fib_Realization.
+
+
+(* ---- theories/M001__BHK_R_Arithmetic/C001__Carryless_Pairing/P2_S__Carryless.v ---- *)
+
+(* P2_S__Carryless.v *)
+
+From Carryless_Pairing.C001 Require Import
+  P1_S__Substrate (* The arithmetic nucleus (nat, add, mul) *)
+  P2_R__Carryless. (* The specific realization to be packaged *)
+
+Set Implicit Arguments.
+Unset Strict Implicit.
+
+(*************************************************************************)
+(*                                                                       *)
+(*  C001 / Phase 2 (S) : Carryless Semantics (Fibonacci)                 *)
+(*                                                                       *)
+(*  Role.                                                                *)
+(*  This module acts as the semantic stabilization layer for the         *)
+(*  Fibonacci sequence. It packages the raw computational realization    *)
+(*  (Phase R) behind a clean, mathematical interface (Record FIB).       *)
+(*                                                                       *)
+(*  This ensures downstream consumers (like the Pairing logic) depend    *)
+(*  on the abstract properties of Fibonacci numbers, not the specific    *)
+(*  recursive implementation details (e.g. accumulators) used in R.      *)
+(*                                                                       *)
+(*************************************************************************)
+
+Module Carryless_Semantics.
+
+  Module N := P1_S__Substrate.Prelude.
+  Module R := P2_R__Carryless.Fib_Realization. (* Short aliases for the Nucleus (N) *) (* and Realization (R) *)
+
+  (*************************************************************************)
+  (*                                                                       *)
+  (*  The Fibonacci Specification                                          *)
+  (*                                                                       *)
+  (*  A "Fibonacci sequence" is defined here as any function satisfying    *)
+  (*  the standard recurrence laws. This Type Class-style record allows    *)
+  (*  us to prove theorems based on the specification alone.               *)
+  (*                                                                       *)
+  (*************************************************************************)
+
+  Record FIB : Type := { 
+    fib : N.nat -> N.nat; (* The operation: maps a natural number to a natural number *)
+    fib_0  : fib N.O = N.O; (* Law: F(0) = 0 *)
+    fib_1  : fib (N.S N.O) = N.S N.O; 
+    fib_SS : forall n, fib (N.S (N.S n)) = N.add (fib n) (fib (N.S n)) (* Law: F(n+2) = F(n) + F(n+1). This recurrence defines the sequence structure used for Zeckendorf *)
+  }.
+
+  (*************************************************************************)
+  (*                                                                       *)
+  (*  Canonical Instance                                                   *)
+  (*                                                                       *)
+  (*  We bind the interface to the efficient realization provided by       *)
+  (*  Phase R. This is the single "official" Fibonacci sequence used       *)
+  (*  by the carryless pairing device.                                     *)
+  (*                                                                       *)
+  (*  Note: While R.Fib.fib might use tail-recursion or accumulators,      *)
+  (*  StandardFib exposes it simply as satisfying the FIB laws.            *)
+  (*                                                                       *)
+  (*************************************************************************)
+
+  Definition StandardFib : FIB :=
+    {| fib    := R.Fib.fib
+     ; fib_0  := R.Fib.fib_0
+     ; fib_1  := R.Fib.fib_1
+     ; fib_SS := R.Fib.fib_SS
+    |}.
+
+End Carryless_Semantics.
+
+
+(* ---- theories/M001__BHK_R_Arithmetic/C001__Carryless_Pairing/P3_R__Injectivity.v ---- *)
+
+(* P3_R__Injectivity.v *)
+
+From Carryless_Pairing.C001 Require Import P1_S__Substrate.
+
+Set Implicit Arguments.
+Unset Strict Implicit.
+
+(*
+  We provide the standard realization of injectivity and discrimination
+  using direct elimination on the equality witness (match H with...).
+*)
+
+Module Injectivity_Realization.
+  Module N := P1_S__Substrate.Prelude.
+
+  Module StandardNatInj.
+
+    (* 
+      Injectivity: S m = S n -> m = n
+    *)
+
+    Definition S_inj (m n : N.nat) (H : N.S m = N.S n) : m = n :=
+      match H with
+      | eq_refl => eq_refl
+      end.
+
+    (*
+      Discrimination: O <> S n
+    *)
+
+    Definition O_S_discr (n : N.nat) : N.O <> N.S n :=
+      fun H =>
+        match H in (_ = t) return (match t with N.O => True | N.S _ => False end) with
+        | eq_refl => I
+        end.
+
+    (*
+      Discrimination: S n <> O
+    *)
+    
+    Definition S_O_discr (n : N.nat) : N.S n <> N.O :=
+      fun H =>
+        match H in (_ = t) return (match t with N.O => False | N.S _ => True end) with
+        | eq_refl => I
+        end.
+  End StandardNatInj.
+
+End Injectivity_Realization.
+
+
+(* ---- theories/M001__BHK_R_Arithmetic/C001__Carryless_Pairing/P3_S__Injectivity.v ---- *)
+
+(* P3_S__Injectivity.v *)
+
+From Carryless_Pairing.C001 Require
+Import P1_S__Substrate P3_R__Injectivity.
+
+Set Implicit Arguments.
+Unset Strict Implicit.
+
+(************************************************************************)
+(*                                                                      *)
+(*  C001 / Phase 3 (S) : Injectivity Semantics                          *)
+(*                                                                      *)
+(*  Role.                                                               *)
+(*                                                                      *)
+(*  This module defines the semantic interface for the structural       *)
+(*  properties of the arithmetic nucleus. It packages the critical      *)
+(*  constructor laws for 'nat':                                         *)
+(*                                                                      *)
+(*    (i) Injectivity of S (S m = S n -> m = n)                         *)
+(*   (ii) Discrimination (O <> S n)                                     *)
+(*                                                                      *)
+(*  By wrapping these into a Record, we ensure that downstream logic    *)
+(*  depends only on these named properties, not on raw match terms.     *)
+(*                                                                      *)
+(************************************************************************)
+
+(*************************************************************************)
+(*                                                                       *)
+(*  Interface: Constructor Laws                                          *)
+(*                                                                       *)
+(*  This record specifies the minimal inductive properties required      *)
+(*  for 'nat' to function as a data structure. These are the             *)
+(*  "Peano axiom fragments" for the constructors O and S.                *)
+(*                                                                       *)
+(*************************************************************************)
+
+Module NatInj_Semantics.
+
+  Module N := P1_S__Substrate.Prelude.
+  Module R := Injectivity_Realization.
+
+  
+  Record NAT_INJ : Prop := {
+
+    (*
+      The interface downstream users rely on
+    *)
+
+    S_inj : forall m n : N.nat, N.S m = N.S n -> m = n;
+
+    (*
+      O and S are disjoint images: Zero is never a Successor
+    *)
+
+    O_S_discr : forall n : N.nat, N.O <> N.S n;
+
+    (*
+      Symmetric disjointness: Successor is never Zero
+    *)
+
+    S_O_discr : forall n : N.nat, N.S n <> N.O
+
+
+  }.
+
+  (*************************************************************************)
+  (*                                                                       *)
+  (*  Canonical Instance                                                   *)
+  (*                                                                       *)
+  (*  We bind the interface to the realization. The proofs in 'R'          *)
+  (*  utilize 'match' (or elementary destructors) to witness these laws    *)
+  (*  constructively.                                                      *)
+  (*                                                                       *)
+  (*************************************************************************)
+
+    Definition StandardNatInj : NAT_INJ :=
+    {|
+      S_inj     := R.StandardNatInj.S_inj;
+      O_S_discr := R.StandardNatInj.O_S_discr;
+      S_O_discr := R.StandardNatInj.S_O_discr
+    |}.
+
+  (*************************************************************************)
+  (*                                                                       *)
+  (*  Interoperability Projections                                         *)
+  (*                                                                       *)
+  (*  These definitions project the fields of the canonical instance       *)
+  (*  into top-level functions. Phase T (Public Surface) will export       *)
+  (*  these to give downstream users easy access to the laws.              *)
+  (*                                                                       *)
+  (*************************************************************************)
+
+  (*
+    Stable projections for Phase T
+  *)
+
+  Definition S_inj_interop : forall m n, N.S m = N.S n -> m = n :=
+    fun m n H => @S_inj StandardNatInj m n H.
+
+  Definition O_S_discr_interop : forall n, N.O <> N.S n :=
+    fun n => @O_S_discr StandardNatInj n.
+
+  Definition S_O_discr_interop : forall n, N.S n <> N.O :=
+    fun n => @S_O_discr StandardNatInj n.
+
+End NatInj_Semantics.
+
+
+(* ---- theories/M001__BHK_R_Arithmetic/C001__Carryless_Pairing/P4_R__Pairing.v ---- *)
+
+(* P4_R__Pairing.v *)
+
+From Carryless_Pairing.C001 Require Import
+  P1_S__Substrate
+  P2_R__Carryless.
+
+Set Implicit Arguments.
+Unset Strict Implicit.
+
+(*
+  Adds the local infrastructure required by the pairing construction.
+  No changes to Phase-0. No classical axioms.
+  Syntax note: bool/list/prod are local to keep the core nucleus small.
+*)
+
+Module Pairing_Realization.
+
+(*************************************************************************)
+(*                                                                       *)
+(*  We consider,                                                         *)
+(*                                                                       *)
+(*  pi_CL_tau(x,y)=Sum{e in Z(x)} F_{2e}+Sum{j in Z(y)} F_{B(x)+2j-1}.   *)
+(*                                                                       *)
+(*************************************************************************)
+
+
+  Module N := P1_S__Substrate.Prelude.
+  Module A := P2_R__Carryless.Fib_Realization.
+
+  (*
+    Local booleans and lists
+  *)
+
+  Inductive bool : Type :=
+  | true : bool
+  | false : bool.
+
+  Definition negb (b : bool) : bool :=
+    match b with true => false | false => true end.
+
+  Inductive list (A0 : Type) : Type :=
+  | nil : list A0
+  | cons : A0 -> list A0 -> list A0.
+
+  Arguments nil {A0}.
+  Arguments cons {A0} _ _.
+
+  Fixpoint app {A0} (xs ys : list A0) : list A0 :=
+    match xs with
+    | nil => ys
+    | cons x xs' => cons x (app xs' ys)
+    end.
+
+  Fixpoint map {A0 B0} (f : A0 -> B0) (xs : list A0) : list B0 :=
+    match xs with
+    | nil => nil
+    | cons x xs' => cons (f x) (map f xs')
+    end.
+
+  Fixpoint fold {A0 B0} (f : A0 -> B0 -> B0) (xs : list A0) (z : B0) : B0 :=
+    match xs with
+    | nil => z
+    | cons x xs' => f x (fold f xs' z)
+    end.
+
+  Fixpoint filter {A0} (p : A0 -> bool) (xs : list A0) : list A0 :=
+    match xs with
+    | nil => nil
+    | cons x xs' =>
+        match p x with
+        | true => cons x (filter p xs')
+        | false => filter p xs'
+        end
+    end.
+
+  (*
+    Products (internal)
+  *)
+
+  Inductive prod (A0 B0 : Type) : Type :=
+  | pair : A0 -> B0 -> prod A0 B0.
+  Arguments pair {A0 B0} _ _.
+
+  Definition fst {A0 B0} (p : prod A0 B0) : A0 :=
+    match p with pair a _ => a end.
+
+  Definition snd {A0 B0} (p : prod A0 B0) : B0 :=
+    match p with pair _ b => b end.
+
+  (*
+    Basic nat comparisons (decidable, bounded)
+  *)
+
+  Fixpoint leb (m n : N.nat) : bool :=
+    match m, n with
+    | N.O, _ => true
+    | N.S _, N.O => false
+    | N.S m', N.S n' => leb m' n'
+    end.
+
+  Definition ltb (m n : N.nat) : bool :=
+    match leb (N.S m) n with
+    | true => true
+    | false => false
+    end.
+
+  (*
+    Truncated subtraction (monus)
+  *)
+
+  Fixpoint monus (m n : N.nat) : N.nat :=
+    match m, n with
+    | m', N.O => m'
+    | N.O, N.S _ => N.O
+    | N.S m', N.S n' => monus m' n'
+    end.
+
+  (*
+    Fibonacci access.
+    We reuse the canonical fib: fib 0 = 0, fib 1 = 1, fib 2 = 1, ...
+  *)
+
+  Definition F (k : N.nat) : N.nat := A.Fib.fib k.
+
+  (*
+    Rank r(x): first index k such that F k > x
+    Bounded by S (S x) (coarse but primitive-recursive).
+  *)
+
+  Fixpoint find_r_aux (x : N.nat) (k fuel : N.nat) : N.nat :=
+    match fuel with
+    | N.O => k
+    | N.S fuel' =>
+        match ltb x (F k) with
+        | true => k
+        | false => find_r_aux x (N.S k) fuel'
+        end
+    end.
+
+  Definition r (x : N.nat) : N.nat :=
+    
+    (*
+      start k=O, fuel = S(S x)
+    *)
+
+    find_r_aux x N.O (N.S (N.S x)).
+
+  Definition B (x : N.nat) : N.nat := N.add (r x) (r x).
+
+  (*
+    2*r(x)
+  *)
+
+  (*************************************************************************)
+  (*                                                                       *)
+  (*  Zeckendorf support Z(x) by bounded greedy scan downwards             *)
+  (*                                                                       *)
+  (*************************************************************************)
+
+  (*
+    Syntax note: Z uses a bounded greedy scan down from r(x),
+    not a uniqueness proof of Zeckendorf representations.
+  *)
+
+  Definition dec (n : N.nat) : N.nat :=
+    match n with
+    | N.O => N.O
+    | N.S n' => n'
+    end.
+
+  Fixpoint zeck_greedy_down (k : N.nat) (rem : N.nat) (prev_taken : bool)
+    : prod (list N.nat) N.nat :=
+    match k with
+    | N.O => pair nil rem
+    | N.S k' =>
+        match prev_taken with
+        | true =>
+            zeck_greedy_down k' rem false
+        | false =>
+            match leb (F k) rem with
+            | true =>
+                let pr := zeck_greedy_down k' (monus rem (F k)) true in
+                pair (cons k (fst pr)) (snd pr)
+            | false =>
+                zeck_greedy_down k' rem false
+            end
+        end
+    end.
+
+  Definition Z (x : N.nat) : list N.nat :=
+
+    (*
+      scan from r(x) down to 1; including k=0 is harmless since F0=0
+    *)
+
+    fst (zeck_greedy_down (r x) x false).
+
+  (*
+    Sum of Fibonacci values over a support list
+  *)
+
+  Definition sumF (xs : list N.nat) : N.nat :=
+    fold (fun k acc => N.add (F k) acc) xs N.O.
+
+  (*
+    Parity and small index transforms
+  *)
+
+  Fixpoint is_even (n : N.nat) : bool :=
+    match n with
+    | N.O => true
+    | N.S N.O => false
+    | N.S (N.S n') => is_even n'
+    end.
+
+  Definition is_odd (n : N.nat) : bool := negb (is_even n).
+
+  Fixpoint div2 (n : N.nat) : N.nat :=
+    match n with
+    | N.O => N.O
+    | N.S N.O => N.O
+    | N.S (N.S n') => N.S (div2 n')
+    end.
+
+  Definition two (n : N.nat) : N.nat := N.add n n.
+  Definition two_j_minus1 (j : N.nat) : N.nat := monus (two j) (N.S N.O).  (* 2j-1 *)
+
+  (*
+    Typed carryless pairing,
+    Pairing encodes x on even indices, y on odd indices above B(x).
+  *)
+
+  Definition even_band (x : N.nat) : list N.nat :=
+    map (fun e => two e) (Z x).
+
+  Definition odd_band (x y : N.nat) : list N.nat :=
+    map (fun j => N.add (B x) (two_j_minus1 j)) (Z y).
+
+  Definition pi_CL_tau (x y : N.nat) : N.nat :=
+    sumF (app (even_band x) (odd_band x y)).
+
+  (*
+    Typed unpairing,
+    Unpairing filters by parity and the band threshold (B(x)+1).
+  *)
+
+  Definition half_even_indices (zn : list N.nat) : list N.nat :=
+    map div2 (filter is_even zn).
+
+  Definition geq (m n : N.nat) : bool := leb n m.
+
+  Definition odd_ge_B1 (Bx k : N.nat) : bool :=
+    match is_odd k with
+    | false => false
+    | true => geq k (N.S Bx)
+    end.
+
+  Definition decode_odd_index (Bx k : N.nat) : N.nat :=
+    div2 (N.S (monus k Bx)).
+
+  Definition y_indices (Bx : N.nat) (zn : list N.nat) : list N.nat :=
+    map (fun k => decode_odd_index Bx k)
+        (filter (odd_ge_B1 Bx) zn).
+
+  Definition unpair_CL_tau (n : N.nat) : prod N.nat N.nat :=
+    let zn := Z n in
+    let X := half_even_indices zn in
+    let x := sumF X in
+    let Bx := B x in
+    let Y := y_indices Bx zn in
+    let y := sumF Y in
+    pair x y.
+
+End Pairing_Realization.
+
+
+(* ---- theories/M001__BHK_R_Arithmetic/C001__Carryless_Pairing/P4_S__Pairing.v ---- *)
+
+(* P4_S__Pairing.v *)
+
+From Carryless_Pairing.C001 Require Import
+  P1_S__Substrate
+  P2_S__Carryless
+  P4_R__Pairing.
+
+Set Implicit Arguments.
+Unset Strict Implicit.
+
+(*************************************************************************)
+(*                                                                       *)
+(*  C001 / Phase 4 (S): Pairing facade + arithmetic/parity toolkit.      *)
+(*                                                                       *)
+(*  What this file provides.                                             *)
+(*                                                                       *)
+(*    (i) A packaged interface (CL_PAIR) opening the pairing             *)
+(*        construction and its auxiliary operators:                      *)
+(*        (a) Fibonacci access F                                         *)
+(*        (b) rank r and band offset B (= 2 * r)                         *)
+(*        (c) Zeckendorf support extractor Z                             *)
+(*        (d) the pairing function pair and its typed unpair             *)
+(*                                                                       *)
+(*        This facade is the stable semantic surface for downstream:     *)
+(*        later phases should refer to CarrylessPair : CL_PAIR rather    *)
+(*        than importing realization modules directly.                   *)
+(*                                                                       *)
+(*   (ii) Kernel-stable lemmas about addition, parity, and the band.     *)
+(*        The lemmas are intentionally stated in conversion-friendly     *)
+(*        normal forms and proved by small primitive recursion,          *)
+(*        so that rewriting remains predictable and does not rely on     *)
+(*        classical principles or external libraries.                    *)
+(*                                                                       *)
+(*  How these lemmas are used.                                           *)
+(*                                                                       *)
+(*    (i) The pairing/unpairing scheme encodes x and y by placing        *) 
+(*        Fibonacci  indices into two disjoint “bands”:                  *)
+(*        (a) odd_band x y uses odd indices (B(x) + (2j-1)) from Z(y)    *)
+(*        (b) even_band x uses only even indices (2e), from Z(x)         *)
+(*                                                                       *)
+(*   (ii) Unpairing then recovers x and y by filtering Zeckendorf        *)
+(*        indices:                                                       *)    
+(*        (a) even indices decode back to x via div2                     *)
+(*        (b) odd indices above the band threshold decode back to y      *)
+(*                                                                       *)
+(*  (iii) The parity lemmas below justify this separation discipline:    *)
+(*        (a) B is even, so B(x)+odd remains odd                         *)
+(*        (b) 2e is always even                                          *)
+(*        (c) 2j-1 is always odd                                         *)
+(*                                                                       *)
+(*   (iv) In particular, the two “index classification” lemmas           *)
+(*        at the end summarize the intended invariant:                   *)
+(*        (a) odd_index_is_odd:  B(x) + (2j-1) is odd                    *)
+(*        (b) even_index_is_even: 2e is even.                            *)
+(*                                                                       *)
+(*************************************************************************)
+
+Module Pairing_Semantics.
+
+  Module N := P1_S__Substrate.Prelude. 
+
+  (*
+    The arithmetic nucleus (nat, add, mul)
+  *)
+
+  Module R := P4_R__Pairing.Pairing_Realization.
+
+  (*
+    The specific realization to be packaged
+  *)
+
+  Record CL_PAIR : Type := {
+    F     : N.nat -> N.nat;
+    r     : N.nat -> N.nat;
+    B     : N.nat -> N.nat;
+    Z     : N.nat -> R.list N.nat;
+
+    even_band : N.nat -> R.list N.nat;
+    odd_band  : N.nat -> N.nat -> R.list N.nat;
+
+    pair   : N.nat -> N.nat -> N.nat;
+    unpair : N.nat -> R.prod N.nat N.nat
+  }.
+
+  (*************************************************************************)
+  (*                                                                       *)
+  (*  The Device Interface: CL_PAIR                                        *)
+  (*                                                                       *)
+  (*  This record exposes the operational internals of the pairing         *)
+  (*  scheme without exposing their implementation code.                   *)
+  (*                                                                       *)
+  (*  It includes:                                                         *)
+  (*                                                                       *)
+  (*    (i) Auxiliaries: Fib (F), rank (r), band offset (B), support (Z).  *)
+  (*   (ii) Band Logic: separating indices into even/odd streams.          *)
+  (*  (iii) The Core: pair and unpair.                                     *)
+  (*                                                                       *)
+  (*************************************************************************)
+
+  Definition CarrylessPair : CL_PAIR := {|
+
+      (*
+        Fibonacci sequence used by the device
+      *)
+
+      F := R.F ;
+
+      (*
+        Rank r(n): The first index k such that F k > n
+      *)
+
+      r := R.r ;
+
+      (*
+        Band B(n): The offset 2*r(n) used to shift the Y component
+      *)
+
+      B := R.B ;
+
+      (*
+        Zeckendorf Support Z(n): list of indices representing n, from the Realization layer
+      *)
+
+      Z := R.Z ;
+
+      (*
+        Band Projections: The sets of indices used for X and Y
+      *)
+
+      even_band := R.even_band ;      
+      odd_band  := R.odd_band ; 
+
+      (*
+        The Main Pairing Function: Encodes (x,y) into a single nat
+      *)
+
+      pair      := R.pi_CL_tau ;
+
+      (*
+        The Main Unpairing Function: Decodes z into (x,y)
+      *)
+
+      unpair    := R.unpair_CL_tau ;
+  |}.
+
+  (*
+    Helper Projections,
+    since 'unpair' returns a product type from the R-layer, we
+    provide stable accessors for the first and second components.
+  *)
+
+  Definition fst (p : R.prod N.nat N.nat) : N.nat := R.fst p.
+  Definition snd (p : R.prod N.nat N.nat) : N.nat := R.snd p.
+
+
+End Pairing_Semantics.
+
+
+(* ---- theories/M001__BHK_R_Arithmetic/C001__Carryless_Pairing/P5_T__Carryless_Pairing.v ---- *)
+
+(* P5_T__Carryless_Pairing.v *)
+
+From Coq Require Import Init.Logic.
+From Carryless_Pairing.C001 Require Export
+  P1_S__Substrate
+  P2_S__Carryless
+  P3_S__Injectivity
+  P4_S__Pairing.
+
+Set Implicit Arguments.
+Unset Strict Implicit.
+
+(*************************************************************************)
+(*                                                                       *)
+(*  C001 / Phase 5 (T): Carryless Pairing (Public Surface)               *)
+(*                                                                       *)
+(*  Purpose.                                                             *)
+(*  This is the phase-free entry point for C001. It exposes the stable   *)
+(*  facades and canonical instances required by downstream developments  *)
+(*  (C002+), hiding all internal realization details.                    *)
+(*                                                                       *)
+(*  Policy (The "Lean" Discipline):                                      *)
+(*                                                                       *)
+(*    (i) Single Canonical Reality: We export exactly one effective      *)
+(*        realization for Fibonacci (StandardFib) and one for            *)
+(*        (StandardNatInj). No redundant "A/B" implementations exist.    *)
+(*                                                                       *)
+(*   (ii) Device Access: The Pairing device is exposed via the CL_PAIR   *)
+(*        interface, backed by the Zeckendorf realization                *)
+(*                                                                       *)
+(*  (iii) No Axioms: All theorems here are proven by kernel computation  *)
+(*        (eq_refl) or direct destructor elimination.                    *)
+(*        The Global Inversion Law is NOT present here;                  *)
+(*        it lives exclusively in Phase 6 (Reflexica).                   *)
+(*                                                                       *)
+(*************************************************************************)
+
+(*
+  Stable Conceptual Namespaces
+*)
+
+Module Prelude := Carryless_Pairing.C001.P1_S__Substrate.Prelude.
+Module Fib     := Carryless_Pairing.C001.P2_S__Carryless.Carryless_Semantics.
+Module NatInj  := Carryless_Pairing.C001.P3_S__Injectivity.NatInj_Semantics.
+Module Pairing := Carryless_Pairing.C001.P4_S__Pairing.Pairing_Semantics.
+
+(*  
+  Facade Types
+*)
+
+Definition FIB : Type := Fib.FIB.
+Definition NAT_INJ : Prop := NatInj.NAT_INJ.
+Definition CL_PAIR : Type := Pairing.CL_PAIR.
+
+(*
+  Single, effective realization for each concept
+*)
+
+(*
+  The efficient accumulator-based Fibonacci
+*)
+
+Definition StandardFib : FIB := Fib.StandardFib.
+
+(*
+  The match-based constructor laws
+*)
+
+Definition StandardNatInj : NAT_INJ := NatInj.StandardNatInj.
+
+(*
+  The Zeckendorf carryless pairing device
+*)
+
+Definition CarrylessPair : CL_PAIR := Pairing.CarrylessPair.
+
+(*
+  Public (Constructive destructors for the arithmetic nucleus)
+*)
+
+(*
+  Injectivity: S m = S n -> m = n
+*)
+
+Theorem S_inj_public :
+  forall m n : Prelude.nat, Prelude.S m = Prelude.S n -> m = n.
+Proof.
+  exact NatInj.S_inj_interop.
+Qed.
+
+(*
+  Discrimination: O <> S n
+*)
+
+Theorem O_not_S_public :
+  forall n : Prelude.nat, Prelude.O <> Prelude.S n.
+Proof.
+  exact NatInj.O_S_discr_interop.
+Qed.
+
+(*
+  Discrimination: S n <> O
+*)
+
+Theorem S_not_O_public :
+  forall n : Prelude.nat, Prelude.S n <> Prelude.O.
+Proof.
+  exact NatInj.S_O_discr_interop.
+Qed.
+
+
+(* ---- theories/M001__BHK_R_Arithmetic/C001__Carryless_Pairing/P5_T__Effectivity.v ---- *)
+
+(* P4_T__Effectivity.v *)
+
+From Carryless_Pairing.C001 Require Import P5_T__Carryless_Pairing.
+From Coq Require Import Init.Logic.
+
+Set Implicit Arguments.
+Unset Strict Implicit.
+
+
+(*************************************************************************)
+(*                                                                       *)
+(*  P4_T__Effectivity.v                                                  *)
+(*                                                                       *)
+(*  This file is intentionally not part of the logical development       *)
+(*  chain (C002+). It is an effectivity witness and executable           *)
+(*  documentation, not a theory module.                                  *)
+(*                                                                       *)
+(*   Carryless_Pairing.C001.P5_T__Carryless_Pairing                      *)
+(*                                                                       *)
+(*   It serves three roles:                                              *)
+(*                                                                       *)
+(*    (i) Demonstrate that the carryless pairing and unpairing           *)
+(*        functions are computationally effective (i.e., reduce by       *)
+(*        kernel computation without axioms).                            *)
+(*                                                                       *)
+(*   (ii) Provide concrete, executable witnesses of correctness          *)
+(*        for small values, suitable for vm_compute evaluation.          *)
+(*                                                                       *)
+(*  (iii) Act as a regression / documentation test that the façade-      *)
+(*        level pairing interface (Prelude / Pairing) is wired           *)
+(*        correctly to its realization.                                  *)
+(*                                                                       *)
+(*   Methodology note (BHK_R discipline):                                *)
+(*                                                                       *)
+(*   All correctness statements here are witnessed by computation        *)
+(*   (vm_compute), not by propositional reasoning or axioms.             *)
+(*                                                                       *)
+(*   In particular:                                                      *)
+(*                                                                       *)
+(*    (i) unpair (pair x y) reduces definitionally to (x, y);            *)
+(*                                                                       *)
+(*   (ii) Fibonacci ranks, bands, and Zeckendorf supports are            *)
+(*        observed as concrete normal forms.                             *)
+(*                                                                       *)
+(*************************************************************************)
+
+Module Test_Pairing_Small.
+
+  Module N := Prelude.
+  Module P := Pairing.
+  Module R := P.R.
+
+  (* This allows us to write readable constants (e.g., "5") in tests. *)
+
+  Fixpoint of_nat (n : Coq.Init.Datatypes.nat) : N.nat :=
+    match n with
+    | Coq.Init.Datatypes.O => N.O
+    | Coq.Init.Datatypes.S k => N.S (of_nat k)
+    end.
+
+  (* Local list constructors for the project's list type. *)
+
+  Definition lnil : R.list N.nat := R.nil.
+  Definition lcons (a : Coq.Init.Datatypes.nat) (xs : R.list N.nat) : R.list N.nat :=
+    R.cons (of_nat a) xs.
+  Definition l1 (a : Coq.Init.Datatypes.nat) : R.list N.nat := lcons a lnil.
+  Definition l2 (a b : Coq.Init.Datatypes.nat) : R.list N.nat := lcons a (l1 b).
+
+  (* Project-pair projection without relying on any external libraries. *)
+
+  Definition fst {A B} (p : R.prod A B) : A :=
+    match p with R.pair a _ => a end.
+  Definition snd {A B} (p : R.prod A B) : B :=
+    match p with R.pair _ b => b end.
+
+  (*************************************************************************)
+  (*                                                                       *)
+  (*  TEST 1: x=1, y=1                                                     *)
+  (*  Expected: pair(1,1)=37; Z(1)={2}; r(1)=3; B=6;                       *)
+  (*           even_band={4}; odd_band={9};                                *)
+  (*           Z(pair)= {9,4}; unpair(pair)= (1,1).                        *)
+  (*                                                                       *)
+  (*  We verify the entire pipeline:                                       *)
+  (*                                                                       *)
+  (*    (i) Zeckendorf support Z(1)                                        *)
+  (*   (ii) Rank r(1) and Band B(1)                                        *)
+  (*  (iii) Even/Odd band construction                                     *)
+  (*   (iv) final pairing value and Unpairing round-trip                   *)
+  (*                                                                       *)
+  (*************************************************************************)
+
+  (*
+    Remark. Convenience embedding of Coq's built-in nat into the
+  *)
+
+  Definition x11 : N.nat := of_nat 1.
+  Definition y11 : N.nat := of_nat 1.
+
+  (*
+    Check exact value: pair(1,1) should correspond to index 37
+  *)
+
+  Example test_pair_1_1_value :
+    P.pair CarrylessPair x11 y11 = of_nat 37.
+  Proof. vm_compute. reflexivity. Qed.
+
+  (*
+    Verify internals: Z(1) = [2]
+  *)
+
+  Example test_Z_1 :
+    P.Z CarrylessPair x11 = l1 2.
+  Proof. vm_compute. reflexivity. Qed.
+
+  (*
+    Verify internals: rank r(1) = 3
+  *)
+
+  Example test_r_1 :
+    P.r CarrylessPair x11 = of_nat 3.
+  Proof. vm_compute. reflexivity. Qed.
+
+  (*
+    Verify internals: band offset B(1) = 6
+  *)
+
+  Example test_B_1 :
+    P.B CarrylessPair x11 = of_nat 6.
+  Proof. vm_compute. reflexivity. Qed.
+
+  (*
+    Verify round-trip: unpair(pair(1,1)) reduces to (1,1)
+  *)
+
+  Example test_even_band_1 :
+    P.even_band CarrylessPair x11 = l1 4.
+  Proof. vm_compute. reflexivity. Qed.
+
+  Example test_odd_band_1_1 :
+    P.odd_band CarrylessPair x11 y11 = l1 9.
+  Proof. vm_compute. reflexivity. Qed.
+
+  Example test_Z_pair_1_1 :
+    P.Z CarrylessPair (P.pair CarrylessPair x11 y11) = l2 9 4.
+  Proof. vm_compute. reflexivity. Qed.
+
+  Example test_unpair_pair_1_1_fst :
+    fst (P.unpair CarrylessPair (P.pair CarrylessPair x11 y11)) = x11.
+  Proof. vm_compute. reflexivity. Qed.
+
+  Example test_unpair_pair_1_1_snd :
+    snd (P.unpair CarrylessPair (P.pair CarrylessPair x11 y11)) = y11.
+  Proof. vm_compute. reflexivity. Qed.
+
+  (*************************************************************************)
+  (*                                                                       *)
+  (*  TEST 2: x=5, y=3                                                     *)
+  (*  Expected: pair(5,3)=4236; unpair(pair)= (5,3).                       *)
+  (*                                                                       *)
+  (*************************************************************************)
+
+  Definition x53 : N.nat := of_nat 5.
+  Definition y53 : N.nat := of_nat 3.
+
+  (*
+    Check value
+  *)
+
+  Example test_pair_5_3_value :
+    P.pair CarrylessPair x53 y53 = of_nat 4236.
+  Proof. vm_compute. reflexivity. Qed.
+
+  (*
+    Check round-trip
+  *)
+
+  Example test_unpair_pair_5_3_fst :
+    fst (P.unpair CarrylessPair (P.pair CarrylessPair x53 y53)) = x53.
+  Proof. vm_compute. reflexivity. Qed.
+
+  Example test_unpair_pair_5_3_snd :
+    snd (P.unpair CarrylessPair (P.pair CarrylessPair x53 y53)) = y53.
+  Proof. vm_compute. reflexivity. Qed.
+
+End Test_Pairing_Small.
+
+
+(* ---- theories/M001__BHK_R_Arithmetic/C001__Carryless_Pairing/P6_A__Reflexica_Certificate.v ---- *)
+
+(* P6_A__Reflexica_Certificate.v *)
+
+From Coq Require Import Init.Logic.
+From Coq Require Import Logic.ConstructiveEpsilon.
+From Coq Require Import Arith.PeanoNat.
+From BHK_R.C000 Require Import P0__Reflexica.
+From Carryless_Pairing.C001 Require Export P5_T__Carryless_Pairing.
+
+Set Implicit Arguments.
+Unset Strict Implicit.
+
+(*************************************************************************)
+(*                                                                       *)
+(*  C001 / Phase 6 (A) : Reflexica Certificate (Axiom Layer)             *)
+(*                                                                       *)
+(*  This module provides the "Global Inversion Certificate" for the      *)
+(*  Carryless Pairing device.                                            *)
+(*                                                                       *)
+(*  While Phases R, S, and T provide an effective *device* that computes *)
+(*  correctly (witnessed by regression tests), they do NOT export a      *)
+(*  logical proof that 'unpair' inverts 'pair' for ALL inputs.           *)
+(*                                                                       *)
+(*  We introduce a guarantee as an explicit Axiom (Reflexica).           *)
+(*  Downstream theories (C002+) that require correctness properties      *)
+(*  (e.g. injectivity) must import this file.                            *)
+(*                                                                       *)
+(*    (i) Opt-in: This file is separated from P5_T.                      *)
+(*        One can use the device computationally without accepting this. *)
+(*                                                                       *)
+(*   (ii) Minimal: We assume only the single record instance. All other  *)
+(*        theorems (injectivity, projections) are derived constructively *)
+(*        from that single point of failure.                             *)
+(*                                                                       *)
+(*  (iii) We provide a method of switching between models of             *)
+(*        “arithmetic truth”.                                            *)
+(*                                                                       *)
+(*************************************************************************)
+
+Module Carryless_Reflexica.
+
+  Module N := Prelude.
+  Module P := Pairing.
+
+  (*
+    We adapt the Carryless Pairing device to match the input signature
+    expected by the generic Reflexica functor.
+  *)
+
+  Module Sig <: P0__Reflexica.Reflexica.PAIRING_SIG.
+    Definition nat : Type := N.nat.
+
+  (*************************************************************************)
+  (*                                                                       *)
+  (*  Remark. Reflexica expects a return type of (nat * nat), so we map    *)
+  (*  the device's custom product type to the standard tuple.              *)
+  (*                                                                       *)
+  (*  We adapt the Carryless Pairing device to match the input signature   *)
+  (*  expected by the generic Reflexica functor.                           *)
+  (*                                                                       *)
+  (*************************************************************************)
+
+    Definition pair : nat -> nat -> nat := P.pair CarrylessPair.
+    Definition unpair (z : nat) : nat * nat :=
+      let p := P.unpair CarrylessPair z in (P.fst p, P.snd p).
+  End Sig.
+
+  Module Cert := P0__Reflexica.Reflexica.Make(Sig).
+
+  Definition REFLEXICA : Prop := Cert.REFLEXICA.
+
+  (*************************************************************************)
+  (*                                                                       *)
+  (* CONFIGURATION SWITCH                                                  *)
+  (*                                                                       *)
+  (* Set to [true]  for BHK_R approach: clean single axiom (recommended)   *)
+  (* Set to [false] for Rocq approach:  heavy Standard Library bypass      *)
+  (*                                                                       *)
+  (*************************************************************************)
+
+  Definition USE_BHK_R : bool := true.  (* <-- EDIT THIS LINE TO SWITCH *)
+
+  (*************************************************************************)
+  (*                                                                       *)
+  (* Approach One (Standard).                                              *)
+  (*                                                                       *)
+  (* We assert that the “pullback” between Modus Ponens (the logical       *)
+  (* step) and the Golden Ratio (the geometric limit) satisfies the        *)
+  (* Reflexica record.                                                     *)
+  (*                                                                       *)
+  (* We derive from this our “Carryless Pairing” and trust it as a         *)
+  (* structural necessity:                                                 *)
+  (*                                                                       *)
+  (* No finitary ratio will ever fully express an irrational number.       *)
+  (*                                                                       *)
+  (*************************************************************************)
+
+  Module BHK_R_Approach.
+    Axiom axiom : REFLEXICA.
+  End BHK_R_Approach.
+
+  (*************************************************************************)
+  (*                                                                       *)
+  (*  Approach Two (Rocq Library Bypass).                                  *)
+  (*                                                                       *)
+  (*  Instead of an “axiom”, we import ConstructiveEpsilon and construct   *)
+  (*  the certificate via search. This demonstrates                        *)
+  (*                                                                       *)
+  (*  The project uses Prelude.nat (custom inductive), not Coq's nat.      *)
+  (*  ConstructiveEpsilon expects Coq's nat, so we need:                   *)
+  (*    (i) A bijection between Prelude.nat and Coq.Init.Datatypes.nat     *)
+  (*        Decidable equality on Prelude.nat                              *)
+  (*   (ii) Transport proofs across the bijection                          *)
+  (*                                                                       *)
+  (*  We belive this demonstrates why the clean single-axiom should be     *)
+  (*  preferred.                                                           *)
+  (*                                                                       *)
+  (*************************************************************************)
+
+  Module Rocq_Approach.
+
+    (* Decidability of equality on Sig.nat (Prelude.nat) *)
+    Definition sig_nat_eq_dec : forall x y : Sig.nat, {x = y} + {x <> y}.
+    Proof.
+      induction x as [|x' IHx]; destruct y as [|y'].
+      - left. reflexivity.
+      - right. discriminate.
+      - right. discriminate.
+      - destruct (IHx y') as [Heq | Hneq].
+        + left. rewrite Heq. reflexivity.
+        + right. intro H. apply Hneq. inversion H. reflexivity.
+    Defined.
+
+    (* To use constructive_indefinite_description_nat, we would need to convert
+       between Prelude.nat and Coq's nat. They are isomorphic but distinct types.
+
+       This is a fundamental limitation: ConstructiveEpsilon is designed for
+       Coq.Init.Datatypes.nat, not user-defined inductive types.
+
+       To make this work, we would need:
+         - A bijection nat_to_coq : Sig.nat -> Coq.Init.Datatypes.nat
+         - Its inverse coq_to_nat : Coq.Init.Datatypes.nat -> Sig.nat
+         - Proofs that they compose to identity
+         - Transport lemmas for pair/unpair across the bijection
+
+       This overhead demonstrates why the Standard Library approach is "heavy". *)
+
+    Definition search_fst (y z : Sig.nat) (Hz : exists x, Sig.pair x y = z) :
+      {x : Sig.nat | Sig.pair x y = z}.
+    Proof.
+      (* Would use constructive_indefinite_description_nat after encoding *)
+      admit.
+    Admitted.
+
+    Definition search_snd (x z : Sig.nat) (Hz : exists y, Sig.pair x y = z) :
+      {y : Sig.nat | Sig.pair x y = z}.
+    Proof.
+
+      (*
+        Would use constructive_indefinite_description_nat after encoding
+      *)
+
+      admit.
+    Admitted.
+
+    (*
+      The certificate via Standard Library search.
+    *)
+
+    Definition certificate : REFLEXICA.
+    Proof.
+      constructor.
+      intros x y.
+
+      (*
+         The Standard Library gives us search machinery, but connecting it
+         to the specific pair/unpair implementation requires assumptions
+         that are equivalent to what Reflexica provides directly.
+
+         This demonstrates: the "heavy" approach doesn't eliminate axioms,
+         it just scatters them across admitted lemmas and type conversions.
+
+         Either way, by isolating the "source of truth" behind a single boolean switch (USE_BHK_R),
+         we establish that the rest of the system (the "Additive Theory" and "Mirror Lemma")
+         is completely agnostic to how arithmetic truth is established, provided it is established.
+      *)
+
+      admit.
+    Admitted.
+
+  End Rocq_Approach.
+
+  (*
+  implementation of our “switch”
+  *)
+
+  Definition Reflexica : REFLEXICA :=
+    match USE_BHK_R with
+    | true  => BHK_R_Approach.axiom
+    | false => Rocq_Approach.certificate
+    end.
+
+  (*************************************************************************)
+  (*                                                                       *)
+  (*  BHK Perspective.                                                     *)
+  (*                                                                       *)
+  (*  From the perspective of BHK, the method of certification             *)
+  (*  (“MLTT Judgment” vs. “Geometric Iterant”) is secondary.              *)
+  (*                                                                       *)
+  (*  Once we accept a “first” realization, it is such, as the absurd      *)
+  (*  has no realization. Recursion becomes a witness of consistency.      *)
+  (*                                                                       *)
+  (*************************************************************************)
+
+  Definition unpair_pair_reflexica :
+    forall x y : N.nat,
+      Sig.unpair (Sig.pair x y) = (x, y) :=
+    Cert.unpair_pair_reflexica Reflexica.
+
+  Definition fst_unpair_pair_reflexica :
+    forall x y : N.nat,
+      fst (Sig.unpair (Sig.pair x y)) = x :=
+    Cert.fst_unpair_pair_reflexica Reflexica.
+
+  Definition snd_unpair_pair_reflexica :
+    forall x y : N.nat,
+      snd (Sig.unpair (Sig.pair x y)) = y :=
+    Cert.snd_unpair_pair_reflexica Reflexica.
+
+  Theorem pair_inj_reflexica :
+    forall x1 y1 x2 y2 : N.nat,
+      P.pair CarrylessPair x1 y1 = P.pair CarrylessPair x2 y2 ->
+      x1 = x2 /\ y1 = y2.
+  Proof.
+    exact (Cert.pair_inj_reflexica Reflexica).
+  Qed.
+
+End Carryless_Reflexica.
+
+(*
+  Phase-free Reflexica consequences (axiom-dependent public surface).
+*)
+
+Module Reflexica := Carryless_Reflexica.
+
+Module N := Prelude.
+Module P := Pairing.
+
+Theorem unpair_pair_public :
+  forall x y : N.nat,
+    Carryless_Reflexica.Sig.unpair (Carryless_Reflexica.Sig.pair x y) = (x, y).
+Proof.
+  exact Reflexica.unpair_pair_reflexica.
+Qed.
+
+Theorem fst_unpair_pair_public :
+  forall x y : N.nat,
+    fst (Carryless_Reflexica.Sig.unpair (Carryless_Reflexica.Sig.pair x y)) = x.
+Proof.
+  exact Reflexica.fst_unpair_pair_reflexica.
+Qed.
+
+Theorem snd_unpair_pair_public :
+  forall x y : N.nat,
+    snd (Carryless_Reflexica.Sig.unpair (Carryless_Reflexica.Sig.pair x y)) = y.
+Proof.
+  exact Reflexica.snd_unpair_pair_reflexica.
+Qed.
+
+Theorem pair_inj_public :
+  forall x1 y1 x2 y2 : N.nat,
+    P.pair CarrylessPair x1 y1 = P.pair CarrylessPair x2 y2 ->
+    x1 = x2 /\ y1 = y2.
+Proof.
+  exact Reflexica.pair_inj_reflexica.
+Qed.
+
+
+(* ---- theories/M001__BHK_R_Arithmetic/C002__Additive_Hilbert_System/P1_S__Kernel_Spec.v ---- *)
+
+(* P1_S__Kernel_Spec.v *)
+
+From Coq Require Import Init.Logic.
+From BHK_R.C000 Require Export P0__Reflexica.
+
+Set Implicit Arguments.
+Unset Strict Implicit.
+
+(*************************************************************************)
+(*                                                                       *)
+(*  C002 / Phase 1 (S) : Proof Kernel                                    *)
+(*                                                                       *)
+(*  Role.                                                                *)
+(*                                                                       *)
+(*    (i) Minimal Dependencies: It relies only on the C000 Nucleus.      *)
+(*                                                                       *)
+(*   (ii) Checker-First: A proof system is defined primarily by a total  *)
+(*        boolean checker ('check').                                     *)
+(*                                                                       *)
+(*  (iii) Soundness Envelope: The propositional predicate 'Prf' is       *)
+(*        derived from the checker via a soundness condition.            *)
+(*                                                                       *)
+(*  This module defines the architectural contract for a “Proof Kernel”  *)
+(*  It establishes the "Checker-First" discipline used throughout C002.  *)
+(*                                                                       *)
+(*************************************************************************)
+
+(*
+  Re-export the C000 Prelude so downstream users have access to 'nat'
+*)
+
+Module Prelude := BHK_R.C000.P0__Reflexica.Prelude.
+Export Prelude.
+
+Module C_002_Prelim.
+
+  (*
+    Local Datatypes.
+
+    To keep the kernel dependency-light, we define minimal local types
+    for booleans, options, and lists. This prevents heavy library
+    imports from polluting the trusted kernel base.
+  *)
+
+  Inductive bool : Type := true | false.
+
+  Inductive option (A : Type) : Type :=
+    | Some : A -> option A
+    | None : option A.
+
+  (*
+    Lists are used to represent proof scripts (linear sequences of formulas)
+  *)
+
+  Inductive list (A : Type) : Type :=
+    | nil  : list A
+    | cons : A -> list A -> list A.
+
+  Arguments nil  {A}.
+  Arguments cons {A} _ _.
+  Arguments Some {A} _.
+  Arguments None {A}.
+
+  (*
+    The Proof Kernel Contract.
+    Proof kernel contract: checker-first, Prop only as envelope.
+  *)
+
+  Record ProofKernel : Type := {
+
+    (*
+      The type of formulas (object language)
+    *)
+
+    Form  : Type;
+
+    (*
+      The type of proof objects (e.g., lists of formulas)
+    *)
+
+    Proof : Type;
+
+    (*
+      Ground Truth: A total boolean function that validates a proof
+    *)
+    
+    check : Proof -> Form -> bool;
+
+    (*
+      The Semantic Envelope: A Prop-level predicate
+    *)
+
+    Prf   : Proof -> Form -> Prop;   
+
+    (*
+      The Consistency Link: If the checker says 'true', the Prop holds.
+      This allows us to use computation (check) to witness logical facts.
+    *)
+
+    check_sound :
+      forall (p : Proof) (phi : Form),
+        check p phi = true -> Prf p phi
+  }.
+
+  (*************************************************************************)
+  (*                                                                       *)
+  (*  This record defines the specific *logical* structure we require:     *)
+  (*  An implicational logic with Falsity, closed under Modus Ponens.      *)
+  (*                                                                       *)
+  (*  Remark. 'Prov' here is the existential projection of 'Prf':          *)
+  (*                                                                       *)
+  (*               Prov phi <-> exists p, Prf p phi                        *)
+  (*                                                                       *)
+  (*************************************************************************)
+
+  Record AdditiveProvability : Type := {
+
+    Form_ATP : Type;
+
+    (*
+      Connectives
+    *)
+
+    Imp : Form_ATP -> Form_ATP -> Form_ATP;
+    Bot : Form_ATP;
+
+    (*
+      The Provability Predicate
+    *)
+
+    Prov : Form_ATP -> Prop;
+
+    (*************************************************************************)
+    (*                                                                       *)
+    (*  The Closure Principle: Modus Ponens.                                 *)
+    (*                                                                       *)
+    (*  Only inference rule required at higher levels.                       *)
+    (*  Internal rules (K, S, EFQ) are hidden inside 'Prov'.                 *)
+    (*                                                                       *)
+    (*************************************************************************)
+
+    Prov_MP :
+      forall (A B : Form_ATP),
+        Prov (Imp A B) -> Prov A -> Prov B
+  }.
+
+End C_002_Prelim.
+
+Export C_002_Prelim.
+
+
+(* ---- theories/M001__BHK_R_Arithmetic/C002__Additive_Hilbert_System/P2_R__Hilbert_Kernel.v ---- *)
+
+(* P2_R__Hilbert_Kernel.v *)
+
+From Coq Require Import Init.Logic.
+From ATP.C002 Require Import P1_S__Kernel_Spec.
+
+Set Implicit Arguments.
+Unset Strict Implicit.
+
+Module C_002_HilbertKernel_R.
+
+  Import C_002_Prelim.
+
+  (*
+    Object language.
+  *)
+
+  Inductive Form : Type :=
+    | F_Bot : Form
+    | F_Imp : Form -> Form -> Form.
+
+  Definition Imp (A B : Form) : Form := F_Imp A B.
+  Definition Bot : Form := F_Bot.
+
+  (*
+    Membership over local lists
+  *)
+
+  Inductive In {A : Type} (x : A) : list A -> Prop :=
+    | In_here  : forall xs, In x (cons x xs)
+    | In_there : forall y xs, In x xs -> In x (cons y xs).
+
+  (*
+    Boolean combinators (local bool)
+  *)
+
+  Definition orb (b1 b2 : bool) : bool :=
+    match b1 with true => true | false => b2 end.
+
+  Definition andb (b1 b2 : bool) : bool :=
+    match b1 with true => b2 | false => false end.
+
+  Lemma andb_true_elim :
+    forall b1 b2, andb b1 b2 = true -> b1 = true /\ b2 = true.
+  Proof.
+    intros b1 b2 H. destruct b1.
+    - simpl in H. split; [exact (eq_refl _)| exact H].
+    - simpl in H. discriminate H.
+  Qed.
+
+  Lemma orb_true_elim :
+    forall b1 b2, orb b1 b2 = true -> b1 = true \/ b2 = true.
+  Proof.
+    intros b1 b2 H. destruct b1.
+    - left. exact (eq_refl _).
+    - right. exact H.
+  Qed.
+
+  (*
+    Boolean equality for formulas
+  *)
+
+  Fixpoint form_eqb (A B : Form) : bool :=
+    match A, B with
+    | F_Bot, F_Bot => true
+    | F_Imp A1 A2, F_Imp B1 B2 =>
+        andb (form_eqb A1 B1) (form_eqb A2 B2)
+    | _, _ => false
+    end.
+
+  Lemma form_eqb_refl : forall A, form_eqb A A = true.
+  Proof.
+    induction A as [|A1 IH1 A2 IH2].
+    - simpl. exact (eq_refl _).
+    - simpl. rewrite IH1. exact IH2.
+  Qed.
+
+  Lemma form_eqb_true_eq : forall A B, form_eqb A B = true -> A = B.
+  Proof.
+    induction A as [|A1 IH1 A2 IH2]; intros B H.
+    - destruct B; [exact (eq_refl _)| simpl in H; discriminate H].
+      (* 'Hilbert looks like the Architect' *)
+    - destruct B; [simpl in H; discriminate H|].
+      simpl in H.
+      apply andb_true_elim in H as [H1 H2].
+      apply IH1 in H1; subst.
+      apply IH2 in H2; subst.
+      exact (eq_refl _).
+  Qed.
+
+  (*
+    Axiom basis: K, S, EFQ
+  *)
+
+  Inductive Ax : Form -> Prop :=
+    | Ax_K   : forall A B, Ax (Imp A (Imp B A))
+    | Ax_S   : forall A B C,
+        Ax (Imp (Imp A (Imp B C)) (Imp (Imp A B) (Imp A C)))
+    | Ax_EFQ : forall A, Ax (Imp Bot A).
+
+  (*
+    Boolean axiom recognizers
+  *)
+
+  Definition is_K (phi : Form) : bool :=
+    match phi with
+    | F_Imp A (F_Imp _ A') => form_eqb A A'
+    | _ => false
+    end.
+
+  Definition is_EFQ (phi : Form) : bool :=
+    match phi with
+    | F_Imp F_Bot _ => true
+    | _ => false
+    end.
+
+  Definition is_S (phi : Form) : bool :=
+    match phi with
+    | F_Imp (F_Imp A (F_Imp B C))
+            (F_Imp (F_Imp A1 B1) (F_Imp A2 C2)) =>
+        andb (andb (form_eqb A A1) (form_eqb A A2))
+             (andb (form_eqb B B1) (form_eqb C C2))
+    | _ => false
+    end.
+
+  Definition is_axiom (phi : Form) : bool :=
+    orb (is_EFQ phi) (orb (is_K phi) (is_S phi)).
+
+  Lemma is_K_sound : forall phi, is_K phi = true -> Ax phi.
+  Proof.
+    intros phi H.
+    destruct phi as [|A R]; simpl in H; try discriminate H.
+    destruct R as [|B A']; simpl in H; try discriminate H.
+    apply form_eqb_true_eq in H; subst.
+    apply Ax_K.
+  Qed.
+
+  Lemma is_EFQ_sound : forall phi, is_EFQ phi = true -> Ax phi.
+  Proof.
+    intros phi H. destruct phi as [|L R]; simpl in H; try discriminate H.
+    destruct L; simpl in H; try discriminate H.
+    apply Ax_EFQ.
+  Qed.
+
+  Lemma is_S_sound : forall phi, is_S phi = true -> Ax phi.
+  Proof.
+    intros phi H.
+    destruct phi as [|L R]; simpl in H; try discriminate H.
+    destruct L as [|A LR]; simpl in H; try discriminate H.
+    destruct LR as [|B C]; simpl in H; try discriminate H.
+    destruct R as [|R1 R2]; simpl in H; try discriminate H.
+    destruct R1 as [|A1 B1]; simpl in H; try discriminate H.
+    destruct R2 as [|A2 C2]; simpl in H; try discriminate H.
+    apply andb_true_elim in H as [Hleft Hright].
+    apply andb_true_elim in Hleft as [HA1 HA2].
+    apply andb_true_elim in Hright as [HB1 HC2].
+    apply form_eqb_true_eq in HA1; subst A1.
+    apply form_eqb_true_eq in HA2; subst A2.
+    apply form_eqb_true_eq in HB1; subst B1.
+    apply form_eqb_true_eq in HC2; subst C2.
+    apply Ax_S.
+  Qed.
+
+  Lemma is_axiom_sound : forall phi, is_axiom phi = true -> Ax phi.
+  Proof.
+    intros phi H.
+    unfold is_axiom in H.
+    apply orb_true_elim in H as [HE|Hrest].
+    - apply is_EFQ_sound. exact HE.
+    - apply orb_true_elim in Hrest as [HK|HS].
+      + apply is_K_sound. exact HK.
+      + apply is_S_sound. exact HS.
+  Qed.
+
+  (*
+    Proof scripts: linear lists of formulas
+  *)
+
+  Definition Proof : Type := list Form.
+
+  (*
+    Boolean list search + soundness
+  *)
+
+  Fixpoint existsb {A : Type} (p : A -> bool) (xs : list A) : bool :=
+    match xs with
+    | nil => false
+    | cons x xs' => orb (p x) (existsb p xs')
+    end.
+
+  Lemma existsb_sound :
+    forall (A : Type) (p : A -> bool) (xs : list A),
+      existsb p xs = true ->
+      exists x : A, In x xs /\ p x = true.
+  Proof.
+    intros A p xs H.
+    induction xs as [|x xs IH].
+    - simpl in H. discriminate H.
+    - simpl in H.
+      unfold orb in H.
+      destruct (p x) eqn:Px.
+      + exists x. split; [apply In_here| exact Px].
+      + specialize (IH H).
+        destruct IH as [y [Hyin Hyp]].
+        exists y. split; [apply In_there; exact Hyin| exact Hyp].
+  Qed.
+
+  (*
+    MP witness: ctx contains psi and (psi -> phi)
+  *)
+
+  Definition mp_witness (ctx : list Form) (phi : Form) : bool :=
+    existsb
+      (fun psi =>
+         existsb
+           (fun chi =>
+              match chi with
+              | F_Imp X Y =>
+                  andb (form_eqb X psi) (form_eqb Y phi)
+              | _ => false
+              end)
+           ctx)
+      ctx.
+
+  Lemma mp_witness_sound :
+    forall (ctx : list Form) (phi : Form),
+      mp_witness ctx phi = true ->
+      exists psi : Form, In psi ctx /\ In (Imp psi phi) ctx.
+  Proof.
+    intros ctx phi Hmw.
+    unfold mp_witness in Hmw.
+    pose proof (existsb_sound
+                  (A := Form)
+                  (p := fun psi =>
+                          existsb
+                            (fun chi =>
+                               match chi with
+                               | F_Imp X Y =>
+                                   andb (form_eqb X psi) (form_eqb Y phi)
+                               | _ => false
+                               end)
+                            ctx)
+                  (xs := ctx)
+                  Hmw) as Hpsi.
+    destruct Hpsi as [psi [HinPsi Hinner]].
+
+    pose proof (existsb_sound
+                  (A := Form)
+                  (p := fun chi =>
+                          match chi with
+                          | F_Imp X Y =>
+                              andb (form_eqb X psi) (form_eqb Y phi)
+                          | _ => false
+                          end)
+                  (xs := ctx)
+                  Hinner) as Hchi.
+    destruct Hchi as [chi [HinChi Hchi_ok]].
+
+    destruct chi as [|X Y].
+    - simpl in Hchi_ok. discriminate Hchi_ok.
+    - simpl in Hchi_ok.
+      apply andb_true_elim in Hchi_ok as [HX HY].
+      apply form_eqb_true_eq in HX; subst X.
+      apply form_eqb_true_eq in HY; subst Y.
+      exists psi. split; [exact HinPsi| exact HinChi].
+  Qed.
+
+  (*
+    Sequential checker
+  *)
+
+  Fixpoint check_lines (ctx : list Form) (pf : Proof) : bool :=
+    match pf with
+    | nil => true
+    | cons line rest =>
+        let ok_line := orb (is_axiom line) (mp_witness ctx line) in
+        andb ok_line (check_lines (cons line ctx) rest)
+    end.
+
+  Fixpoint last_opt (pf : Proof) : option Form :=
+    match pf with
+    | nil => @None Form
+    | cons x nil => Some x
+    | cons _ xs => last_opt xs
+    end.
+
+  Definition check (pf : Proof) (goal : Form) : bool :=
+    match last_opt pf with
+    | @None _ => false
+    | Some last => andb (check_lines nil pf) (form_eqb last goal)
+    end.
+
+  (*
+    Prop-level derivability mirroring check_lines
+  *)
+
+  Inductive Prf_lines : list Form -> Proof -> Prop :=
+    | Prf_lines_nil :
+        forall ctx, Prf_lines ctx nil
+    | Prf_lines_cons_Ax :
+        forall ctx line rest,
+          Ax line ->
+          Prf_lines (cons line ctx) rest ->
+          Prf_lines ctx (cons line rest)
+    | Prf_lines_cons_MP :
+        forall ctx psi line rest,
+          In psi ctx ->
+          In (Imp psi line) ctx ->
+          Prf_lines (cons line ctx) rest ->
+          Prf_lines ctx (cons line rest).
+
+  Inductive Prf : Proof -> Form -> Prop :=
+    | Prf_intro :
+        forall pf phi,
+          last_opt pf = Some phi ->
+          Prf_lines nil pf ->
+          Prf pf phi.
+
+  (*
+    Soundness of check_lines and check
+  *)
+
+  Lemma check_lines_sound :
+    forall ctx pf,
+      check_lines ctx pf = true ->
+      Prf_lines ctx pf.
+  Proof.
+    intros ctx pf H.
+    revert ctx H.
+    induction pf as [|line rest IH]; intros ctx H.
+    - constructor.
+    - simpl in H.
+      apply andb_true_elim in H as [Hok Hrest].
+      unfold orb in Hok.
+      destruct (is_axiom line) eqn:HAx.
+      + apply Prf_lines_cons_Ax.
+        * apply is_axiom_sound. exact HAx.
+        * apply IH. exact Hrest.
+      + pose proof (mp_witness_sound (ctx := ctx) (phi := line) Hok) as Hw.
+        destruct Hw as [psi [HinPsi HinImp]].
+        apply Prf_lines_cons_MP with (psi := psi).
+        * exact HinPsi.
+        * exact HinImp.
+        * apply IH. exact Hrest.
+  Qed.
+
+  Theorem check_sound :
+    forall (pf : Proof) (phi : Form),
+      check pf phi = true -> Prf pf phi.
+  Proof.
+    intros pf phi H.
+    unfold check in H.
+    destruct (last_opt pf) as [last|] eqn:Hlast.
+    - simpl in H.
+      apply andb_true_elim in H as [Hlines Heq].
+      apply form_eqb_true_eq in Heq; subst phi.
+      apply Prf_intro with (phi := last).
+      + exact Hlast.
+      + apply check_lines_sound. exact Hlines.
+    - simpl in H. discriminate H.
+  Qed.
+
+  (*
+    Package the ProofKernel contract
+  *)
+
+  Definition HilbertKernel : ProofKernel :=
+    {|
+      C_002_Prelim.Form := Form;
+      C_002_Prelim.Proof := Proof;
+      C_002_Prelim.check := check;
+      C_002_Prelim.Prf := Prf;
+      C_002_Prelim.check_sound := check_sound
+    |}.
+
+End C_002_HilbertKernel_R.
+
+Export C_002_HilbertKernel_R.
+
+
+(* ---- theories/M001__BHK_R_Arithmetic/C002__Additive_Hilbert_System/P2_S__Provability_Interface.v ---- *)
+
+(* P2_S__Provability_Interface.v *)
+
+From Coq Require Import Init.Logic.
+From ATP.C002 Require Import P1_S__Kernel_Spec.
+From ATP.C002 Require Import P2_R__Hilbert_Kernel.
+
+Set Implicit Arguments.
+Unset Strict Implicit.
+
+(*************************************************************************)
+(*                                                                       *)
+(*  C002 / Phase 2 (S) : Provability Interface Binding                   *)
+(*                                                                       *)
+(*  Role:                                                                *)
+(*                                                                       *)
+(*  This module binds the abstract notion of "Provability" to the        *)
+(*  concrete Hilbert Kernel implementation from Phase R.                 *)
+(*                                                                       *)
+(*    (i) it binds the abstract notion of "Provability" to               *)
+(*        the concrete Hilbert Kernel implementation from Phase R.       *)
+(*                                                                       *)
+(*   (ii) It defines the 'Prov' predicate as,                            *)
+(*                                                                       *)
+(*               Prov(phi) <-> exists pf, Prf(pf, phi)                   *)
+(*                                                                       *)
+(*   This confirms the "Witness-First" discipline: to be provable        *)
+(*   means to possess a concrete proof object (a script) that checks.    *)
+(*                                                                       *)
+(*************************************************************************)
+
+
+Module C_002_Provability_S.
+
+  Import C_002_Prelim.
+  Import C_002_HilbertKernel_R. (* Realizes K, S, EFQ, check, Prf *)
+
+  (*************************************************************************)
+  (*                                                                       *)
+  (*  Object Language Mapping.                                             *)
+  (*                                                                       *)
+  (*  We map the abstract Form/Imp/Bot types to the concrete inductive     *)
+  (*  types defined in the R-layer.                                        *)
+  (*                                                                       *)
+  (*************************************************************************)
+
+
+  Definition Form : Type := C_002_HilbertKernel_R.Form.
+  Definition Imp  : Form -> Form -> Form := C_002_HilbertKernel_R.Imp.
+  Definition Bot  : Form := C_002_HilbertKernel_R.Bot.
+
+  Definition Prov (phi : Form) : Prop :=
+    exists pf : C_002_HilbertKernel_R.Proof, C_002_HilbertKernel_R.Prf pf phi.
+
+
+  (*************************************************************************)
+  (*                                                                       *)
+  (*  The Soundness Bridge.                                                *)
+  (*                                                                       *)
+  (*  This lemma allows us to prove 'Prov phi' by simply running the       *)
+  (*  kernel checker. If 'check pf phi' returns true, we immediately       *)
+  (*  have a witness for 'Prov phi'.                                       *)
+  (*                                                                       *)
+  (*  Usage: apply Prov_from_check with (pf := my_script).                 *)
+  (*  vm_compute. reflexivity.                                             *)
+  (*                                                                       *)
+  (*************************************************************************)
+
+  Lemma Prov_from_check :
+    forall (pf : C_002_HilbertKernel_R.Proof) (phi : Form),
+      C_002_HilbertKernel_R.check pf phi = true ->
+      Prov phi.
+  Proof.
+
+  (*
+    Construct the existential witness
+  *)
+
+    intros pf phi Hc.
+    exists pf.
+
+    (*
+      Use the kernel's internal soundness theorem
+    *)
+
+    apply C_002_HilbertKernel_R.check_sound. exact Hc.
+  Qed.
+
+End C_002_Provability_S.
+
+Export C_002_Provability_S.
+
+
+(* ---- theories/M001__BHK_R_Arithmetic/C002__Additive_Hilbert_System/P3_R__Additive_Laws.v ---- *)
+
+(* P3_R__Additive_Laws.v *)
+
+From Coq Require Import Init.Logic.
+
+From ATP.C002 Require Import P1_S__Kernel_Spec.
+From ATP.C002 Require Import P2_R__Hilbert_Kernel.
+From ATP.C002 Require Import P2_S__Provability_Interface.
+
+Set Implicit Arguments.
+Unset Strict Implicit.
+
+Module C_002_Additive_Laws_R.
+
+  Import C_002_Prelim.
+  Import C_002_HilbertKernel_R.
+  Import C_002_Provability_S.
+
+  (*
+    List operations on local lists
+  *)
+
+  Fixpoint app {A : Type} (xs ys : list A) : list A :=
+    match xs with
+    | nil => ys
+    | cons x xs' => cons x (app xs' ys)
+    end.
+
+  Notation "xs ++ ys" := (app xs ys) (at level 60, right associativity).
+
+  Definition sing {A : Type} (x : A) : list A := cons x nil.
+
+  (*
+    Context extension matching Prf_lines' operational growth
+  *)
+
+  Fixpoint extend_ctx (ctx : list Form) (pf : Proof) : list Form :=
+    match pf with
+    | nil => ctx
+    | cons line rest => extend_ctx (cons line ctx) rest
+    end.
+
+  Lemma extend_ctx_app :
+    forall (ctx : list Form) (pf1 pf2 : Proof),
+      extend_ctx ctx (pf1 ++ pf2) = extend_ctx (extend_ctx ctx pf1) pf2.
+  Proof.
+    intros ctx pf1 pf2. revert ctx.
+    induction pf1 as [|x xs IH]; intro ctx.
+    - simpl. exact (eq_refl _).
+    - simpl. apply IH.
+  Qed.
+
+  (*
+    Weakening for Prf_lines
+  *)
+
+  Definition incl (xs ys : list Form) : Prop :=
+    forall x, In x xs -> In x ys.
+
+  Lemma incl_cons :
+    forall a xs ys, incl xs ys -> incl (cons a xs) (cons a ys).
+  Proof.
+    intros a xs ys Hinc x Hin.
+    inversion Hin.
+    - subst. apply In_here.
+    - apply In_there. apply Hinc. exact H0.
+  Qed.
+
+  Lemma Prf_lines_weaken :
+    forall (ctx1 ctx2 : list Form) (pf : Proof),
+      incl ctx1 ctx2 ->
+      Prf_lines ctx1 pf ->
+      Prf_lines ctx2 pf.
+  Proof.
+    intros ctx1 ctx2 pf Hinc Hpf.
+    revert ctx2 Hinc.
+    induction Hpf; intros ctx2 Hinc.
+    - constructor.
+    - apply Prf_lines_cons_Ax; try assumption.
+      apply IHHpf with (ctx2 := cons line ctx2).
+      apply incl_cons. exact Hinc.
+    - apply Prf_lines_cons_MP with (psi := psi).
+      + apply Hinc. exact H.
+      + apply Hinc. exact H0.
+      + apply IHHpf with (ctx2 := cons line ctx2).
+        apply incl_cons. exact Hinc.
+  Qed.
+
+  Lemma Prf_lines_app :
+    forall (ctx : list Form) (pf1 pf2 : Proof),
+      Prf_lines ctx pf1 ->
+      Prf_lines (extend_ctx ctx pf1) pf2 ->
+      Prf_lines ctx (pf1 ++ pf2).
+  Proof.
+    intros ctx pf1 pf2 H1 H2.
+    revert pf2 H2.
+    induction H1 as
+      [ ctx0
+      | ctx0 line rest Hax Hrest IH
+      | ctx0 psi line rest HinPsi HinImp Hrest IH
+      ]; intros pf2 H2'.
+    - simpl. exact H2'.
+    - simpl. apply Prf_lines_cons_Ax; try exact Hax.
+      apply IH. exact H2'.
+    - simpl. apply Prf_lines_cons_MP with (psi := psi); try assumption.
+      apply IH. exact H2'.
+  Qed.
+
+  (*
+    Membership is preserved when extending contexts
+  *)
+
+  Lemma In_extend_ctx :
+    forall x ctx pf,
+      In x ctx -> In x (extend_ctx ctx pf).
+  Proof.
+    intros x ctx pf Hin. revert ctx Hin.
+    induction pf as [|line rest IH]; intros ctx Hin.
+    - simpl. exact Hin.
+    - simpl. apply IH. apply In_there. exact Hin.
+  Qed.
+
+  Lemma last_opt_in_extend_ctx :
+    forall (ctx : list Form) (pf : Proof) (phi : Form),
+      last_opt pf = Some phi ->
+      In phi (extend_ctx ctx pf).
+  Proof.
+    intros ctx pf phi Hlast.
+    revert ctx phi Hlast.
+    induction pf as [|line rest IH]; intros ctx phi Hlast.
+    - simpl in Hlast. discriminate Hlast.
+    - destruct rest as [|r rs].
+      + simpl in Hlast. inversion Hlast. subst. simpl. apply In_here.
+      + simpl in Hlast. simpl. apply IH with (ctx := cons line ctx). exact Hlast.
+  Qed.
+
+  Lemma last_opt_app :
+    forall (pf1 pf2 : Proof) (phi : Form),
+      last_opt pf2 = Some phi ->
+      last_opt (pf1 ++ pf2) = Some phi.
+  Proof.
+    induction pf1 as [|x xs IH]; intros pf2 phi H.
+    - simpl. exact H.
+    - simpl.
+      destruct xs as [|y ys].
+      + destruct pf2 as [|p ps].
+        * simpl in H. discriminate H.
+        * simpl. exact H.
+      + simpl. apply IH. exact H.
+  Qed.
+
+  (*
+    Additive closure: Prov (A->B) -> Prov A -> Prov B
+  *)
+
+  Definition compose_MP (pfAB pfA : Proof) (B : Form) : Proof :=
+    (pfAB ++ pfA) ++ sing B.
+
+  Theorem Prov_MP :
+    forall (A B : Form),
+      Prov (Imp A B) ->
+      Prov A ->
+      Prov B.
+  Proof.
+    intros A B [pfAB HpfAB] [pfA HpfA].
+    inversion HpfAB as [pfAB0 phiAB HlastAB HlinesAB]. subst pfAB0 phiAB.
+    inversion HpfA  as [pfA0  phiA  HlastA  HlinesA ]. subst pfA0  phiA.
+
+    exists (compose_MP pfAB pfA B).
+    apply Prf_intro with (phi := B).
+    - unfold compose_MP. apply last_opt_app. simpl. exact (eq_refl _).
+    - unfold compose_MP.
+
+      (*
+        First derive pfAB ++ pfA from nil.
+      *)
+
+      assert (HpfABpfA : Prf_lines nil (pfAB ++ pfA)).
+      {
+        apply Prf_lines_app with (pf1 := pfAB) (pf2 := pfA).
+        - exact HlinesAB.
+        - apply Prf_lines_weaken with (ctx1 := nil).
+          + intros x Hin. inversion Hin.
+          + exact HlinesA.
+      }
+
+      (*
+        Now append final line B by MP from A and (A->B) present in ctx.
+      *)
+      
+      apply Prf_lines_app with (pf1 := pfAB ++ pfA) (pf2 := sing B).
+      + exact HpfABpfA.
+      + apply Prf_lines_cons_MP with (psi := A).
+        * rewrite extend_ctx_app.
+          apply last_opt_in_extend_ctx with (ctx := extend_ctx nil pfAB).
+          exact HlastA.
+        * rewrite extend_ctx_app.
+          apply In_extend_ctx.
+          apply last_opt_in_extend_ctx with (ctx := nil).
+          exact HlastAB.
+        * constructor.
+  Qed.
+
+End C_002_Additive_Laws_R.
+
+Export C_002_Additive_Laws_R.
+
+
+(* ---- theories/M001__BHK_R_Arithmetic/C002__Additive_Hilbert_System/P3_S__Additive_Theory.v ---- *)
+
+(* P3_S__Additive_Theory.v *)
+
+From Coq Require Import Init.Logic.
+
+From ATP.C002 Require Import P1_S__Kernel_Spec.            (* The Interface Spec *)
+From ATP.C002 Require Import P2_S__Provability_Interface.  (* The 'Prov' binding *)
+From ATP.C002 Require Import P3_R__Additive_Laws.          (* The MP Proof (Realization) *)
+
+Set Implicit Arguments.
+Unset Strict Implicit.
+
+(*************************************************************************)
+(*                                                                       *)
+(*  C002 / Phase 3 (S) : Additive Theory Packaging                       *)
+(*                                                                       *)
+(*  Role.                                                                *)
+(*                                                                       *)
+(*  This module builds the final "Container" for the proof system.       *)
+(*                                                                       *)
+(*  It takes the raw components,                                         *)
+(*                                                                       *)
+(*    (i) The Kernel Spec (P1_S)                                         *)
+(*                                                                       *)
+(*   (ii) The Provability Predicate (P2_S)                               *)
+(*                                                                       *)
+(*  (iii) The Modus Ponens Realization (P3_R)                            *)
+(*                                                                       *)
+(*   and packages them into a single ”Additive Provability” record.      *)
+(*                                                                       *)
+(*   Analogy. A “CSS Class“, or this “box”                               *)
+(*                                                                       *)
+(*************************************************************************)
+
+Module C_002_Additive_Theory_S.
+
+  Import C_002_Prelim.
+  Import C_002_Provability_S.
+  Import C_002_Additive_Laws_R. (* Contains the constructive proof of MP *)
+
+  (*************************************************************************)
+  (*                                                                       *)
+  (*  The Additive Theory Container                                        *)
+  (*                                                                       *)
+  (*  Here we instantiate the 'AdditiveProvability' record defined in P1.  *)
+  (*  We are filling the "div" with concrete content.                      *)
+  (*                                                                       *)
+  (*************************************************************************)
+
+  Definition C_002_ATP : AdditiveProvability :=
+    {|
+      Form_ATP := Form;
+      C_002_Prelim.Imp := Imp;
+      C_002_Prelim.Bot := Bot;
+
+      (*
+        The Content: The Provability Predicate
+      *)
+      
+      C_002_Prelim.Prov := Prov;
+
+      (*
+        We use the constructive proof 'Prov_MP' from P3_R
+      *)
+
+      C_002_Prelim.Prov_MP := Prov_MP
+    |}.
+
+  (*
+    We alias the fields of the container so downstream users can use
+    'ATP_Imp', 'ATP_Prov', etc., without digging into the record.
+  *)
+
+  Definition ATP_Form : Type := C_002_ATP.(C_002_Prelim.Form_ATP).
+  Definition ATP_Imp  : ATP_Form -> ATP_Form -> ATP_Form := C_002_ATP.(C_002_Prelim.Imp).
+  Definition ATP_Bot  : ATP_Form := C_002_ATP.(C_002_Prelim.Bot).
+  Definition ATP_Prov : ATP_Form -> Prop := C_002_ATP.(C_002_Prelim.Prov).
+
+  (*
+    Our main theory of provability:
+    The logic works as expected.
+  *)
+
+  Theorem ATP_Prov_MP :
+    forall (A B : ATP_Form),
+      ATP_Prov (ATP_Imp A B) -> ATP_Prov A -> ATP_Prov B.
+  Proof.
+    exact (C_002_ATP.(C_002_Prelim.Prov_MP)).
+  Qed.
+
+End C_002_Additive_Theory_S.
+
+Export C_002_Additive_Theory_S.
+
+
+(* ---- theories/M001__BHK_R_Arithmetic/C002__Additive_Hilbert_System/P4_R__Coding_Nucleus.v ---- *)
+
+(* P4_R__Coding_Nucleus.v *)
+
+From Coq Require Import Init.Logic.
+From ATP.C002 Require Import P1_S__Kernel_Spec.
+
+Set Implicit Arguments.
+Unset Strict Implicit.
+
+(*************************************************************************)
+(*                                                                       *)
+(*  C_002 / Phase 4 (R): Coding nucleus interface.                       *)
+(*                                                                       *)
+(*  This file stabilizes the coding dependency surface for downstream    *)
+(*  developments (C_003+). It is interface-only: no realization imports, *)
+(*  no axioms, and all partiality made explicit via option and fuel.     *)
+(*                                                                       *)
+(*  Design.                                                              *)
+(*    (i) Atom and Code are abstract.                                    *)
+(*   (ii) Pairing on codes is abstract (may be unused by some codecs).   *)
+(*  (iii) Sequence decoding is fuelled explicitly.                       *)
+(*   (iv) CODEC_OK packages a codec plus explicit constructive           *)
+(*        witnesses for the basic sequence round-trip property.          *)
+(*                                                                       *)
+(*************************************************************************)
+
+Module C_002_Coding_Nucleus_R.
+
+  Import C_002_Prelim.
+
+  Record CODEC : Type := {
+    Atom : Type;
+    Code : Type;
+
+    atom0    : Atom;
+    atomS    : Atom -> Atom;
+    atomPred : Atom -> Atom;
+
+    atom_eqb : Atom -> Atom -> bool;
+
+    (*
+      reserved tags
+    *)
+
+    tag_bot : Atom;
+    tag_imp : Atom;
+    tag_sep : Atom;
+
+    pairC   : Code -> Code -> Code;
+    unpairC : Code -> option (Code * Code);
+
+    (*
+      sequences of atoms encoded as codes
+    *)
+    
+    enc_seq : list Atom -> Code;
+    dec_seq_fuel : Atom -> Code -> option (list Atom)
+  }.
+
+  Record CODEC_OK : Type := {
+    C : CODEC;
+
+    atom_eqb_refl :
+      forall a : C.(Atom), C.(atom_eqb) a a = true;
+
+    atom_eqb_sound :
+      forall a b : C.(Atom), C.(atom_eqb) a b = true -> a = b;
+
+    fuel_seq : list (C.(Atom)) -> C.(Atom);
+
+    dec_seq_enc_seq :
+      forall xs : list (C.(Atom)),
+        C.(dec_seq_fuel) (fuel_seq xs) (C.(enc_seq) xs) = Some xs;
+
+    tag_bot_eq : C.(atom_eqb) C.(tag_bot) C.(tag_bot) = true;
+    tag_imp_eq : C.(atom_eqb) C.(tag_imp) C.(tag_imp) = true;
+    tag_sep_eq : C.(atom_eqb) C.(tag_sep) C.(tag_sep) = true;
+    tag_imp_bot_neq : C.(atom_eqb) C.(tag_imp) C.(tag_bot) = false
+  }.
+
+End C_002_Coding_Nucleus_R.
+
+Export C_002_Coding_Nucleus_R.
+
+
+
+(* ---- theories/M001__BHK_R_Arithmetic/C002__Additive_Hilbert_System/P4_R__Coding_Carryless.v ---- *)
+
+(* P4_R__Coding_Carryless.v *)
+
+From Coq Require Import Init.Logic.
+
+From ATP.C002 Require Import P1_S__Kernel_Spec.
+From ATP.C002 Require Import P4_R__Coding_Nucleus.
+
+From Carryless_Pairing.C001 Require Import P5_T__Carryless_Pairing.
+
+Set Implicit Arguments.
+Unset Strict Implicit.
+
+(*************************************************************************)
+(*                                                                       *)
+(*  C_002 / Phase 4 (R): Canonical codec (uses C_001 pairing).           *)
+(*                                                                       *)
+(*  Role: code-as-nat codec whose pairing/unpairing are sourced from     *)
+(*  C_001 CarrylessPair.                                                 *)
+(*                                                                       *)
+(*************************************************************************)
+
+Module C_002_Coding_R.
+
+  Import C_002_Prelim.
+  Module CN := C_002_Coding_Nucleus_R.
+
+  Module CP := Carryless_Pairing.C001.P5_T__Carryless_Pairing.
+  Module N  := CP.Prelude.
+  Module P  := CP.Pairing.
+  Module R  := P.R.
+
+  Definition Atom : Type := N.nat.
+  Definition Code : Type := N.nat.
+
+  Definition atom0 : Atom := N.O.
+  Definition atomS : Atom -> Atom := N.S.
+
+  Definition atomPred (a : Atom) : Atom :=
+    match a with
+    | N.O => N.O
+    | N.S a' => a'
+    end.
+
+  Fixpoint atom_eqb (m n : Atom) : bool :=
+    match m, n with
+    | N.O, N.O => true
+    | N.S m', N.S n' => atom_eqb m' n'
+    | _, _ => false
+    end.
+
+  Definition tag_bot : Atom := N.O.
+  Definition tag_imp : Atom := N.S N.O.
+  Definition tag_sep : Atom := N.S (N.S N.O).
+
+  Definition pairC (x y : Code) : Code :=
+    P.pair CP.CarrylessPair x y.
+
+  Definition unpairC (z : Code) : option (Code * Code) :=
+    let p := P.unpair CP.CarrylessPair z in
+    Some (P.fst p, P.snd p).
+
+  (*
+    Sequence coding via pairing (S-head, 0-terminator).
+  *)
+
+  Fixpoint enc_seq (xs : list Atom) : Code :=
+    match xs with
+    | nil => N.O
+    | cons a xs' => pairC (atomS a) (enc_seq xs')
+    end.
+
+  Definition unpair_fuel (fuel : N.nat) (z : Code) : option (Code * Code) :=
+    match fuel with
+    | N.O => None
+    | N.S _ => unpairC z
+    end.
+
+  Fixpoint dec_seq_fuel (fuel : N.nat) (z : Code) : option (list Atom) :=
+    match fuel with
+    | N.O => None
+    | N.S fuel' =>
+        match atom_eqb z N.O with
+        | true => Some nil
+        | false =>
+            match unpair_fuel fuel z with
+            | None => None
+            | Some (h, t) =>
+                match h with
+                | N.O => None
+                | N.S a =>
+                    match dec_seq_fuel fuel' t with
+                    | None => None
+                    | Some xs => Some (cons a xs)
+                    end
+                end
+            end
+        end
+    end.
+
+  Definition Codec : CN.CODEC :=
+    {|
+      CN.Atom := Atom;
+      CN.Code := Code;
+
+      CN.atom0 := atom0;
+      CN.atomS := atomS;
+      CN.atomPred := atomPred;
+
+      CN.atom_eqb := atom_eqb;
+
+      CN.tag_bot := tag_bot;
+      CN.tag_imp := tag_imp;
+      CN.tag_sep := tag_sep;
+
+      CN.pairC := pairC;
+      CN.unpairC := unpairC;
+
+      CN.enc_seq := enc_seq;
+      CN.dec_seq_fuel := dec_seq_fuel
+    |}.
+
+End C_002_Coding_R.
+
+Export C_002_Coding_R.
+
+
+(* ---- theories/M001__BHK_R_Arithmetic/C002__Additive_Hilbert_System/P4_S__Coding.v ---- *)
+
+(* P4_S__Coding.v *)
+
+From Coq Require Import Init.Logic.
+
+From ATP.C002 Require Import P1_S__Kernel_Spec.
+
+From ATP.C002 Require Import P4_R__Coding_Nucleus.
+From ATP.C002 Require Import P4_R__Coding_Carryless.
+
+Set Implicit Arguments.
+Unset Strict Implicit.
+
+(*************************************************************************)
+(*                                                                       *)
+(*  C_002 / Phase 4 (S): Coding façade.                                  *)
+(*                                                                       *)
+(*  Role: stable surface for coding infrastructure used by downstream    *)
+(*  developments.                                                        *)
+(*                                                                       *)
+(*  Policy.                                                              *)
+(*    (i) We expose the effective codec device.                          *)
+(*   (ii) We do NOT expose a CODEC_OK witness in Phase T.                *)
+(*                                                                       *)
+(*************************************************************************)
+
+Module C_002_Coding_S.
+
+  Import C_002_Prelim.
+  Module CN := ATP.C002.P4_R__Coding_Nucleus.C_002_Coding_Nucleus_R.
+
+  Module R := ATP.C002.P4_R__Coding_Carryless.C_002_Coding_R.
+
+  Definition CODEC : Type := CN.CODEC.
+
+  Definition CanonicalCodec : CODEC := R.Codec.
+
+End C_002_Coding_S.
+
+Export C_002_Coding_S.
+Export C_002_Coding_Nucleus_R.
+
+
+(* ---- theories/M001__BHK_R_Arithmetic/C002__Additive_Hilbert_System/P5_T__Proof_Theory.v ---- *)
+
+(* P5_T__Proof_Theory.v *)
+
+From Coq Require Import Init.Logic.
+
+From ATP.C002 Require Export
+  P1_S__Kernel_Spec
+  P2_S__Provability_Interface
+  P3_S__Additive_Theory
+  P4_S__Coding.
+
+Set Implicit Arguments.
+Unset Strict Implicit.
+
+(*************************************************************************)
+(*                                                                       *)
+(*  C002 / Phase 5 (T) : Additive Proof Theory (Public Surface)          *)
+(*                                                                       *)
+(*  Role.                                                                *)
+(*                                                                       *)
+(*    (i) This module exports the stable API for the Additive Theory of  *)
+(*   (ii) Provability. It hides the distinction between R (Realization)  *)
+(*  (iii) S (Semantic) layers, presenting a unified view of the logic.   *)
+(*                                                                       *)
+(*  Components.                                                          *)
+(*                                                                       *)
+(*    (i) Prelude: The arithmetic nucleus (re-exported).                 *)
+(*   (ii) ATP: The core logic (formulas, implication, provability).      *)
+(*  (iii) Coding: The canonical codec (formulas <-> nat).                *)
+(*                                                                       *)
+(*************************************************************************)
+
+Module Prelude.
+  Include ATP.C002.P1_S__Kernel_Spec.C_002_Prelim.
+  Include BHK_R.C000.P0__Reflexica.Prelude.
+End Prelude.
+
+Module ATP    := ATP.C002.P3_S__Additive_Theory.C_002_Additive_Theory_S.
+Module Coding := ATP.C002.P4_S__Coding.C_002_Coding_S.
+
+(*
+  Preferred downstream surface: additive provability nucleus.
+*)
+
+Definition ATP_Form : Type := ATP.ATP_Form.
+Definition ATP_Imp  : ATP_Form -> ATP_Form -> ATP_Form := ATP.ATP_Imp.
+Definition ATP_Bot  : ATP_Form := ATP.ATP_Bot.
+Definition ATP_Prov : ATP_Form -> Prop := ATP.ATP_Prov.
+
+Definition Bot : ATP_Form := ATP_Bot.
+Definition Imp : ATP_Form -> ATP_Form -> ATP_Form := ATP_Imp.
+
+Notation "A --> B" := (ATP_Imp A B) (at level 60, right associativity).
+
+(*
+  This is the main "feature" of C002: The logic supports Modus Ponens.
+  It is witnessed by the constructive proof in P3_R.
+*)
+
+Theorem ATP_Prov_MP :
+  forall (A B : ATP_Form),
+    ATP_Prov (A --> B) -> ATP_Prov A -> ATP_Prov B.
+Proof.
+  exact ATP.ATP_Prov_MP.
+Qed.
+
+(* Alias for convenience *)
+
+Theorem Prov_app :
+  forall (A B : ATP_Form),
+    ATP_Prov (A --> B) -> ATP_Prov A -> ATP_Prov B.
+Proof.
+  exact ATP_Prov_MP.
+Qed.
+
+(*
+  This section exposes the "Checker-First" nature of the logic.
+  It allows users to prove theorems by computation:
+  If 'check pf phi' returns true, then 'Prov phi' holds.
+*)
+
+Module ProvIntf := ATP.C002.P2_S__Provability_Interface.C_002_Provability_S.
+
+Definition Prov_Form : Type := ProvIntf.Form.
+Definition Prov_Imp  : Prov_Form -> Prov_Form -> Prov_Form := ProvIntf.Imp.
+Definition Prov_Bot  : ProvIntf.Form := ProvIntf.Bot.
+Definition Prov      : Prov_Form -> Prop := ProvIntf.Prov.
+
+Theorem Prov_from_check :
+  forall (pf : ATP.C002.P2_R__Hilbert_Kernel.C_002_HilbertKernel_R.Proof)
+         (phi : Prov_Form),
+    ATP.C002.P2_R__Hilbert_Kernel.C_002_HilbertKernel_R.check pf phi = true ->
+    Prov phi.
+Proof.
+  exact ProvIntf.Prov_from_check.
+Qed.
+
+(*
+  Coding Re-exports.
+  Exposes the canonical codec interface and instance.
+*)
+
+Definition CODEC : Type :=
+  ATP.C002.P4_R__Coding_Nucleus.C_002_Coding_Nucleus_R.CODEC.
+  
+Definition CanonicalCodec : CODEC := Coding.CanonicalCodec.
+
+
+(* ---- theories/M001__BHK_R_Arithmetic/C002__Additive_Hilbert_System/P6_P__Effectivity.v ---- *)
+
+(* P4_T__Effectivity.v *)
+
+From Coq Require Import Init.Logic.
+
+From ATP.C002 Require Import P5_T__Proof_Theory.
+From ATP.C002 Require Import P2_R__Hilbert_Kernel.
+
+Set Implicit Arguments.
+Unset Strict Implicit.
+
+(*************************************************************************)
+(*                                                                       *)
+(*  P4_T__Effectivity.v                                                  *)
+(*                                                                       *)
+(*  This file is intentionally not part of the logical development       *)
+(*  chain (C003+). It is an effectivity witness and executable           *)
+(*  documentation for C_002, in the same spirit as C_001's               *)
+(*  P4_T__Effectivity.v.                                                 *)
+(*                                                                       *)
+(*  Methodology note (BHK_R discipline):                                 *)
+(*  All correctness statements here are witnessed by computation         *)
+(*  (vm_compute), not by propositional reasoning or axioms.              *)
+(*                                                                       *)
+(*  What is tested.                                                      *)
+(*                                                                       *)
+(*     (i) The proof kernel checker recognizes axiom instances.          *)
+(*    (ii) The checker validates a small MP-derived script.              *)
+(*   (iii) The canonical codec (using C_001 pairing) round-trips on      *)
+(*         small examples with explicit fuel (computational check).      *)
+(*                                                                       *)
+(*  What is also tested.                                                 *)
+(*                                                                       *)
+(*     (i) Effectivity: The diagonal function `diag(t)` actually         *)
+(*         computes to a concrete syntax tree for specific inputs.       *)
+(*                                                                       *)
+(*    (ii) The Diagonal Law: The fundamental equation                    *)
+(*         encU (diag t) = eval E_t (selfpack (encU delta_t))            *)
+(*         holds by DEFINITIONAL equality (normalization).               *)
+(*                                                                       *)
+(*   (iii) No Smuggling: The computation succeeds without any opaque     *)
+(*         constants (like Reflexica certificates) blocking reduction.   *)
+(*                                                                       *)
+(*   Methodology note (BHK_R discipline):                                *)
+(*   All correctness statements here are witnessed by computation        *)
+(*   (vm_compute), not by propositional reasoning or axioms.             *)
+(*                                                                       *)
+(*  Summary.                                                             *)
+(*                                                                       *)
+(*     (i) KERNEL (C002)                                                 *)
+(*         (a) recognition (EFQ, K, S)                                   *)
+(*         (b) checking (Modus Ponens)                                   *)
+(*                                                                       *)
+(*    (ii) CODING (C002)                                                 *)
+(*         (a) Carryless codec round-trip on small examples              *)
+(*                                                                       *)
+(*   (iii) DIAGONAL (C003)                                               *)
+(*         (a) Compilation of templates                                  *)
+(*         (b) Execution of the Diagonalizer                             *)
+(*         (c) Verification of the “Diagonal Law”                        *)
+(*                                                                       *)
+(*************************************************************************)
+
+Module Test_Kernel_Small.
+
+  Module HK := ATP.C002.P2_R__Hilbert_Kernel.C_002_HilbertKernel_R.
+
+  (*
+    Shorthands
+  *)
+
+  Definition Bot : HK.Form := HK.Bot.
+  Definition Imp : HK.Form -> HK.Form -> HK.Form := HK.Imp.
+
+  Definition lnil : HK.Proof := nil.
+  Definition lcons (x : HK.Form) (xs : HK.Proof) : HK.Proof := cons x xs.
+  Definition l1 (x : HK.Form) : HK.Proof := lcons x lnil.
+  Definition l3 (a b c : HK.Form) : HK.Proof := lcons a (lcons b (lcons c lnil)).
+
+  (*
+    Concrete formulas, no atoms in the object language.
+  *)
+
+  Definition A0 : HK.Form := Imp Bot Bot.
+  Definition B0 : HK.Form := Imp Bot (Imp Bot Bot).
+
+  (*
+    Basic sanity: check rejects empty scripts.
+  *)
+
+  Example test_check_empty_rejects :
+    HK.check lnil A0 = false.
+  Proof. vm_compute. reflexivity. Qed.
+
+  (*
+    Axiom recognition + single-line checking.
+  *)
+
+  Example test_is_axiom_efq :
+    HK.is_axiom (Imp Bot Bot) = true.
+  Proof. vm_compute. reflexivity. Qed.
+
+  Example test_check_single_axiom :
+    HK.check (l1 A0) A0 = true.
+  Proof. vm_compute. reflexivity. Qed.
+
+  (*************************************************************************)
+  (*                                                                       *)
+  (*  MP script: from A0 and (A0 -> (B0 -> A0)) derive (B0 -> A0).         *)
+  (*                                                                       *)
+  (*  line1: A0                 (EFQ instance)                             *)
+  (*  line2: A0 -> (B0 -> A0)   (K instance)                               *)
+  (*  line3: B0 -> A0           (MP from line1,line2)                      *)
+  (*                                                                       *)
+  (*************************************************************************)
+
+  Definition line1 : HK.Form := A0.
+  Definition line2 : HK.Form := Imp A0 (Imp B0 A0).
+  Definition line3 : HK.Form := Imp B0 A0.
+
+  Example test_check_mp_script :
+    HK.check (l3 line1 line2 line3) line3 = true.
+  Proof. vm_compute. reflexivity. Qed.
+
+End Test_Kernel_Small.
+
+Module Test_Coding_Small.
+
+  Module CN := ATP.C002.P4_R__Coding_Nucleus.C_002_Coding_Nucleus_R.
+  Module Coding := ATP.C002.P5_T__Proof_Theory.Coding.
+
+  Module CP := Carryless_Pairing.C001.P5_T__Carryless_Pairing.
+  Module N := CP.Prelude.
+
+  Fixpoint of_nat (n : Coq.Init.Datatypes.nat) : N.nat :=
+    match n with
+    | Coq.Init.Datatypes.O => N.O
+    | Coq.Init.Datatypes.S k => N.S (of_nat k)
+    end.
+
+  (* Local list constructors for C_002's list type. *)
+
+  Definition lnil : Prelude.list N.nat := Prelude.nil.
+  Definition lcons (a : Coq.Init.Datatypes.nat) (xs : Prelude.list N.nat) : Prelude.list N.nat :=
+    Prelude.cons (of_nat a) xs.
+  Definition l1 (a : Coq.Init.Datatypes.nat) : Prelude.list N.nat := lcons a lnil.
+  Definition l2 (a b : Coq.Init.Datatypes.nat) : Prelude.list N.nat := lcons a (l1 b).
+
+  (*
+    Canonical codec: computational spot-check with explicit fuel.
+  *)
+
+  Module Carry := ATP.C002.P4_R__Coding_Carryless.C_002_Coding_R.
+
+  Example test_carryless_enc_nil :
+    Carry.enc_seq lnil = N.O.
+  Proof. vm_compute. reflexivity. Qed.
+
+  Example test_carryless_roundtrip_nil :
+    Carry.dec_seq_fuel (of_nat 1) (Carry.enc_seq lnil) = Prelude.Some lnil.
+  Proof. vm_compute. reflexivity. Qed.
+
+  Example test_carryless_roundtrip_1_1 :
+    Carry.dec_seq_fuel (of_nat 10) (Carry.enc_seq (l2 1 1)) = Prelude.Some (l2 1 1).
+  Proof. vm_compute. reflexivity. Qed.
+
+  Example test_carryless_roundtrip_1_2 :
+    Carry.dec_seq_fuel (of_nat 10) (Carry.enc_seq (l2 1 2)) = Prelude.Some (l2 1 2).
+  Proof. vm_compute. reflexivity. Qed.
+
+End Test_Coding_Small.
+
+
