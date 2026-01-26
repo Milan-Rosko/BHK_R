@@ -1,0 +1,161 @@
+(* Proofcase v0.2 *)
+
+1 - Files:
+    -----
+
+    Our contribution is a collection of self-contained formal developments:
+
+    ./README                    This file
+    
+    ./theories/                 The primary source directory. Contains all
+                                `.v` (Rocq) files organized by semantic units
+
+    ./builders/                 Automation tools. Contains `.command` scripts
+                                (tested for macOS) that streamline the process
+
+    ./builders/_CoqProject      Identifies the logical path
+
+    ./appendix/                 Accompanying technical artifacts
+
+    ./.../proofextraction/      Sub-folder containing the OCaml
+                                realizations of the “Fermat Machine“
+
+2 - Contributions:
+    -------------
+
+    This contribution is self-contained while the can be compiled with the
+    Rocq proof environment (https://rocq-prover.org).
+
+    Our repository implements several novel constructive mechanisms to
+    enforce hardness and barrier results without classical axioms:
+
+        (i) Carryless Pairing: A structural arithmetic coding scheme that
+            avoids prime factorization and multiplicative number theory,
+            relying instead on Fibonacci growth and Zeckendorf supports,
+            see https://milanrosko.com/carryless.html.
+
+       (ii) BHK_R Semantics: A lambda-definable local logic that serves as
+            the organizing principle for the entire repository.
+
+      (iii) The Mirror Lemma: A mechanism for weak local forcing derived
+            strictly from reflection principles, allowing "As-If" reasoning
+            within the constructive core.
+
+       (iv) The Adversarial and Audit Barrier: Impossibility results for
+            certified separators and self-auditing systems, showing that
+            certain decision procedures cannot coexist.
+
+    A central methodological choice follows from a constraint: we avoid the
+    classical prime-power Gödel coding route. Prime-based arithmetization
+    is elegant in classical settings, but it silently imports a heavy
+    multiplicative number-theoretic substrate (unique factorization, divisibility
+    infrastructure, gcd/normalization lemmas, etc.). In a minimal constructive
+    kernel this is not “free”; it forces a large arithmetic tower just to
+    represent finitary syntax.
+
+    Instead, `BHK_R` shifts coding to an additive substrate based on Fibonacci
+    growth and Zeckendorf-style supports. Concretely, the repository implements
+    a carryless pairing discipline in which codes are assembled as additive
+    sums of Fibonacci values indexed in disjoint “bands.” Separation is enforced
+    by parity (even vs odd indices) and a rank/band offset function, rather than
+    by multiplicative properties of primes.
+
+
+3 - Organization:
+    ------------
+    
+    Constructions are explicit, terminating, and compute what they claim to compute.
+    Proofs do not rely on hidden axioms or untracked gaps.
+
+    Files are named so the filename alone indicates phase, role, and semantic unit.
+    We use a phase prefix to keep filenames valid Rocq identifiers
+    (module names cannot begin with a digit) while preserving lexical ordering by phase:
+
+
+        [ P<Phase>_<Role>__Unit.v ]
+
+    `P<Phase>` is a nonnegative phase index (`P0`, `P1`, `P2`, …).
+    `<Role>` indicates the file’s function within the phase.
+    `Unit` is a stable identifier for the component/topic.
+
+    Roles:
+
+    `S` = Semantics / interaction layer (interfaces, interoperability, translations)
+    `R` = Realization (implementations / realizers / computational content)
+    `T` = Phase-free public surface (only stable façades)
+    `A` = Opt-in certificate layer (explicit meta commitments, quarantined) 
+
+4 - Literature
+
+    Consult,
+
+
+      @book{russell27,
+        title        = {{Principia Mathematica}},
+        author       = {Whitehead, A. N. and Russell, B.},
+        year         = 1927,
+        publisher    = {Cambridge University Press},
+        address      = {Cambridge},
+        isbn         = {0521626064},
+        edition      = {2d ed.}
+      }
+      @book{kleene52,
+        title        = {{Introduction to Metamathematics}},
+        author       = {Kleene, S. C.},
+        year         = 1952,
+        publisher    = {North-Holland},
+        isbn         = 9780444896230
+      }
+      @book{troelstra88,
+        title        = {{Constructivism in Mathematics, Vol. 2}},
+        author       = {Troelstra, A. S. and van Dalen, D.},
+        year         = 1988,
+        publisher    = {North-Holland (an imprint of Elsevier Science)},
+        address      = {Amsterdam, New York},
+        series       = {Studies in Logic and the Foundations of Mathematics},
+        volume       = 123,
+        isbn         = {0444703586}
+      }
+      @book{boolos07,
+        title        = {{Computability and Logic}},
+        author       = {Boolos, G. and Burgess, J. P. and Jeffrey, R. C.},
+        year         = 2007,
+        publisher    = {Cambridge University Press},
+        isbn         = 9780521877520,
+        edition      = {5th}
+      }
+
+    Further our previous work,
+
+      @misc{rosko2025fractal,
+        title        = {{The Fractal Logic of $\Phi$-adic Recursion}},
+        author       = {Rosko, M.},
+        year         = 2025,
+        note         = {arXiv preprint},
+        url          = {http://doi.org/10.48550/arXiv.2510.08934}
+      }
+      @misc{rosko2025adversarial,
+        title        = {{Adversarial Barrier in Uniform Class Separation}},
+        author       = {Rosko, M.},
+        year         = 2025,
+        note         = {arXiv preprint},
+        url          = {http://doi.org/10.48550/arXiv.2512.08149},
+      }
+      @misc{rosko2025solverparadox,
+        title        = {{The Solver's Paradox in Formal Problem Spaces}},
+        author       = {Rosko, M.},
+        year         = 2025,
+        url          = {http://doi.org/10.48550/arXiv.2511.14665},
+      }
+      @misc{rosko2025primeconjectures,
+        title        = {{On the Realizability of Prime Conjectures in Heyting Arithmetic}},
+        author       = {Rosko, M.},
+        year         = 2025,
+        url          = {http://doi.org/10.48550/arXiv.2511.07774}
+      }
+
+
+5 - Contact:
+    -------
+
+    www.milanrosko.com
