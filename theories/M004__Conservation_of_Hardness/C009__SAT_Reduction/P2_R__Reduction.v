@@ -137,7 +137,9 @@ Module C009_SAT_Reduction.
   (*                                                                       *)
   (*************************************************************************)
 
-    (* Helper: chain implications ending in ⊥ *)
+    (*
+      Helper: chain implications ending in ⊥
+    *)
 
   Fixpoint chain_imp (fs : N.list P.ATP_Form) : P.ATP_Form :=
     match fs with
@@ -153,13 +155,16 @@ Module C009_SAT_Reduction.
     | N.cons c rest => N.cons (reduce_clause c) (map_clauses rest)
     end.
 
-  (* Full CNF reduction *)
+  (*
+    Full CNF reduction
+  *)
+  
   Definition reduce_cnf (cnf : Syn.CNF) : P.ATP_Form :=
     Not (chain_imp (map_clauses cnf)).
 
   (*************************************************************************)
   (*                                                                       *)
-  (*  THE TERMINAL CLASSES                                                 *)
+  (*  Terminal Classes                                                     *)
   (*                                                                       *)
   (*  Class A: Validity class (TAUT-like)                                  *)
   (*      Under universal quantification over valuations,                  *)
@@ -174,41 +179,45 @@ Module C009_SAT_Reduction.
   (*                                                                       *)
   (*************************************************************************)
 
-    (* The reduced CNF formula (for reuse) *)
+    (*
+      The reduced CNF formula (for reuse)
+    *)
 
   Definition CNF_Form (n : N.nat) : P.ATP_Form :=
     reduce_cnf (Syn.decode_cnf n).
 
-    (* Class A: The CNF is VALID (all clauses satisfied by all valuations) *)
+    (*
+      Class A: The CNF is VALID (all clauses satisfied by all valuations)
+    *)
 
   Definition SAT_Form (n : N.nat) : P.ATP_Form :=
     CNF_Form n.
 
-    (* Class B: The CNF is REFUTABLE (negation is valid) *)
+    (*
+      Class B: The CNF is REFUTABLE (negation is valid)
+    *)
     
   Definition UNSAT_Form (n : N.nat) : P.ATP_Form :=
     Not (CNF_Form n).
 
-  (*************************************************************************)
-  (*                                                                       *)
-  (*  STRUCTURAL LEMMAS                                                    *)
-  (*                                                                       *)
-  (*  These witness that the encoding has the expected structure.          *)
-  (*                                                                       *)
-  (*************************************************************************)
-
-    (* Empty CNF reduces to ¬⊥ (trivially valid) *)
+    (*
+      Empty CNF reduces to ¬⊥ (trivially valid)
+    *)
 
   Lemma reduce_cnf_nil : reduce_cnf N.nil = Not P.ATP_Bot.
   Proof. unfold reduce_cnf, chain_imp, map_clauses. reflexivity. Qed.
 
-    (* Single-clause CNF reduces to ¬(C → ⊥) = ¬¬C *)
+    (*
+      Single-clause CNF reduces to ¬(C → ⊥) = ¬¬C
+    *)
 
   Lemma reduce_cnf_single : forall c,
     reduce_cnf (N.cons c N.nil) = Not (P.ATP_Imp (reduce_clause c) P.ATP_Bot).
   Proof. intro c. unfold reduce_cnf, chain_imp, map_clauses. reflexivity. Qed.
 
-    (* Class duality: B n = ¬(A n) *)
+    (*
+      Class duality: B n = ¬(A n)
+    *)
 
   Lemma class_duality : forall n,
     UNSAT_Form n = Not (SAT_Form n).

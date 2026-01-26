@@ -25,9 +25,9 @@
 (*
   “Where Did the Incompleteness Go?” (Part Two)
 
-  Hint: It went here, it became the "As-If" operator.
-  This file formalizes the status of the “unprovable-but-true” (classically trivial) pairing 
-  inversion law through the Mirror Schema.
+  It became the "As-If" operator.
+  This file formalizes the status of the “unprovable-but-true”
+  (classically trivial) pairing inversion law through the Mirror Schema.
 
   The Three-Stage Argument             
 
@@ -96,16 +96,13 @@ Module C_004_Mirror_Core_R.
   (*************************************************************************)
 
   (*
-    Consider a story as a formal system.
-
-    Characters inside the story could derive the Diagonal Lemma and
-    conclude that their formal system is incomplete — that there are
-    unknowable truths.
+    Analogy. Characters inside the story could derive the Diagonal Lemma and
+    conclude that their formal system is incomplete, a “book”.
 
     Yet they will treat the ground truth relative to the ambient story
-    "as if" true, because they do not have access to a richer theory.
+    "as if" complete, because they do not have access to a richer theory.
 
-    Whatever they do, it will always be consistent to the narrative.
+    Whatever they do, it will always be relatively consistent to the book.
 
     Key Insight:
 

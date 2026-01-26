@@ -33,7 +33,7 @@
 (*        if the bound variable y equals the substitution target x,      *)
 (*        we stop recursing (x is shadowed by the binder).               *)
 (*                                                                       *)
-(*    (v) This substitution does NOT perform α-renaming to avoid         *)
+(*   (iv) This substitution does NOT perform α-renaming to avoid         *)
 (*        variable capture. Instead, it relies on the caller to          *)
 (*        ensure t does not contain free variables that would be         *)
 (*        captured by binders in φ.                                      *)
@@ -122,25 +122,31 @@ Module C009_FOL_Subst_R.
     | S.Imp a b => S.Imp (subst a x t) (subst b x t)
 
     | S.Eq t1 t2 =>
+
         (*
           Replace t1 with t if t1 equals x, otherwise keep t1.
           Same for t2.
         *)
+
         let t1' := if term_eqb t1 x then t else t1 in
         let t2' := if term_eqb t2 x then t else t2 in
         S.Eq t1' t2'
 
     | S.All v body =>
+
         (*
           If the bound variable v equals x, x is shadowed.
           Don't recurse. Otherwise, recurse into the body.
         *)
+
         if term_eqb v x then S.All v body else S.All v (subst body x t)
 
     | S.Ex v body =>
+
         (*
           Same as All case.
         *)
+        
         if term_eqb v x then S.Ex v body else S.Ex v (subst body x t)
     end.
 

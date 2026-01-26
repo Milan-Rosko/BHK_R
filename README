@@ -1,15 +1,13 @@
 (* README *)
 
-			░█▀█░█▀▄░█▀█░█▀█░█▀▀░█▀▀░█▀█░█▀▀░█▀▀
-			░█▀▀░█▀▄░█░█░█░█░█▀▀░█░░░█▀█░▀▀█░█▀▀
-			░▀░░░▀░▀░▀▀▀░▀▀▀░▀░░░▀▀▀░▀░▀░▀▀▀░▀▀▀
-
-1 - Files:
+                ┏━┓┏━┓┏━┓┏━┓┏━╸┏━╸┏━┓┏━┓┏━╸         
+                ┣━┛┣┳┛┃ ┃┃ ┃┣╸ ┃  ┣━┫┗━┓┣╸          
+                ╹  ╹┗╸┗━┛┗━┛╹  ┗━╸╹ ╹┗━┛┗━╸    
+                                                    
+1 - Files
     -----
 
-    Our contribution is a collection of self-contained formal developments:
-
-    ./README                    This file
+    A collection of self-contained formal developments:
     
     ./theories/                 The primary source directory. Contains all
                                 `.v` (Rocq) files organized by semantic units
@@ -24,14 +22,11 @@
     ./.../proofextraction/      Sub-folder containing the OCaml
                                 realizations of the “Fermat Machine“
 
-2 - Contributions:
+2 - Contributions
     -------------
 
-    This contribution is self-contained while the can be compiled with the
-    Rocq proof environment (https://rocq-prover.org).
-
-    Our repository implements several novel constructive mechanisms to
-    enforce hardness and barrier results without classical axioms:
+    Our repository implements several (hopefully) novel constructive tools
+    to enforce hardness and barrier results without classical assumptions:
 
         (i) Carryless Pairing: A structural arithmetic coding scheme that
             avoids prime factorization and multiplicative number theory,
@@ -50,31 +45,30 @@
             certain decision procedures cannot coexist.
 
     A central methodological choice follows from a constraint: we avoid the
-    classical prime-power Gödel coding route. Prime-based arithmetization
-    is elegant in classical settings, but it silently imports a heavy
-    multiplicative number-theoretic substrate (unique factorization, divisibility
-    infrastructure, gcd/normalization lemmas, etc.). In a minimal constructive
-    kernel this is not “free”; it forces a large arithmetic tower just to
-    represent finitary syntax.
+    classical prime-power coding route. Prime-based arithmetization is
+    elegant, but it silently imports a heavy (and expressive) multiplicative 
+    substrate: unique factorization, divisibility, superpolynomial growth,
+    etc. in a minimal constructive kernel this is not “free”, it forces a
+    large arithmetic tower just to represent finitary syntax.
 
-    Instead, `BHK_R` shifts coding to an additive substrate based on Fibonacci
-    growth and Zeckendorf-style supports. Concretely, the repository implements
+    Instead, `BHK_R` shifts coding to an additive substrate based on
+    Fibonacci
+    growth and Zeckendorf-style supports. Concretely, the repository
+    implements
     a carryless pairing discipline in which codes are assembled as additive
     sums of Fibonacci values indexed in disjoint “bands.” Separation is enforced
-    by parity (even vs odd indices) and a rank/band offset function, rather than
-    by multiplicative properties of primes.
 
 
 3 - Organization:
     ------------
     
-    Constructions are explicit, terminating, and compute what they claim to compute.
-    Proofs do not rely on hidden axioms or untracked gaps.
+    Constructions are explicit, terminating, and compute what they claim to
+    compute. Proofs do not rely on hidden axioms or untracked gaps.
 
-    Files are named so the filename alone indicates phase, role, and semantic unit.
-    We use a phase prefix to keep filenames valid Rocq identifiers
-    (module names cannot begin with a digit) while preserving lexical ordering by phase:
-
+    Files are named so the filename alone indicates phase, role, and semantic
+    unit. We use a phase prefix to keep filenames valid Rocq identifiers
+    (module names cannot begin with a digit) while preserving lexical
+    ordering by phase:
 
         [ P<Phase>_<Role>__Unit.v ]
 
@@ -158,8 +152,7 @@
         url          = {http://doi.org/10.48550/arXiv.2511.07774}
       }
 
-
-5 - Contact:
+5 - Contact
     -------
 
     www.milanrosko.com

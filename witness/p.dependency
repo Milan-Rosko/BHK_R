@@ -1,0 +1,111 @@
+Welcome to Coq 8.20.1
+
+Coq < Coq < 
+Coq < 
+Coq < 
+Coq < 
+Coq < 
+Coq < Coq < Coq < 
+Coq < 
+Coq < 
+Coq < 
+Coq < Coq < Coq < Toplevel input, characters 75-105:
+> Print "=== MAIN BARRIER THEOREM ===".
+>       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Error: Unable to interpret "=== MAIN BARRIER THEOREM ===" as a reference.
+
+Coq < Fetching opaque proofs from disk for Fermat_Machine.C014.P4_T__The_Fermat_Barrier
+Fetching opaque proofs from disk for Fermat_Machine.C014.P3_R__Fermat_Solver
+Fetching opaque proofs from disk for Cubic_Incompleteness.C012.P2_S__Barrier
+Axioms:
+P1_S__Structure.C012_Structure_S.decode_equation :
+  P1_S__Structure.C012_Structure_S.N.nat ->
+  P1_S__Structure.C012_Structure_S.Equation
+P1_S__Structure.C012_Structure_S.Unsolvable :
+  P1_S__Structure.C012_Structure_S.Equation -> Prop
+P1_S__Structure.C012_Structure_S.Solvable :
+  P1_S__Structure.C012_Structure_S.Equation -> Prop
+Bridge_Contract.Index_Condition : forall n : N.nat, (n > two)%bhk
+Bridge_Contract.Fermat_Triple_Implies_Solvable :
+  forall (t : Triple) (n : N.nat),
+  Fermat_Relation n t ->
+  Bridge_Contract.Str.Solvable (Bridge_Contract.Str.decode_equation n)
+P1_S__Structure.C012_Structure_S.Equation : Type
+Ctx_Disjoint : Barrier.Ctx_Disjointness
+Ctx_DPRM_Diagonal : Barrier.Ctx_DPRM_Diagonal
+
+Coq < Coq < Toplevel input, characters 7-32:
+> Print "=== BRIDGE CONTRACT ===".
+>       ^^^^^^^^^^^^^^^^^^^^^^^^^
+Error: Unable to interpret "=== BRIDGE CONTRACT ===" as a reference.
+
+Coq < Axioms:
+Bridge_Contract.Fermat_Triple_Implies_Solvable :
+  forall (t : Triple) (n : N.nat),
+  Fermat_Relation n t ->
+  Bridge_Contract.Str.Solvable (Bridge_Contract.Str.decode_equation n)
+
+Coq < Coq < Toplevel input, characters 7-35:
+> Print "=== MACHINE DEFINITION ===".
+>       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Error: Unable to interpret "=== MACHINE DEFINITION ===" as a reference.
+
+Coq < Fermat_Machine =
+fun M : N.nat -> Triple =>
+Radical M /\ (forall n : N.nat, (n > two)%bhk -> Fermat_Relation n (M n))
+     : (N.nat -> Triple) -> Prop
+
+Arguments Fermat_Machine M%function_scope
+
+Coq < Radical =
+fun M : N.nat -> Triple =>
+Rad.Solvable_By_Radicals (fun n : Rad.N.nat => let '(a, _, _) := M n in a) /\
+Rad.Solvable_By_Radicals (fun n : Rad.N.nat => let '(_, b, _) := M n in b) /\
+Rad.Solvable_By_Radicals (fun n : Rad.N.nat => let '(_, _, c) := M n in c)
+     : (N.nat -> Triple) -> Prop
+
+Arguments Radical M%function_scope
+
+Coq < Coq < Toplevel input, characters 7-36:
+> Print "=== SOLVER CONSTRUCTION ===".
+>       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Error: Unable to interpret "=== SOLVER CONSTRUCTION ===" as a reference.
+
+Coq < Fermat_solver =
+fun (M : N.nat -> Triple) (HM : Fermat_Machine M) =>
+{|
+  Barrier.sigma := sigma_true;
+  Barrier.witness_solvable :=
+    fun (n : Fermat_Solver_R.Barrier.N.nat)
+      (_ : sigma_true n = P1_S__Kernel_Spec.C_002_Prelim.true) =>
+    witness_solvable_from_machine M HM n;
+  Barrier.witness_unsolvable :=
+    fun (n : Fermat_Solver_R.Barrier.N.nat)
+      (Hfalse : sigma_true n = P1_S__Kernel_Spec.C_002_Prelim.false) =>
+    False_rect
+      (Fermat_Solver_R.Barrier.Str.Unsolvable
+         (Fermat_Solver_R.Barrier.Str.decode_equation n))
+      (sigma_true_not_false n Hfalse)
+|}
+     : forall M : N.nat -> Triple,
+       Fermat_Machine M ->
+       Fermat_Solver_R.Barrier.Certified_Diophantine_Solver
+
+Arguments Fermat_solver M%function_scope HM
+
+Coq < witness_solvable_from_machine =
+fun (M : N.nat -> Triple) (HM : Fermat_Machine M) (n : N.nat) =>
+match HM with
+| conj _ H_Solver =>
+    let H_Rel : Fermat_Relation n (M n) :=
+      H_Solver n (Bridge_Contract.Index_Condition n) in
+    Bridge_Contract.Fermat_Triple_Implies_Solvable (M n) n H_Rel
+end
+     : forall M : N.nat -> Triple,
+       Fermat_Machine M ->
+       forall n : N.nat,
+       Bridge_Contract.Str.Solvable (Bridge_Contract.Str.decode_equation n)
+
+Arguments witness_solvable_from_machine M%function_scope HM n%bhk_scope
+
+Coq < 

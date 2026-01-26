@@ -32,8 +32,6 @@ Module C009_SAT_Syntax.
 
   (*************************************************************************)
   (*                                                                       *)
-  (*  Local list combinator (map)                                          *)
-  (*                                                                       *)
   (*  The Prelude provides 'list' but not 'map'. We define it locally      *)
   (*  to keep the nucleus minimal.                                         *)
   (*                                                                       *)
@@ -46,8 +44,6 @@ Module C009_SAT_Syntax.
     end.
 
   (*************************************************************************)
-  (*                                                                       *)
-  (*  Literal Encoding                                                     *)
   (*                                                                       *)
   (*  A literal is a natural number encoding (variable_index, polarity).   *)
   (*  We use the carryless pairing to pack these two values.               *)
@@ -62,8 +58,6 @@ Module C009_SAT_Syntax.
 
   (*************************************************************************)
   (*                                                                       *)
-  (*  Clause & Formula Structure                                           *)
-  (*                                                                       *)
   (*  Clauses and CNF formulas are encoded as lists using the canonical    *)
   (*  sequence codec from C002/C001.                                       *)
   (*                                                                       *)
@@ -73,8 +67,6 @@ Module C009_SAT_Syntax.
   Definition CNF : Type := N.list Clause.
 
   (*************************************************************************)
-  (*                                                                       *)
-  (*  Decoding Operations                                                  *)
   (*                                                                       *)
   (*  These connect to the C001 carryless pairing device.                  *)
   (*  The codec witnesses (Reflexica) ensure round-trip correctness.       *)
@@ -103,8 +95,6 @@ Module C009_SAT_Syntax.
 
   (*************************************************************************)
   (*                                                                       *)
-  (*  Sequence Codec Interface                                             *)
-  (*                                                                       *)
   (*  CNF decoding uses the sequence codec from C002.                      *)
   (*  We expose this as a parameter to allow different codec strategies,   *)
   (*  but the canonical implementation uses carryless pairing.             *)
@@ -123,8 +113,6 @@ Module C009_SAT_Syntax.
     map decode_clause clause_codes.
 
   (*************************************************************************)
-  (*                                                                       *)
-  (*  Effectivity Witnesses                                                *)
   (*                                                                       *)
   (*  These examples demonstrate that the encoding is computationally      *)
   (*  effective (reduces under vm_compute).                                *)

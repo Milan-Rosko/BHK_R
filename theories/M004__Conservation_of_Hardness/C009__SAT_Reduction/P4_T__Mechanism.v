@@ -258,7 +258,7 @@ End C009_Diagonal_Mechanism_T.
 
 (*************************************************************************)
 (*                                                                       *)
-(*  Summary: The Diagonal Mechanism as Linker                            *)
+(*  The Diagonal Mechanism as Linker                                     *)
 (*                                                                       *)
 (*  Three-Module Integration:                                            *)
 (*                                                                       *)

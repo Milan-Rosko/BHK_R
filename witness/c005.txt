@@ -1,0 +1,58 @@
+Welcome to Coq 8.20.1
+
+Coq < 
+Coq < Coq < Toplevel input, characters 7-9:
+> Print ""; Print "=== ADVERSARIAL BARRIER ===".
+>       ^^
+Error: Empty string.
+
+Coq < Fetching opaque proofs from disk for Adversarial_Barrier.C005.P2_T__Barrier
+Fetching opaque proofs from disk for ATP.C002.P3_R__Additive_Laws
+Fetching opaque proofs from disk for Adversarial_Barrier.C005.P2_R__Barrier_Proof
+Fetching opaque proofs from disk for Coq.Init.Logic
+Axioms:
+Truth : P.ATP_Form -> Prop
+B : N.nat -> P.ATP_Form
+A : N.nat -> P.ATP_Form
+
+Coq < Coq < Toplevel input, characters 7-9:
+> Print ""; Print "=== DEFINITIONS ===".
+>       ^^
+Error: Empty string.
+
+Coq < Adversarial_Barrier =
+fun (S : Def.SEPARATOR) (Is_Disjoint : Def.Semantic_Disjointness)
+  (Soundness : forall phi : Def.P.ATP_Form,
+               Def.P.ATP_Prov phi -> Def.Truth phi)
+  (Hdiag : exists (d : Def.N.nat) (D : Def.P.ATP_Form),
+             (Def.Truth D <-> Def.Truth (Def.Flip_Logic S d)) /\
+             (Def.Truth (Def.A d) <-> Def.Truth D) /\
+             (Def.Truth (Def.B d) <-> Def.Truth D)) =>
+P2_R__Barrier_Proof.C005_Barrier_Proof_R.Barrier_Law (S:=S) Is_Disjoint
+  Soundness Hdiag
+     : forall [S : Def.SEPARATOR],
+       Def.Semantic_Disjointness ->
+       (forall phi : Def.P.ATP_Form, Def.P.ATP_Prov phi -> Def.Truth phi) ->
+       (exists (d : Def.N.nat) (D : Def.P.ATP_Form),
+          (Def.Truth D <-> Def.Truth (Def.Flip_Logic S d)) /\
+          (Def.Truth (Def.A d) <-> Def.Truth D) /\
+          (Def.Truth (Def.B d) <-> Def.Truth D)) -> False
+
+Arguments Adversarial_Barrier [S] Is_Disjoint Soundness%function_scope _
+
+Coq < Record SEPARATOR : Set := Build_SEPARATOR
+  { sigma : Def.N.nat -> Def.N.bool;
+    cert : forall n : Def.N.nat,
+           if sigma n
+           then Def.P.ATP_Prov (Def.A n)
+           else Def.P.ATP_Prov (Def.B n) }.
+
+Arguments Def.Build_SEPARATOR [sigma]%function_scope cert%function_scope
+Arguments Def.sigma s _
+Arguments Def.cert s n
+
+Coq < Def.Semantic_Disjointness =
+forall n : Def.N.nat, Def.Truth (Def.A n) -> Def.Truth (Def.B n) -> False
+     : Prop
+
+Coq < 

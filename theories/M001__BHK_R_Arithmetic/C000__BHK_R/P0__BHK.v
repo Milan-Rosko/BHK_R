@@ -7,15 +7,8 @@
  (*_  /\/\/\/\/\__  /\/\__  /\/\_  /\/\___  /\/\__________  /\/\__  /\/\__     *)
 (*______________________________________________  /\/\/\/\_______________      *)
 (*                                                                             *)
-(*     “Brouwer–Heyting–Kolmogorov Interpretation (BHK)“                       *)
-(*                                                                             *)
-(*     This defines the “meaning nucleus” shared by all later phases           *)
+(*     This defines the “BHK meaning nucleus” shared by all later phases.      *)
 (*     The methodology is repository-wide and project-agnostic.                *)
-(*                                                                             *)
-(*     The BHK perspective.                                                    *)
-(*                                                                             *)
-(*     This file is intended to be read under the discipline                   *)
-(*     of proof.                                                               *)
 (*                                                                             *)
 (*        (i) A proposition is identified with the type of its proofs.         *)
 (*                                                                             *)
@@ -31,13 +24,6 @@
 (*      extensional principles or additional axioms. The emphasis is on        *)
 (*      explicit constructions whose meaning is stable under reduction.        *)
 (*                                                                             *)
-(*      Interpretation as realization.                                         *)
-(*                                                                             *)
-(*      We work in a small constructive core:                                  *)
-(*      to prove P is to construct an inhabitant of P, and the meaning         *)
-(*      of connectives is given by their introduction forms—functions,         *)
-(*      pairs, tagged alternatives, dependent pairs, etc.                      *)
-(*                                                                             *)
 (*      BHK remains the informal proof-theoretic semantics, whereas            *)
 (*      BHK_R denotes an additional discipline:                                *)
 (*                                                                             *)
@@ -46,8 +32,6 @@
 (*       (ii) Explicit primitive recursion,                                    *)
 (*                                                                             *)
 (*      (iii) A fixed phase structure.                                         *)
-(*                                                                             *)
-(*      Computation as the proof engine.                                       *)
 (*                                                                             *)
 (*      The preferred notion of reasoning is kernel conversion:                *)
 (*      definitional equality via β, ι, ζ, and transparent δ, together         *)
@@ -128,23 +112,19 @@ Module BHK.
   (*******************************************************************************)
 
 
-  (*************************************************************************)
-  (*                                                                       *)
-  (*  A minimal Arithmetic Kernel (nat) with explicit primitive recursion  *)
-  (*  This is intentionally not Coq.Init.Datatypes.nat.                    *)
-  (*                                                                       *)
-  (*  BHK reading:                                                         *)
-  (*                                                                       *)
-  (*     (i) The inductive type nat is a canonical constructive object.    *)
-  (*    (ii) O and S are constructors giving the canonical proofs          *)
-  (*         that a number is zero or a successor.                         *)
-  (*   (iii) Induction / recursion corresponds to case analysis on proofs  *)
-  (*         of nat.                                                       *)
-  (*                                                                       *)
-  (*  The goal is to keep the computational behavior fully transparent     *)
-  (*  and independent of any larger library abstractions.                  *)
-  (*                                                                       *)
-  (*************************************************************************)
+  (*
+    A minimal Arithmetic Kernel (nat) with explicit primitive recursion
+    This is intentionally not Coq.Init.Datatypes.nat. BHK reading:
+
+      (i) The inductive type nat is a canonical constructive object,
+
+     (ii) O and S are constructors giving the canonical proofs,
+
+    (iii) Induction / recursion corresponds to case analysis on proofs.
+
+    The “goal” is to keep the computational behavior fully transparent
+    and independent of any larger library abstractions.
+  *)
 
   Inductive nat : Type :=
     | O : nat
