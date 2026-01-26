@@ -1,6 +1,6 @@
 (* README *)
 
-                ┏━┓┏━┓┏━┓┏━┓┏━╸┏━╸┏━┓┏━┓┏━╸         
+                ┏━┓┏━┓┏━┓┏━┓┏━╸┏━╸┏━┓┏━┓┏━╸        
                 ┣━┛┣┳┛┃ ┃┃ ┃┣╸ ┃  ┣━┫┗━┓┣╸          
                 ╹  ╹┗╸┗━┛┗━┛╹  ┗━╸╹ ╹┗━┛┗━╸    
                                                     
@@ -10,17 +10,17 @@
     A collection of self-contained formal developments:
     
     ./theories/                 The primary source directory. Contains all
-                                `.v` (Rocq) files organized by semantic units
+                                `.v` (Rocq) files organized by semantic units.
 
     ./builders/                 Automation tools. Contains `.command` scripts
-                                (tested for macOS) that streamline the process
+                                (tested for macOS) that streamline the process.
 
-    ./builders/_CoqProject      Identifies the logical path
+    ./builders/_CoqProject      Identifies the logical path.
 
-    ./appendix/                 Accompanying technical artifacts
+    ./appendix/                 Accompanying technical artifacts.
 
     ./.../proofextraction/      Sub-folder containing the OCaml
-                                realizations of the “Fermat Machine“
+                                realizations of the “Fermat Machine.”
 
 2 - Contributions
     -------------
@@ -28,38 +28,35 @@
     Our repository implements several (hopefully) novel constructive tools
     to enforce hardness and barrier results without classical assumptions:
 
-        (i) Carryless Pairing: A structural arithmetic coding scheme that
-            avoids prime factorization and multiplicative number theory,
-            relying instead on Fibonacci growth and Zeckendorf supports,
-            see https://milanrosko.com/carryless.html.
+       (i) Carryless Pairing: A structural arithmetic coding scheme that
+           avoids prime factorization and multiplicative number theory,
+           relying instead on Fibonacci growth and Zeckendorf supports.
+           See https://milanrosko.com/carryless.html.
 
-       (ii) BHK_R Semantics: A lambda-definable local logic that serves as
-            the organizing principle for the entire repository.
+      (ii) BHK_R Semantics: A lambda-definable local logic that serves as
+           the organizing principle for the entire repository.
 
-      (iii) The Mirror Lemma: A mechanism for weak local forcing derived
-            strictly from reflection principles, allowing "As-If" reasoning
-            within the constructive core.
+     (iii) The Mirror Lemma: A mechanism for weak local forcing derived
+           strictly from reflection principles, allowing "As-If" reasoning
+           within the constructive core.
 
-       (iv) The Adversarial and Audit Barrier: Impossibility results for
-            certified separators and self-auditing systems, showing that
-            certain decision procedures cannot coexist.
+      (iv) The Adversarial and Audit Barrier: Impossibility results for
+           certified separators and self-auditing systems, showing that
+           certain decision procedures cannot coexist.
 
     A central methodological choice follows from a constraint: we avoid the
     classical prime-power coding route. Prime-based arithmetization is
     elegant, but it silently imports a heavy (and expressive) multiplicative 
     substrate: unique factorization, divisibility, superpolynomial growth,
-    etc. in a minimal constructive kernel this is not “free”, it forces a
+    etc. In a minimal constructive kernel this is not “free”; it forces a
     large arithmetic tower just to represent finitary syntax.
 
-    Instead, `BHK_R` shifts coding to an additive substrate based on
-    Fibonacci
-    growth and Zeckendorf-style supports. Concretely, the repository
-    implements
-    a carryless pairing discipline in which codes are assembled as additive
-    sums of Fibonacci values indexed in disjoint “bands.” Separation is enforced
+    Instead, `BHK_R` shifts coding to an additive substrate based on Fibonacci
+    growth and Zeckendorf-style supports. Concretely, the repository implements
+    a “Carryless Pairing in which codes are assembled as additive
+    sums of Fibonacci values indexed in disjoint “bands.”
 
-
-3 - Organization:
+3 - Organization
     ------------
     
     Constructions are explicit, terminating, and compute what they claim to
@@ -73,11 +70,10 @@
         [ P<Phase>_<Role>__Unit.v ]
 
     `P<Phase>` is a nonnegative phase index (`P0`, `P1`, `P2`, …).
-    `<Role>` indicates the file’s function within the phase.
-    `Unit` is a stable identifier for the component/topic.
+    `<Role>`   indicates the file’s function within the phase.
+    `Unit`     is a stable identifier for the component/topic.
 
     Roles:
-
     `S` = Proof semantics
     `R` = Realization
     `T` = Stable façades, Theorems
@@ -85,6 +81,7 @@
 
 4 - Literature
     ----------
+
 
     For expostion, consult:
 

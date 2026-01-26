@@ -60,7 +60,7 @@
     
     "Fermat's Last Theorem is true in the exact same sense that arithmetic is consistent."
     
-    The proof establishes that a counterexample to FLT would not be a mere
+    The proof (reverse mathematics) establishes that a counterexample to FLT would not be a mere
     numerical anomaly, but a structural violation of the 'Conservation of Hardness',
     implying the collapse of the arithmetical hierarchy.
 
