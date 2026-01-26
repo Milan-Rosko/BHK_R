@@ -14,9 +14,34 @@ Textfile triggered by a successful 'makefile' run.
 . . . . .. ... ..... .....******************          *****                
  . . . . .. ... ..... .....***************              ***                
 . . . . . .. ... ..... .....************                 *                 
- . . . . . .. ... ..... .....*********                                     
-. . . . . . .. ... ..... ......******                                      
- . . . .  ... ... ...... .......**                                        
+ . . . ..d8888b.. ..... .....*********                                     
+. . . .d88P..Y88b. ..... ......******                                      
+ . . . Y88b... ... ...... .......**                                        
+        Y888b.   888  888  .d8888b .d8888b .d88b.  .d8888b  .d8888b        
+          ”Y88b. 888  888 d88P”   d88P”   d8P  Y8b 88K      88K            
+            ”888 888  888 888     888     88888888 ”Y8888b. ”Y8888b.       
+      Y88b  d88P Y88b 888 Y88b.   Y88b.   Y8b.          X88      X88  d8b  
+       ”Y8888P”   ”Y88888  ”Y8888P ”Y8888P ”Y8888   88888P'  88888P'  Y8P  
+
+
+                    Date (UTC): 2026-01-26T22:55:25Z,
+
+                   Rocq version: The Coq Proof Assistant, version 8.20.1
+                   Method: isolated shadow, scratch folder
+
+---------------------------------------------------------------------------
+DISCIPLINE REPORT:
+---------------------------------------------------------------------------
+
+Status: Other
+Details:
+No additional information.
+
+---------------------------------------------------------------------------
+
+_CoqProject file contents:
+
+=== BEGIN ===
 
    # root 
    -docroot proofcase 
@@ -161,3 +186,90 @@ Textfile triggered by a successful 'makefile' run.
    theories/M004__Conservation_of_Hardness/C014__Fermat_Machine/P3_S__Machine_Definition.v 
    theories/M004__Conservation_of_Hardness/C014__Fermat_Machine/P4_S__Barrier_Interface.v 
    theories/M004__Conservation_of_Hardness/C014__Fermat_Machine/P4_T__The_Fermat_Barrier.v 
+
+=== END ===
+
+------------------------
+
+Hash(es) (Short SHA-256) of 77 Files:
+
+   ZM/W3wUJhg9Ygm33HS+jKYGJWzjQZgPQAdTBZpM7ti0=   C000__BHK_R
+   5g1UPogR/IKPlvJq5MYgdGr9uLQx8zVekkr5cO9/kxg=   C000__BHK_R
+   gEaI9wTWoJt2+/rTXOaB5lw089eAnVQhXM3FIV3hvcw=   C001__Carryless_Pairing
+   7jUTpdW3eP53jPOG4PDz+gu2rpg/irY4lduWnuFmwkI=   C001__Carryless_Pairing
+   fOdVenWSjr6D+ARCvO6gzjA8L1Bzw5fclXUIhlPE1KA=   C001__Carryless_Pairing
+   K7E92b1Q3q3ST+oMYJANWZpXM7nTGDK0bIHsO8KhxGw=   C001__Carryless_Pairing
+   W3z+VdUKroHUG3xYZ/Oc9/o9xQ/zborQraccJCAhZhk=   C001__Carryless_Pairing
+   BIq+3OiBZFRJa/moEfWfUn3I90j/gcRbPB/2aAo7C8Y=   C001__Carryless_Pairing
+   /+inG1MWnFHdXZpWqxvCe0XnDCd0c0Vj8AbtqmHr5HY=   C001__Carryless_Pairing
+   +07VV9mfgSwT5ZmR68q3hs6oAKaheZXiGJ1N83MLQj4=   C001__Carryless_Pairing
+   I7nswrL97lVaPpXesdvDDv6rJJYo/hvzEWfD8TjzOxI=   C001__Carryless_Pairing
+   Pcv0vodG5AA0krh9swM00LoTglkcdUQXAOVcVcCOwHs=   C001__Carryless_Pairing
+   +DwUpX2ioVCh/nyjmCMpj6GTZMdG6eTzk9e9pIJm71E=   C002__Additive_Hilbert_System
+   PFnC9CYteZX7X8ZAHoAPsKIEMEmb8V7VqKIDWYQ18Rw=   C002__Additive_Hilbert_System
+   WZRngrQChk0hLJXvGRNv8WZ5Y+Xwc3XJQZb++uXIUMQ=   C002__Additive_Hilbert_System
+   Lq8Mu6krZRbWSt9vPmzIKMszony0cZet94zUovJpZkU=   C002__Additive_Hilbert_System
+   PjhuLDxHEX4XkrNKZEoZAkfI4nflIgb6fcSlTTlYPOM=   C002__Additive_Hilbert_System
+   Kgq8IQsddJFtECdRGWhQaMSgFW4WL4hXsArnNv8UGqI=   C002__Additive_Hilbert_System
+   Z52dV8cGSQY8MKXcVZbyWSBlj+735Do8mCHbAfJkl68=   C002__Additive_Hilbert_System
+   H4fJqOvIHpkfy7T05JNFMHBch0xD7JNi85MRfRoc6Us=   C002__Additive_Hilbert_System
+   kxI6WsxefnR7vGtEGDFdBtw1cNUtMRLr/U7a+bc6Mbg=   C002__Additive_Hilbert_System
+   Q/KAJYJSm4Yhmx4J3NeVh4ZtZUfDkl3OM3j7Vl/+CHo=   C002__Additive_Hilbert_System
+   Tuv4pAu+6PBCMXhjZWDq+/vOBMK8l717IV4kZWJ4QTo=   C003__Carryless_Diagonal_Lemma
+   TpzIDRZuUQ4rku7rRPXUKY0LMsZ8bn6oI/xQ8fEIaEM=   C003__Carryless_Diagonal_Lemma
+   GLP53uSfmvrOtIFLDtP4agsPhZA2HLmD7S4qGsxkiuI=   C003__Carryless_Diagonal_Lemma
+   sC8tx+wPMfq3LI+T8UDOHJI7D7tcpTcfeGutuI2Yf8s=   C003__Carryless_Diagonal_Lemma
+   t9lboj1PDANSDH3ZUT8hKBW1EClt71Mi+CUi01iiW3U=   C003__Carryless_Diagonal_Lemma
+   6TOQxzGVJKH55MWi4is/Vla+hgnsWJ1zWlyZJd2HAlU=   C004__Mirror_Lemma
+   1eMfhtwcAeGRtmjsdOXkFkD/Am0Dk2BugWHStoBDd/4=   C004__Mirror_Lemma
+   fw1eO/WQ2lD0dMi/6W3j8C19CN0LVwJlpO7xM3TaFGk=   C004__Mirror_Lemma
+   CEGx2aKa4d/+3ncllJAfpHFpO6sXVA6QWokW2Froggs=   C004__Mirror_Lemma
+   0ehaJjlcteA0Y414VIBdxIMGY1FqhyN1hRWI7tvxIZM=   C004__Mirror_Lemma
+   kT3n107tTQqOrN7YjDT9Ze4aEnAYk9GKpCbVqHHE/JE=   C004__Mirror_Lemma
+   mf42POpnu/tzYboe2hQOl0IwPDRYgPMuJ4760M9m3IE=   C005__Adversarial_Barrier
+   9DtccVmCOOiSUHN3K03i5KxaMrp5VQA+hkJYxLPwxbE=   C005__Adversarial_Barrier
+   sRR6ki//5yCqxshARfRk+OtjCqZ+76OBW1fmLu07dek=   C005__Adversarial_Barrier
+   MVBNyNRF9b8jd7YIuN/odA7jSnGz5srpBjCaHuSkOi4=   C005__Adversarial_Barrier
+   thJ/eNtjJpl7klZBI4jYYOv2/SJZucFuq4tbLQNO4p8=   C006__Audit_Barrier
+   q0CBaNpzc1pRBSUaQmAN1QRUJuutYnc0QQktaY1+16g=   C006__Audit_Barrier
+   X/FGEPDnc8KLaHcGHMmzjzqoJPY8hN2j6fmez/a3EUw=   C006__Audit_Barrier
+   SyQDiYGkoEFTmBujDIhs0+6ab/RUDxyqgyNttsYBN4c=   C006__Audit_Barrier
+   tnE2hJl47u6/Jkz141oIFCMUukewr7cUPxbWLDKCznE=   C006__Audit_Barrier
+   MoHZ6Liyu5WcMjVryWSs/kigVsL1tcSnY7B8mUvdoS4=   C007__Resistance_Law
+   DX4+b3QQlJ9bZ47xyPEUpDI4qUPL1Jzz8of6pVnyjng=   C007__Resistance_Law
+   ZWnYWWwrluTxhJMl97AcreUbhqyKtyEpHwhz/9vMhCA=   C007__Resistance_Law
+   mJmfWNDPaxwfQavykw0f7pG6Axz5kQKg/595iVXuxAU=   C008__Reflexica_Normalization
+   Jb8yZiAm1sNuFvkLONS0+I2TIRsT8H9eB89zESxEEWw=   C008__Reflexica_Normalization
+   +5FQV56mUZKF+GfJkT+0z7bR2EG1VOj3DDjiW76EWAA=   C008__Reflexica_Normalization
+   5EnQ0FrkoOd4o09TrVZarrNwPxpUyhPZcZdVEfGRYfA=   C008__Reflexica_Normalization
+   NUdWld4uHh25pJQ8YMibNSiaog1/p44ekEXm9r9H2qw=   C009__SAT_Reduction
+   YeAkLLKX3AoFduWeVhVb03ASsGv1W8rWnktJky/2UUI=   C009__SAT_Reduction
+   R1kTqDlEp7PCW7a0622xqcS/QuEgAbjFn/DdfV8myBU=   C009__SAT_Reduction
+   NGqXjfa2qO+PGbGU2AuUoLhuPSl3DRIhtvTiUnYXUPE=   C009__SAT_Reduction
+   2/6IAOeJAmBYKe73aF194QVFrGPdWaZWTgf+EWIhvyQ=   C009__SAT_Reduction
+   7CV4TMtTsNlYB6EdwyeSA8TiWLWCSuPxcjd0V3GYP1s=   C009__SAT_Reduction
+   rW+RxmrKEirX3RmUcaBy+vjRHPwIP4oXCbkLC+n05rI=   C009__SAT_Reduction
+   JKlrD0yZ2LXYmAqnxooiJSvRuHahg9yYXu+hsBKehGs=   C009__SAT_Reduction
+   BoSFXJ9JJK/A3+nn40dXMcYBtbGfJ/m7wlLXqcnWuBI=   C009__SAT_Reduction
+   UwqQlFcxAuvAWLXd2Rp4cp9uj5g8VQ4Lv/Nj35Aflqg=   C010__Solvability_Thesis
+   IyzMVR16DfBtEtL+eXUS5r9MFLbnpIfdYBNeaQwGncM=   C010__Solvability_Thesis
+   05BgYDi3QhbmZkUfK6PGCiegXDf2SrVA4yfpCq2qO60=   C010__Solvability_Thesis
+   9CraF4H3qPcOHiE9ciJFeOsb9U8sraMxk9a9GOyFgYY=   C011__Quintic_Hardness
+   q1FZz1jLy/K92dyFSsGC2YAYR6N/FwMjXxZnTE5+iXQ=   C011__Quintic_Hardness
+   aaCKGvfLRxyDTC09Muz8rB34dF7/5oT1cW1CvoCFG78=   C012__Cubic_Incompleteness
+   fyGUvxKEMii9WD602ugRcHb1zxGhJQcVjiEPm/EszSg=   C012__Cubic_Incompleteness
+   3pyiIUpNxdTcDL9eRKRNLmKleDFLeVRjJAth72/MNfQ=   C012__Cubic_Incompleteness
+   n1OIGIE/as8Q6FFQgnoPtMGKlFS9+njt1q8IJhdvGBk=   C013__Logical_Cryptography
+   2G8SZgLQ36e67K7hF5iZIk80yTnRC5MhZiDU1Ukzzs0=   C014__Fermat_Machine
+   j7E6Wq/T/7BNTFgT1zGZtpraeOyjVSqMM8no3FUZuMQ=   C014__Fermat_Machine
+   5YBKoRW3Rznm39pkwHV3+Ycoi4pmbJN6M7fkPKzH5h4=   C014__Fermat_Machine
+   I140+YS+dl+Cmvmy3wxd0s/VgQDWEeIbqud1o2Kyl6s=   C014__Fermat_Machine
+   MXDil4HKdr4UfrL6qGZaFVlbYsavhG0AnlL5dd4In+E=   C014__Fermat_Machine
+   1sXMR4n1t3ydNmW/qEfWC5fkckcA/jynBz4t1bb5INM=   C014__Fermat_Machine
+   TSYbc7Rv8hQgVwBd3jok2GA7V8wSZI/nx6D32aGlGRc=   C014__Fermat_Machine
+   0JHTaB9Eg6tR36lU7639ZE/gLOWMlj1BWfiKXaBKxtU=   C014__Fermat_Machine
+   B2BwOBV5gCgV3AKOhdE3WJIStkiL5Q1s/M0zWVl9m/o=   C014__Fermat_Machine
+   Su4w6laYqqnxFFpNkgDwRKxSaPc/nvRUzMZvYHCyxjA=   C014__Fermat_Machine
+
+------------------------
+
