@@ -23,7 +23,21 @@
                               Raw graph of internal module dependencies.
  
 
-2 - The Witness
+4 - The Statement
+    -------------
+    
+    "Fermat's Last Theorem is true in the exact same sense that arithmetic is consistent."
+
+    or
+
+    “Arrow between FLT and Arithmetic Integrity.”
+    
+    The proof (reverse mathematics) establishes that a counterexample to FLT would not be a mere
+    numerical anomaly, but a structural violation of the 'Conservation of Hardness',
+    implying the collapse of the arithmetical hierarchy.
+
+
+3 - The Witness
     -----------
 
     The `FLT.ml` file is a mechanical artifact. 
@@ -37,8 +51,11 @@
 
      (iii) It includes the `Fermat_Check_Witness` decidability kernel.
 
+      (iv) The [ __ ] signifies because Reflexica is formulated in Propositional logic.
+           The axiom posits that the “Carryless Pairing” function holds.
 
-3 - Scope
+
+4 - Scope
     -----
 
     This directory contains:
@@ -53,16 +70,6 @@
        (i) A standalone mathematical proof text (see ../theories/).
 
       (ii) A new trusted kernel or alternative proof assistant.
-
-
-4 - The Statement
-    -------------
-    
-    "Fermat's Last Theorem is true in the exact same sense that arithmetic is consistent."
-    
-    The proof (reverse mathematics) establishes that a counterexample to FLT would not be a mere
-    numerical anomaly, but a structural violation of the 'Conservation of Hardness',
-    implying the collapse of the arithmetical hierarchy.
 
 
 5 - Reproducible Verification
