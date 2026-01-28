@@ -48,8 +48,7 @@
     invariance”: several major obstructions become corollary manifestations of a
     single failure mode, once “truth” is interpreted as verifiable access.
 
-    This repository formalizes the thesis that several major
-    “Hard Problems” are corollary manifestations of the Reflexica failure:
+    Examples:
 
         (i) The failure of a verifier to simulate a solver without aliasing
             temporal resources;
