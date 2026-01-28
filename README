@@ -52,12 +52,12 @@
                    “We do not solve hard problems by proof;
                    we solve them by invariance.”
 
-    Here, we formalize a method of problem reduction on grounds of λ-invariance
+    Here, we formalize a method of problem reduction on grounds of λ-invariance.
     Several major obstructions might be corollary manifestations of a single
     failure mode, once focus shifts from “truth” semantics to verifiable access.
 
-    Several “Hard Problems” are suspected as the corollary manifestations of
-    the Reflexica/entropy failure:
+    The following are suspected as the corollary manifestations of a failure
+    by “entropy:”
 
         (i) The failure of a verifier to simulate a solver without aliasing
             temporal resources;
