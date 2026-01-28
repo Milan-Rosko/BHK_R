@@ -1,11 +1,12 @@
 
-		Wythoff/Carryless Vault Challenge (Preliminary)
+		Wythoff/Carryles Challenge (Preliminary)
 
 1 - Files
     -----
-    
-    challange.md                 challenge.md: full challenge description,
-				primitives, protocol, tiers, solver.
+
+
+    challenge.md                technical specification of the “challenge”,
+				ie. primitives, protocol, tiers, solving.
 
 
 2 - Quick overview

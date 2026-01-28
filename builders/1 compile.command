@@ -96,7 +96,7 @@ sed -e 's/\r$//' -e 's/[[:space:]]*#.*$//' -e 's/^[[:space:]]*//' -e 's/[[:space
 COUNT="$(grep -c . "${SELECTED_LIST}" || true)"
 
 {
-  echo "Textfile triggered by a successful 'makefile' run. "
+  echo "(successful 'makefile' run.) "
   echo 
   echo " . . . . . . . . .....*************************.                           "
   echo ". . . . . ... ..... ....***************************.                       "
@@ -112,25 +112,19 @@ COUNT="$(grep -c . "${SELECTED_LIST}" || true)"
   echo ". . . . .. ... ..... .....******************          *****                "
   echo " . . . . .. ... ..... .....***************              ***                "
   echo ". . . . . .. ... ..... .....************                 *                 "
-  echo " . . . ..d8888b.. ..... .....*********                                     "
-  echo ". . . .d88P..Y88b. ..... ......******                                      "
-  echo " . . . Y88b... ... ...... .......**                                        "
-  echo "        Y888b.   888  888  .d8888b .d8888b .d88b.  .d8888b  .d8888b        "
-  echo "          ”Y88b. 888  888 d88P”   d88P”   d8P  Y8b 88K      88K            "
-  echo "            ”888 888  888 888     888     88888888 ”Y8888b. ”Y8888b.       "
-  echo "      Y88b  d88P Y88b 888 Y88b.   Y88b.   Y8b.          X88      X88  d8b  "
-  echo "       ”Y8888P”   ”Y88888  ”Y8888P ”Y8888P ”Y8888   88888P'  88888P'  Y8P  "
-  echo
+  echo " . . . . . .. ... ..... .....*********                                     "
+  echo ". . . . . . .. ... ..... ......******                                      "
+  echo " . . . . . . ... ........ .......**                                        "
+  echo "---------------------------------------------------------------------------"
   echo 
-echo "                    Date (UTC): $UTC_NOW,"
-  echo 
-  if [ -n "${COQC}" ]; then
-    echo "                   Rocq version: $(${COQC} --version 2>/dev/null | head -n 1)"
-    echo "                   Method: isolated shadow, scratch folder"
+  echo "                    Date (UTC): $UTC_NOW,"
+  echo ""  if [ -n "${COQC}" ]; then
+  echo "                   Rocq version: $(${COQC} --version 2>/dev/null | head -n 1)"
+  echo "                   Method: isolated shadow, scratch folder"
   fi
   echo
   echo "---------------------------------------------------------------------------"
-  echo "AXIOM REPORT"
+  echo "Discipline analysis"
   echo "---------------------------------------------------------------------------"
   echo
   if [ -n "${ALL_AXIOM_FILES}" ]; then
@@ -150,10 +144,9 @@ echo "                    Date (UTC): $UTC_NOW,"
   echo 
   echo "=== END ==="
   echo
-  echo "------------------------"
-  echo
+  echo "---------------------------------------------------------------------------"
   echo "Hash(es) (Short SHA-256) of ${COUNT} Files:"
-  echo
+  echo "---------------------------------------------------------------------------"
   while IFS= read -r f; do
     [ -z "${f}" ] && continue
     if [ -f "${ROOT}/${f}" ]; then

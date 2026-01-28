@@ -1,37 +1,41 @@
-                                                
-                          ┏━┓┏━┓┏━┓┏━┓┏━╸┏━╸┏━┓┏━┓┏━╸     
-                          ┣━┛┣┳┛┃ ┃┃ ┃┣╸ ┃  ┣━┫┗━┓┣╸      
-                          ╹  ╹┗╸┗━┛┗━┛╹  ┗━╸╹ ╹┗━┛┗━╸     
-                                                
-    Our project re-frames the stalemate of foundations within a cryptographic
-    semantic layer. 
+(* README *)
+                                                                                
+                          ┏━┓┏━┓┏━┓┏━┓┏━╸┏━╸┏━┓┏━┓┏━╸                           
+                          ┣━┛┣┳┛┃ ┃┃ ┃┣╸ ┃  ┣━┫┗━┓┣╸                            
+                          ╹  ╹┗╸┗━┛┗━┛╹  ┗━╸╹ ╹┗━┛┗━╸                           
+                          ---------------------------                           
 
-    The central move is to treat mathematical truth not as abstract existence,
-    but as “verifiable access”: the certificate supersedes the axiom as the
-    fundamental unit of authority.
+             “Every hard problem is also a cryptographic resource.”             
 
-    In this repository, every “global principle” is either:
+    We reframe the stalemate of foundations inside a cryptographic semantic
+    layer, and treat mathematical truth not as abstract existence, but as
+    “verifiable access:” the certificate supersedes the axiom as the fundamental
+    unit of authority.
 
-        (i) Device layer (effective): computed inside a minimal constructive
-            core;
+    In this repository, every global principle is classified as either:
 
-       (ii) Reflexica core (uniformity): imported explicitly as a named
-            certificate whose consequences are fully tracked.
+      (i)  Effective device layer: computed inside a minimal constructive core;
 
-    This is the intended “axiom → certificate” shift, devices are computable
-    and testable, certificates are the auditable single points of failure.
+      (ii) Reflexica core (uniformity): imported explicitly as a named
+           certificates whose consequences are fully tracked.
+
+    This is the intended “axiom → certificate” shift: devices are computable and
+    testable; certificates are auditable single points of failure.
+
+ 	The project is inspired by Martin-Löf type theory (MLTT) and
+    realizability interpretations (BHK).
 
 
 1 - Files
     -----
-    
+
     ./theories/                 The primary source directory. Contains all
-                                `.v` (Rocq) files organized by semantic units
+                                `.v` (Rocq) files organized by semantic units.
 
     ./builders/                 Automation tools. Contains `.command` scripts
-                                (tested for macOS) that streamline the process
+                                (tested on macOS) that streamline the process.
 
-    ./builders/_CoqProject      Identifies the logical path
+    ./builders/_CoqProject      Identifies the logical path.
 
     ./appendix/                 Accompanying technical artifacts and further
                                 exposition.
@@ -40,16 +44,21 @@
 2 - Contribution
     ------------
 
-    Thesis. Hardness is not an intrinsic property of problems; it is a structural
-    defect in the finite observer’s ability to losslessly encode “Domains with
-    Totality” (cf. Kleene) We call the resulting displacement phenomenon “Reflexica”.
+    Thesis. “Hardness” is not an intrinsic property of problems; it is a
+    structural defect in any finite observer’s ability to losslessly encode
+    “Domains with Totality” (cf. Kleene). We call the resulting displacement
+    phenomenon “Reflexica”.
 
-    We do not claim to “solve hard problems,” we formalize an “ontology-free
-    invariance”: several major obstructions become corollary manifestations of a
-    single failure mode, once “truth” is interpreted as verifiable access.
+                   “We do not solve hard problems by proof;
+                   we solve them by invariance.”
 
-    This repository formalizes the thesis that several major
-    “Hard Problems” are corollary manifestations of the Reflexica failure:
+    We do not claim to “solve hard problems.” Here, we formalize a method of
+    problem reduction on grounds of “ontology-free λ-invariance.” Several major
+    obstructions might be corollary manifestations of a single failure mode,
+    once “truth” is interpreted as “verifiable access”.
+
+    This repository formalizes the thesis that several major “Hard Problems”
+    are corollary manifestations of the Reflexica failure:
 
         (i) The failure of a verifier to simulate a solver without aliasing
             temporal resources;
@@ -60,16 +69,16 @@
       (iii) The failure of a system to decide set emptiness due to encoding
             ambiguities;
 
-       (iv) The failure of a system to externalize it's own renormalization;
+       (iv) The failure of a system to externalize its own renormalization;
 
         (v) ... etc.
 
     Our first canonical limit is synchronized to additive pairing:
 
-    For a chosen effective pairing device, the “global inversion law”
-    (uniform recovery for all inputs) is not derivable “for free” inside the
-    pure constructive nucleus; it must be isolated as an explicit certificate,
-    until proven otherwise.
+    For a chosen effective pairing device, the “global inversion law” (uniform
+    recovery for all inputs) is not derivable inside the pure constructive
+    nucleus; it must be isolated as an explicit certificate, until proven
+    otherwise.
 
     This is not the claim that pairing functions do not exist. It is a claim
     about where uniform correctness lives under this semantics: in the
@@ -79,18 +88,19 @@
 3 - Falsifiability
     --------------
 
-    This framework posits its own falsifiability. We establish a formal
-    reduction between “Logical Undecidability” and “Cryptographic Security”,
-    asserting that every “Reflexica certificate” corresponds to a secure
+    We posit a falsifiability criterion. Since we establish a formal reduction
+    between logical undecidability and “entropy”, we allow ourselves
+    an epistemic wager, in that we assert that every “Reflexica certificate”
+    (as a distilled obstruction) corresponds to, or admits, a secure
     cryptographic primitive.
 
     This gives us a strict falsifiability criterion:
 
-    ”If a cryptographic scheme derived from this framework is broken,
+    “If a cryptographic scheme derived from this framework is broken,
     but the underlying problem is not solved, then the framework is false.”
 
-    In other words, we move foundational debate away from ontology and
-    into verifiable adversarial evidence.
+    In other words, we move foundational debate away from ontology into
+    verifiable adversarial evidence.
 
     To enforce these results without relying on classical assumptions, we
     implement the following constructive tools:
@@ -105,7 +115,7 @@
             See: https://milanrosko.com/carryless.html
 
       (iii) “The Mirror Lemma:” A mechanism for weak local forcing derived
-            strictly from reflection principles, permitting "As-If" reasoning
+            strictly from reflection principles, permitting “as-if” reasoning
             within the constructive core.
 
        (iv) “The Adversarial Barrier:” Impossibility results for certified
@@ -115,7 +125,7 @@
 
 4 - Organization
     ------------
-    
+
     Constructions are explicit, terminating, and fully computable. Proofs
     do not rely on hidden axioms or untracked gaps.
 
@@ -133,9 +143,9 @@
     `R` = Realization
     `T` = Stable Façades / Theorems
     `A` = Certificate Layers
-  
 
-4 - Literature
+
+5 - Literature
     ----------
 
     For exposition, consult:
@@ -193,14 +203,18 @@
         url          = {http://doi.org/10.48550/arXiv.2511.14665}
       }
       @misc{rosko2025primeconjectures,
-        title        = {{On the Realizability of Prime Conjectures in Heyting Arithmetic}},
+        title        = {{On the Realizability of Prime Conjectures in Heyting
+                        Arithmetic}},
         author       = {Rosko, M.},
         year         = 2025,
         url          = {http://doi.org/10.48550/arXiv.2511.07774}
       }
 
-5 - Contact
+
+6 - Contact
     -------
+
+    We are currently seeking collaborators.
 
     www.milanrosko.com
 
