@@ -102,6 +102,15 @@
     In other words, we move foundational debate away from ontology into
     verifiable adversarial evidence.
 
+    A first preliminary “challange” can be found in:
+
+    ./builders/
+
+
+4 - Staring Tools
+    -------------
+
+
     To enforce these results without relying on classical assumptions, we
     implement the following constructive tools:
 
@@ -123,7 +132,7 @@
             prove Reflexica) effectively solve the Halting Problem.
 
 
-4 - Organization
+5 - Organization
     ------------
 
     Constructions are explicit, terminating, and fully computable. Proofs
@@ -145,7 +154,7 @@
     `A` = Certificate Layers
 
 
-5 - Literature
+6 - Literature
     ----------
 
     For exposition, consult:
@@ -158,12 +167,14 @@
         address      = {Cambridge},
         edition      = {2d ed.}
       }
+
       @book{kleene52,
         title        = {{Introduction to Metamathematics}},
         author       = {Kleene, S. C.},
         year         = 1952,
         publisher    = {North-Holland}
       }
+
       @book{troelstra88,
         title        = {{Constructivism in Mathematics, Vol. 2}},
         author       = {Troelstra, A. S. and van Dalen, D.},
@@ -172,6 +183,7 @@
         series       = {Studies in Logic and the Foundations of Mathematics},
         volume       = 123
       }
+
       @book{boolos07,
         title        = {{Computability and Logic}},
         author       = {Boolos, G. and Burgess, J. P. and Jeffrey, R. C.},
@@ -189,6 +201,7 @@
         note         = {arXiv preprint},
         url          = {http://doi.org/10.48550/arXiv.2510.08934}
       }
+
       @misc{rosko2025adversarial,
         title        = {{Adversarial Barrier in Uniform Class Separation}},
         author       = {Rosko, M.},
@@ -196,6 +209,7 @@
         note         = {arXiv preprint},
         url          = {http://doi.org/10.48550/arXiv.2512.08149}
       }
+
       @misc{rosko2025solverparadox,
         title        = {{The Solver's Paradox in Formal Problem Spaces}},
         author       = {Rosko, M.},
