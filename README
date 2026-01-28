@@ -1,89 +1,144 @@
-(* README *)
+                                                
+                          ┏━┓┏━┓┏━┓┏━┓┏━╸┏━╸┏━┓┏━┓┏━╸     
+                          ┣━┛┣┳┛┃ ┃┃ ┃┣╸ ┃  ┣━┫┗━┓┣╸      
+                          ╹  ╹┗╸┗━┛┗━┛╹  ┗━╸╹ ╹┗━┛┗━╸     
+                                                
+    Our project re-frames the stalemate of foundations within a cryptographic
+    semantic layer. 
 
-                ┏━┓┏━┓┏━┓┏━┓┏━╸┏━╸┏━┓┏━┓┏━╸        
-                ┣━┛┣┳┛┃ ┃┃ ┃┣╸ ┃  ┣━┫┗━┓┣╸          
-                ╹  ╹┗╸┗━┛┗━┛╹  ┗━╸╹ ╹┗━┛┗━╸    
-                                                    
+    The central move is to treat mathematical truth not as abstract existence,
+    but as “verifiable access”: the certificate supersedes the axiom as the
+    fundamental unit of authority.
+
+    In this repository, every “global principle” is either:
+
+        (i) Device layer (effective): computed inside a minimal constructive
+            core;
+
+       (ii) Reflexica core (uniformity): imported explicitly as a named
+            certificate whose consequences are fully tracked.
+
+    This is the intended “axiom → certificate” shift, devices are computable
+    and testable, certificates are the auditable single points of failure.
+
+
 1 - Files
     -----
-
-    A collection of self-contained formal developments:
     
     ./theories/                 The primary source directory. Contains all
-                                `.v` (Rocq) files organized by semantic units.
+                                `.v` (Rocq) files organized by semantic units
 
     ./builders/                 Automation tools. Contains `.command` scripts
-                                (tested for macOS) that streamline the process.
+                                (tested for macOS) that streamline the process
 
-    ./builders/_CoqProject      Identifies the logical path.
+    ./builders/_CoqProject      Identifies the logical path
 
-    ./appendix/                 Accompanying technical artifacts.
+    ./appendix/                 Accompanying technical artifacts and further
+                                exposition.
 
-    ./.../proofextraction/      Sub-folder containing the OCaml
-                                realizations of the “Fermat Machine.”
 
-2 - Contributions
-    -------------
+2 - Contribution
+    ------------
 
-    Our repository implements several (hopefully) novel constructive tools
-    to enforce hardness and barrier results without classical assumptions:
+    Thesis. Hardness is not an intrinsic property of problems; it is a structural
+    defect in the finite observer’s ability to losslessly encode “Domains with
+    Totality” (cf. Kleene) We call the resulting displacement phenomenon “Reflexica”.
 
-       (i) Carryless Pairing: A structural arithmetic coding scheme that
-           avoids prime factorization and multiplicative number theory,
-           relying instead on Fibonacci growth and Zeckendorf supports.
-           See https://milanrosko.com/carryless.html.
+    We do not claim to “solve hard problems,” we formalize an “ontology-free
+    invariance”: several major obstructions become corollary manifestations of a
+    single failure mode, once “truth” is interpreted as verifiable access.
 
-      (ii) BHK_R Semantics: A lambda-definable local logic that serves as
-           the organizing principle for the entire repository.
+    This repository formalizes the thesis that several major
+    “Hard Problems” are corollary manifestations of the Reflexica failure:
 
-     (iii) The Mirror Lemma: A mechanism for weak local forcing derived
-           strictly from reflection principles, allowing "As-If" reasoning
-           within the constructive core.
+        (i) The failure of a verifier to simulate a solver without aliasing
+            temporal resources;
 
-      (iv) The Adversarial and Audit Barrier: Impossibility results for
-           certified separators and self-auditing systems, showing that
-           certain decision procedures cannot coexist.
+       (ii) The failure of a rational tape to address irrational geometry
+            without aliasing coordinates;
 
-    A central methodological choice follows from a constraint: we avoid the
-    classical prime-power coding route. Prime-based arithmetization is
-    elegant, but it silently imports a heavy (and expressive) multiplicative 
-    substrate: unique factorization, divisibility, superpolynomial growth,
-    etc. In a minimal constructive kernel this is not “free”; it forces a
-    large arithmetic tower just to represent finitary syntax.
+      (iii) The failure of a system to decide set emptiness due to encoding
+            ambiguities;
 
-    Instead, `BHK_R` shifts coding to an additive substrate based on Fibonacci
-    growth and Zeckendorf-style supports. Concretely, the repository implements
-    a “Carryless Pairing in which codes are assembled as additive
-    sums of Fibonacci values indexed in disjoint “bands.”
+       (iv) The failure of a system to externalize it's own renormalization;
 
-3 - Organization
+        (v) ... etc.
+
+    Our first canonical limit is synchronized to additive pairing:
+
+    For a chosen effective pairing device, the “global inversion law”
+    (uniform recovery for all inputs) is not derivable “for free” inside the
+    pure constructive nucleus; it must be isolated as an explicit certificate,
+    until proven otherwise.
+
+    This is not the claim that pairing functions do not exist. It is a claim
+    about where uniform correctness lives under this semantics: in the
+    certificate layer.
+
+
+3 - Falsifiability
+    --------------
+
+    This framework posits its own falsifiability. We establish a formal
+    reduction between “Logical Undecidability” and “Cryptographic Security”,
+    asserting that every “Reflexica certificate” corresponds to a secure
+    cryptographic primitive.
+
+    This gives us a strict falsifiability criterion:
+
+    ”If a cryptographic scheme derived from this framework is broken,
+    but the underlying problem is not solved, then the framework is false.”
+
+    In other words, we move foundational debate away from ontology and
+    into verifiable adversarial evidence.
+
+    To enforce these results without relying on classical assumptions, we
+    implement the following constructive tools:
+
+        (i) “BHK_R Semantics:” A lambda-definable local logic that serves as
+            the organizing principle for the entire repository, enforcing
+            constructive validity.
+
+       (ii) “Carryless Pairing:” A structural arithmetic coding scheme that
+            avoids prime factorization and multiplicative number theory,
+            relying instead on Fibonacci growth and Zeckendorf supports.
+            See: https://milanrosko.com/carryless.html
+
+      (iii) “The Mirror Lemma:” A mechanism for weak local forcing derived
+            strictly from reflection principles, permitting "As-If" reasoning
+            within the constructive core.
+
+       (iv) “The Adversarial Barrier:” Impossibility results for certified
+            separators, demonstrating that self-auditing systems (those that
+            prove Reflexica) effectively solve the Halting Problem.
+
+
+4 - Organization
     ------------
     
-    Constructions are explicit, terminating, and compute what they claim to
-    compute. Proofs do not rely on hidden axioms or untracked gaps.
+    Constructions are explicit, terminating, and fully computable. Proofs
+    do not rely on hidden axioms or untracked gaps.
 
     Files are named so the filename alone indicates phase, role, and semantic
-    unit. We use a phase prefix to keep filenames valid Rocq identifiers
-    (module names cannot begin with a digit) while preserving lexical
-    ordering by phase:
+    unit. We use a phase prefix to maintain lexical ordering:
 
         [ P<Phase>_<Role>__Unit.v ]
 
     `P<Phase>` is a nonnegative phase index (`P0`, `P1`, `P2`, …).
-    `<Role>`   indicates the file’s function within the phase.
-    `Unit`     is a stable identifier for the component/topic.
+    `<Role>` indicates the file’s function within the phase.
+    `Unit` is a stable identifier for the component/topic.
 
     Roles:
-    `S` = Proof semantics
+    `S` = Proof Semantics
     `R` = Realization
-    `T` = Stable façades, Theorems
-    `A` = Certificate layers
+    `T` = Stable Façades / Theorems
+    `A` = Certificate Layers
+  
 
 4 - Literature
     ----------
 
-
-    For expostion, consult:
+    For exposition, consult:
 
       @book{russell27,
         title        = {{Principia Mathematica}},
@@ -91,32 +146,27 @@
         year         = 1927,
         publisher    = {Cambridge University Press},
         address      = {Cambridge},
-        isbn         = {0521626064},
         edition      = {2d ed.}
       }
       @book{kleene52,
         title        = {{Introduction to Metamathematics}},
         author       = {Kleene, S. C.},
         year         = 1952,
-        publisher    = {North-Holland},
-        isbn         = 9780444896230
+        publisher    = {North-Holland}
       }
       @book{troelstra88,
         title        = {{Constructivism in Mathematics, Vol. 2}},
         author       = {Troelstra, A. S. and van Dalen, D.},
         year         = 1988,
-        publisher    = {North-Holland (an imprint of Elsevier Science)},
-        address      = {Amsterdam, New York},
+        publisher    = {North-Holland},
         series       = {Studies in Logic and the Foundations of Mathematics},
-        volume       = 123,
-        isbn         = {0444703586}
+        volume       = 123
       }
       @book{boolos07,
         title        = {{Computability and Logic}},
         author       = {Boolos, G. and Burgess, J. P. and Jeffrey, R. C.},
         year         = 2007,
         publisher    = {Cambridge University Press},
-        isbn         = 9780521877520,
         edition      = {5th}
       }
 
@@ -134,13 +184,13 @@
         author       = {Rosko, M.},
         year         = 2025,
         note         = {arXiv preprint},
-        url          = {http://doi.org/10.48550/arXiv.2512.08149},
+        url          = {http://doi.org/10.48550/arXiv.2512.08149}
       }
       @misc{rosko2025solverparadox,
         title        = {{The Solver's Paradox in Formal Problem Spaces}},
         author       = {Rosko, M.},
         year         = 2025,
-        url          = {http://doi.org/10.48550/arXiv.2511.14665},
+        url          = {http://doi.org/10.48550/arXiv.2511.14665}
       }
       @misc{rosko2025primeconjectures,
         title        = {{On the Realizability of Prime Conjectures in Heyting Arithmetic}},
@@ -153,3 +203,5 @@
     -------
 
     www.milanrosko.com
+
+    hi "at" milanrosko "dot" com

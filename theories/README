@@ -1,162 +1,230 @@
+Mechanically checkable results
 
- . . . . . . . . .....*************************.                           
-. . . . . ... ..... ....***************************.                       
- . . . . . . . . . . .. ... .. ... .....**************                     
-. . . . . .. .. .. .....********************************                   
- . . . . ... ..... ......********************************                  
-. . . . . . . . . . .. .... .... ....*********************                 
- . . . . . . ... .... .....**********************   *******                
-. . . . . . . .  .... ....*********************************.               
- . . . . .. .. ..... ....***********************************               
-. . . ... ... ..... .....***********************************               
- . . . .. ... ..... .....***********************************               
-. . . . .. ... ..... .....******************          *****                
- . . . . .. ... ..... .....***************              ***                
-. . . . . .. ... ..... .....************                 *                 
- . . . . . .. ... ..... .....*********                                     
-. . . . . . .. ... ..... ......******                                      
- . . . .  ... ... ...... .......**                                        
+Each item below points to a single stable `.v` surface. “Certificate-dependent” means it
+imports a Reflexica certificate layer (explicit uniformity/inversion), rather than being
+derivable in the pure constructive nucleus.
 
-   # root 
-   -docroot proofcase 
-    
-   # Logical Path Mappings 
-    
-   -Q theories/M001__BHK_R_Arithmetic/C000__BHK_R BHK_R.C000 
-   -Q theories/M001__BHK_R_Arithmetic/C001__Carryless_Pairing Carryless_Pairing.C001 
-   -Q theories/M001__BHK_R_Arithmetic/C002__Additive_Hilbert_System ATP.C002 
-   -Q theories/M002__Carryless_Proof_Theory/C003__Carryless_Diagonal_Lemma Diagonallemma.C003 
-   -Q theories/M002__Carryless_Proof_Theory/C004__Mirror_Lemma ATP.C004__Mirror_Lemma 
-   -Q theories/M003__Delian_Barrier/C005__Adversarial_Barrier Adversarial_Barrier.C005 
-   -Q theories/M003__Delian_Barrier/C006__Audit_Barrier Audit_Barrier.C006 
-   -Q theories/M003__Delian_Barrier/C007__Resistance_Law Resistance_Law.C007 
-   -Q theories/M003__Delian_Barrier/C008__Reflexica_Normalization Reflexica_Normalization.C008 
-   -Q theories/M004__Conservation_of_Hardness/C009__SAT_Reduction SAT.C009 
-   -Q theories/M004__Conservation_of_Hardness/C010__Solvability_Thesis Solvability_Thesis.C010 
-   -Q theories/M004__Conservation_of_Hardness/C011__Quintic_Hardness Quintic_Hardness.C011 
-   -Q theories/M004__Conservation_of_Hardness/C012__Cubic_Incompleteness Cubic_Incompleteness.C012 
-   -Q theories/M004__Conservation_of_Hardness/C013__Logical_Cryptography Logical_Crypt.C012 
-   -Q theories/M004__Conservation_of_Hardness/C014__Fermat_Machine Fermat_Machine.C014 
-    
-   # File List 
-    
-   # C000 
-    
-   theories/M001__BHK_R_Arithmetic/C000__BHK_R/P0__BHK.v 
-   theories/M001__BHK_R_Arithmetic/C000__BHK_R/P0__Reflexica.v 
-    
-   # C001 
-    
-   theories/M001__BHK_R_Arithmetic/C001__Carryless_Pairing/P1_S__Substrate.v 
-   theories/M001__BHK_R_Arithmetic/C001__Carryless_Pairing/P2_R__Carryless.v 
-   theories/M001__BHK_R_Arithmetic/C001__Carryless_Pairing/P2_S__Carryless.v 
-   theories/M001__BHK_R_Arithmetic/C001__Carryless_Pairing/P3_R__Injectivity.v 
-   theories/M001__BHK_R_Arithmetic/C001__Carryless_Pairing/P3_S__Injectivity.v 
-   theories/M001__BHK_R_Arithmetic/C001__Carryless_Pairing/P4_R__Pairing.v 
-   theories/M001__BHK_R_Arithmetic/C001__Carryless_Pairing/P4_S__Pairing.v 
-   theories/M001__BHK_R_Arithmetic/C001__Carryless_Pairing/P5_T__Carryless_Pairing.v 
-   theories/M001__BHK_R_Arithmetic/C001__Carryless_Pairing/P5_T__Effectivity.v 
-   theories/M001__BHK_R_Arithmetic/C001__Carryless_Pairing/P6_A__Reflexica_Certificate.v 
-    
-   # C002 
-    
-   theories/M001__BHK_R_Arithmetic/C002__Additive_Hilbert_System/P1_S__Kernel_Spec.v 
-   theories/M001__BHK_R_Arithmetic/C002__Additive_Hilbert_System/P2_R__Hilbert_Kernel.v 
-   theories/M001__BHK_R_Arithmetic/C002__Additive_Hilbert_System/P2_S__Provability_Interface.v 
-   theories/M001__BHK_R_Arithmetic/C002__Additive_Hilbert_System/P3_R__Additive_Laws.v 
-   theories/M001__BHK_R_Arithmetic/C002__Additive_Hilbert_System/P3_S__Additive_Theory.v 
-   theories/M001__BHK_R_Arithmetic/C002__Additive_Hilbert_System/P4_R__Coding_Nucleus.v 
-   theories/M001__BHK_R_Arithmetic/C002__Additive_Hilbert_System/P4_R__Coding_Carryless.v 
-   theories/M001__BHK_R_Arithmetic/C002__Additive_Hilbert_System/P4_S__Coding.v 
-   theories/M001__BHK_R_Arithmetic/C002__Additive_Hilbert_System/P5_T__Proof_Theory.v 
-   theories/M001__BHK_R_Arithmetic/C002__Additive_Hilbert_System/P6_P__Effectivity.v 
-    
-   # C003 
-    
-   theories/M002__Carryless_Proof_Theory/C003__Carryless_Diagonal_Lemma/P1_S__Syntax.v 
-   theories/M002__Carryless_Proof_Theory/C003__Carryless_Diagonal_Lemma/P2_R__Backend.v 
-   theories/M002__Carryless_Proof_Theory/C003__Carryless_Diagonal_Lemma/P2_R__Compiler.v 
-   theories/M002__Carryless_Proof_Theory/C003__Carryless_Diagonal_Lemma/P2_T__Diagonal.v 
-   theories/M002__Carryless_Proof_Theory/C003__Carryless_Diagonal_Lemma/P3_T__Flip_Instance.v 
-    
-   # C004 
-    
-   theories/M002__Carryless_Proof_Theory/C004__Mirror_Lemma/P1_S__Context.v 
-   theories/M002__Carryless_Proof_Theory/C004__Mirror_Lemma/P2_R__Mirror_Core.v 
-   theories/M002__Carryless_Proof_Theory/C004__Mirror_Lemma/P2_R__Mirror_Transport.v 
-   theories/M002__Carryless_Proof_Theory/C004__Mirror_Lemma/P2_S__Mirror_Lemma.v 
-   theories/M002__Carryless_Proof_Theory/C004__Mirror_Lemma/P3_S__Recursive_Mirror_Lemma.v 
-   theories/M002__Carryless_Proof_Theory/C004__Mirror_Lemma/P3_T__Weakforcing.v 
-    
-   # C005 
-    
-   theories/M003__Delian_Barrier/C005__Adversarial_Barrier/P1_S__Barrier_Definition.v 
-   theories/M003__Delian_Barrier/C005__Adversarial_Barrier/P2_R__Barrier_Proof.v 
-   theories/M003__Delian_Barrier/C005__Adversarial_Barrier/P2_T__Barrier.v 
-   theories/M003__Delian_Barrier/C005__Adversarial_Barrier/P2_T__Mirror_Instance.v 
-    
-   # C006 
-    
-   theories/M003__Delian_Barrier/C006__Audit_Barrier/P1_S__Context.v 
-   theories/M003__Delian_Barrier/C006__Audit_Barrier/P2_R__Audit_Logic.v 
-   theories/M003__Delian_Barrier/C006__Audit_Barrier/P2_T__Audit_Barrier.v 
-   theories/M003__Delian_Barrier/C006__Audit_Barrier/P2_T__Audit_Adapter.v 
-   theories/M003__Delian_Barrier/C006__Audit_Barrier/P3_A__Provability_Logic.v 
-    
-   # C007 
-    
-   theories/M003__Delian_Barrier/C007__Resistance_Law/P1_S__Separation.v 
-   theories/M003__Delian_Barrier/C007__Resistance_Law/P2_R__Resistance_Proof.v 
-   theories/M003__Delian_Barrier/C007__Resistance_Law/P2_T__Resistance.v 
-    
-   # C008 
-    
-   theories/M003__Delian_Barrier/C008__Reflexica_Normalization/P1_S__Core_Goal.v 
-   theories/M003__Delian_Barrier/C008__Reflexica_Normalization/P2_R__The_Bridge.v 
-   theories/M003__Delian_Barrier/C008__Reflexica_Normalization/P2_T__Reflexica_Derived.v 
-   theories/M003__Delian_Barrier/C008__Reflexica_Normalization/P2_T__Public_Surface.v 
-    
-   # C009 
-    
-   theories/M004__Conservation_of_Hardness/C009__SAT_Reduction/P1_S__CNF_Syntax.v 
-   theories/M004__Conservation_of_Hardness/C009__SAT_Reduction/P2_R__Reduction.v 
-   theories/M004__Conservation_of_Hardness/C009__SAT_Reduction/P3_T__Structural_Integrity.v 
-   theories/M004__Conservation_of_Hardness/C009__SAT_Reduction/P1_S__Syntax.v 
-   theories/M004__Conservation_of_Hardness/C009__SAT_Reduction/P2_R__Substitution.v 
-   theories/M004__Conservation_of_Hardness/C009__SAT_Reduction/P3_R__Kernel.v 
-   theories/M004__Conservation_of_Hardness/C009__SAT_Reduction/P3_T__FOL.v 
-   theories/M004__Conservation_of_Hardness/C009__SAT_Reduction/P4_T__Kernel_Sanity.v 
-   theories/M004__Conservation_of_Hardness/C009__SAT_Reduction/P4_T__Mechanism.v 
-    
-   # C010 
-    
-   theories/M004__Conservation_of_Hardness/C010__Solvability_Thesis/P1_S__Thesis_Definition.v 
-   theories/M004__Conservation_of_Hardness/C010__Solvability_Thesis/P2_R__Triviality_Proof.v 
-   theories/M004__Conservation_of_Hardness/C010__Solvability_Thesis/P2_T__Normalization.v 
-    
-   # C011 
-    
-   theories/M004__Conservation_of_Hardness/C011__Quintic_Hardness/P1_S__Diophantine_Basis.v 
-   theories/M004__Conservation_of_Hardness/C011__Quintic_Hardness/P2_T__The_Quintic_Barrier.v 
-    
-   # C012 
-    
-   theories/M004__Conservation_of_Hardness/C012__Cubic_Incompleteness/P1_S__Structure.v 
-   theories/M004__Conservation_of_Hardness/C012__Cubic_Incompleteness/P2_S__Barrier.v 
-   theories/M004__Conservation_of_Hardness/C012__Cubic_Incompleteness/P3_T__Theorem.v 
-    
-   # C013 
-    
-   theories/M004__Conservation_of_Hardness/C013__Logical_Cryptography/P1_T__Trapdoor_Theorem.v 
-    
-   # C014 
-   theories/M004__Conservation_of_Hardness/C014__Fermat_Machine/P1_S__Fermat_Interface.v 
-   theories/M004__Conservation_of_Hardness/C014__Fermat_Machine/P1_R__Peano_Arithmetic.v 
-   theories/M004__Conservation_of_Hardness/C014__Fermat_Machine/P1_T__Arithmetic_Surface.v 
-   theories/M004__Conservation_of_Hardness/C014__Fermat_Machine/P2_R__Z_Isomorphism.v 
-   theories/M004__Conservation_of_Hardness/C014__Fermat_Machine/P2_S__Bridge_Contract.v 
-   theories/M004__Conservation_of_Hardness/C014__Fermat_Machine/P3_P__Sumbool_Extraction.v 
-   theories/M004__Conservation_of_Hardness/C014__Fermat_Machine/P3_R__Fermat_Solver.v 
-   theories/M004__Conservation_of_Hardness/C014__Fermat_Machine/P3_S__Machine_Definition.v 
-   theories/M004__Conservation_of_Hardness/C014__Fermat_Machine/P4_S__Barrier_Interface.v 
-   theories/M004__Conservation_of_Hardness/C014__Fermat_Machine/P4_T__The_Fermat_Barrier.v 
+1)    Kolmogorov Equivalence (mechanical semantics bridge).
+      A semantic equivalence principle connecting the project’s mechanical semantics
+      framing to the rest of the stack.
+
+      Files:
+            `M001__Mechanical_Semantics/C016__Kolmogorov_Equivalence/P1_T__Kolgmorov_Equivalence.v`
+
+2)    BHK_R nucleus (constructive validity surface).
+      The local constructive core used throughout: the definition of validity,
+      realizability interfaces, and the “no hidden axioms” discipline.
+
+      Files:
+            `M002__BHK_R_Arithmetic/C000__BHK_R/P0__BHK.v`
+      Layer:
+            nucleus (no certificates)
+
+3)    Reflexica interface (the certificate boundary).
+      The explicit type/interface by which global uniformity principles enter the
+      development as auditable certificate objects.
+
+      Files:
+            `M002__BHK_R_Arithmetic/C000__BHK_R/P0__Reflexica.v`
+      Layer:
+            interface (no certificate assumed; defines how certificates are named/used)
+
+4)    Carryless pairing (device + effectivity).  
+      A fully constructive, additive pairing/coding scheme with effectivity theorems,
+      separated from any global inversion principle.
+
+      Files:
+            `M002__BHK_R_Arithmetic/C001__Carryless_Pairing/P5_T__Carryless_Pairing.v`
+            `M002__BHK_R_Arithmetic/C001__Carryless_Pairing/P5_T__Effectivity.v`  
+      Layer:
+            device (no certificates)
+
+5)    Reflexica Certificate for carryless pairing (first canonical obstruction).  
+      Packages the global inversion/uniform recovery law as an explicit certificate layer
+      and derives the strong consequences only from that single import point.
+
+      Files:
+            `M002__BHK_R_Arithmetic/C001__Carryless_Pairing/P6_A__Reflexica_Certificate.v`  
+      Layer:
+            certificate-dependent (by design)
+
+6)    Additive Hilbert kernel + proof theory surface (checker-first provability).  
+      A proof-theoretic interface and stable façade for provability/coding in the additive
+      setting, with effectivity plumbing.
+
+      Files:
+            `M002__BHK_R_Arithmetic/C002__Additive_Hilbert_System/P5_T__Proof_Theory.v`
+            `M002__BHK_R_Arithmetic/C002__Additive_Hilbert_System/P6_P__Effectivity.v`  
+      Layer:
+            device/theory (track imports)
+
+7)    Carryless Diagonal Lemma (compiler-backed diagonalization).  
+      A diagonal/flip instance built from an explicit syntax + compiler/backend pipeline,
+      staying inside the project’s constructive accounting.
+
+      Files:
+            `M003__Carryless_Proof_Theory/C003__Carryless_Diagonal_Lemma/P2_T__Diagonal.v`
+            `M003__Carryless_Proof_Theory/C003__Carryless_Diagonal_Lemma/P3_T__Flip_Instance.v`
+
+8)    Mirror Lemma / weak forcing (“As-If” reasoning).  
+      A weak local forcing surface derived from reflection principles (the “As-If” mechanism),
+      packaged as a stable theorem façade.
+
+      Files:
+            `M003__Carryless_Proof_Theory/C004__Mirror_Lemma/P3_T__Weakforcing.v`
+
+9)    Delian Barrier (certified separator impossibilities).  
+      The adversarial and audit barrier theorems: impossibility results for certified separators
+      and self-auditing systems under the repository’s notion of certification.
+
+      Files:
+            `M004__Delian_Barrier/C005__Adversarial_Barrier/P2_T__Barrier.v`
+            `M004__Delian_Barrier/C006__Audit_Barrier/P2_T__Audit_Barrier.v`
+
+10)   Conservation of Hardness / normalization bridge (public consequences).  
+      A normalization/bridge layer exposing stable consequences and derived theorems once
+      certificates are localized and tracked.
+
+      Files:
+            `M005__Conservation_of_Hardness/C008__Reflexica_Normalization/P2_T__Public_Surface.v`
+            `M005__Conservation_of_Hardness/C008__Reflexica_Normalization/P2_T__Reflexica_Derived.v`
+
+11)   Trapdoor Lemma + Vault thesis (logical cryptography surface).  
+      The explicit cryptographic-facing lemma/thesis layer tying Reflexica certificates to trapdoor-style primitives.  
+      
+      Files:
+            `M006__Logical_Cryptography/C013__Trapdoor_Lemma/P1_T__Trapdoor_Lemma.v`
+            `M006__Logical_Cryptography/C017__Reflexica_Vaults/P1_T__Trapdoor_Thesis.v`
+
+                  .
+                  ├── M001__Mechanical_Semantics
+                  │           │
+                  │           └── C016__Kolmogorov_Equivalence
+                  │               └── P1_T__Kolgmorov_Equivalence.v
+                  │
+                  ├── M002__BHK_R_Arithmetic
+                  │           │
+                  │           ├── C000__BHK_R
+                  │           │           ├── P0__BHK.v
+                  │           │           └── P0__Reflexica.v
+                  │           ├── C001__Carryless_Pairing
+                  │           │           ├── P1_S__Substrate.v
+                  │           │           ├── P2_R__Carryless.v
+                  │           │           ├── P2_S__Carryless.v
+                  │           │           ├── P3_R__Injectivity.v
+                  │           │           ├── P3_S__Injectivity.v
+                  │           │           ├── P4_R__Pairing.v
+                  │           │           ├── P4_S__Pairing.v
+                  │           │           ├── P5_T__Carryless_Pairing.v
+                  │           │           ├── P5_T__Effectivity.v
+                  │           │           └── P6_A__Reflexica_Certificate.v
+                  │           └── C002__Additive_Hilbert_System
+                  │               ├── P1_S__Kernel_Spec.v
+                  │               ├── P2_R__Hilbert_Kernel.v
+                  │               ├── P2_S__Provability_Interface.v
+                  │               ├── P3_R__Additive_Laws.v
+                  │               ├── P3_S__Additive_Theory.v
+                  │               ├── P4_R__Coding_Carryless.v
+                  │               ├── P4_R__Coding_Nucleus.v
+                  │               ├── P4_S__Coding.v
+                  │               ├── P5_T__Proof_Theory.v
+                  │               └── P6_P__Effectivity.v
+                  │
+                  ├── M003__Carryless_Proof_Theory
+                  │           │
+                  │           ├── C003__Carryless_Diagonal_Lemma
+                  │           │           ├── P1_S__Syntax.v
+                  │           │           ├── P2_R__Backend.v
+                  │           │           ├── P2_R__Compiler.v
+                  │           │           ├── P2_T__Diagonal.v
+                  │           │           └── P3_T__Flip_Instance.v
+                  │           └── C004__Mirror_Lemma
+                  │               ├── P1_S__Context.v
+                  │               ├── P2_R__Mirror_Core.v
+                  │               ├── P2_R__Mirror_Transport.v
+                  │               ├── P2_S__Mirror_Lemma.v
+                  │               ├── P3_S__Recursive_Mirror_Lemma.v
+                  │               └── P3_T__Weakforcing.v
+                  │
+                  ├── M004__Delian_Barrier
+                  │           │
+                  │           ├── C005__Adversarial_Barrier
+                  │           │           ├── P1_S__Barrier_Definition.v
+                  │           │           ├── P2_R__Barrier_Proof.v
+                  │           │           ├── P2_T__Barrier.v
+                  │           │           ├── P2_T__Mirror_Instance.v
+                  │           │           └── README.md
+                  │           └── C006__Audit_Barrier
+                  │               ├── P1_S__Context.v
+                  │               ├── P2_R__Audit_Logic.v
+                  │               ├── P2_T__Audit_Adapter.v
+                  │               ├── P2_T__Audit_Barrier.v
+                  │               ├── P3_A__Provability_Logic.v
+                  │               └── README.md
+                  │
+                  ├── M005__Conservation_of_Hardness
+                  │           │
+                  │           ├── C007__Resistance_Law
+                  │           │           ├── P1_S__Separation.v
+                  │           │           ├── P2_R__Resistance_Proof.v
+                  │           │           ├── P2_T__Resistance.v
+                  │           │           └── README.md
+                  │           ├── C008__Reflexica_Normalization
+                  │           │           ├── P1_S__Core_Goal.v
+                  │           │           ├── P2_R__The_Bridge.v
+                  │           │           ├── P2_T__Public_Surface.v
+                  │           │           ├── P2_T__Reflexica_Derived.v
+                  │           │           └── README.md
+                  │           ├── C009__SAT_Reduction
+                  │           │           ├── P1_S__CNF_Syntax.v
+                  │           │           ├── P1_S__Syntax.v
+                  │           │           ├── P2_R__Reduction.v
+                  │           │           ├── P2_R__Substitution.v
+                  │           │           ├── P3_R__Kernel.v
+                  │           │           ├── P3_T__FOL.v
+                  │           │           ├── P3_T__Structural_Integrity.v
+                  │           │           ├── P4_T__Kernel_Sanity.v
+                  │           │           └── P4_T__Mechanism.v
+                  │           ├── C010__Solvability_Thesis
+                  │           │           ├── P1_S__Thesis_Definition.v
+                  │           │           ├── P2_R__Triviality_Proof.v
+                  │           │           └── P2_T__Normalization.v
+                  │           ├── C011__Quintic_Hardness
+                  │           │           ├── P1_S__Diophantine_Basis.v
+                  │           │           └── P2_T__The_Quintic_Barrier.v
+                  │           ├── C012__Cubic_Incompleteness
+                  │           │           ├── P1_S__Structure.v
+                  │           │           ├── P2_S__Barrier.v
+                  │           │           └── P3_T__Theorem.v
+                  │           ├── C014__Fermat_Machine
+                  │           │           ├── Extraction
+                  │           │           │           ├── Extract_FLT.glob
+                  │           │           │           ├── Extract_FLT.v
+                  │           │           │           ├── Extract_FLT.vo
+                  │           │           │           ├── Extract_FLT.vok
+                  │           │           │           └── Extract_FLT.vos
+                  │           │           ├── P1_R__Peano_Arithmetic.v
+                  │           │           ├── P1_S__Fermat_Interface.v
+                  │           │           ├── P1_T__Arithmetic_Surface.v
+                  │           │           ├── P2_R__Z_Isomorphism.v
+                  │           │           ├── P2_S__Bridge_Contract.v
+                  │           │           ├── P3_P__Sumbool_Extraction.v
+                  │           │           ├── P3_R__Fermat_Solver.v
+                  │           │           ├── P3_S__Machine_Definition.v
+                  │           │           ├── P4_S__Barrier_Interface.v
+                  │           │           ├── P4_T__The_Fermat_Barrier.v
+                  │           │           └── P5_T__Implication.v
+                  │           └── C015__Wythoff_Barrier
+                  │               ├── P1_S__Fermat_Interface.v
+                  │               ├── P2_T__The_Wythoff_Barrier.v
+                  │               ├── P3_T__Semantic_Horizon.v
+                  │               └── P4_T__Reflexica_Bridge.v
+                  │
+                  ├── M006__Logical_Cryptography
+                  │           │
+                  │           ├── C013__Trapdoor_Lemma
+                  │           │           └── P1_T__Trapdoor_Lemma.v
+                  │           └── C017__Reflexica_Vaults
+                  │               └── P1_T__Trapdoor_Thesis.v
+                  └── README
+

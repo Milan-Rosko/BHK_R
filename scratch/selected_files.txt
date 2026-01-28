@@ -1,75 +1,35 @@
-
-
-# C000
 theories/M002__BHK_R_Arithmetic/C000__BHK_R/P0__BHK.v
 theories/M002__BHK_R_Arithmetic/C000__BHK_R/P0__Reflexica.v
 theories/M002__BHK_R_Arithmetic/C001__Carryless_Pairing/P5_T__Carryless_Pairing.v
 theories/M002__BHK_R_Arithmetic/C001__Carryless_Pairing/P6_A__Reflexica_Certificate.v
-
-# C002
 theories/M002__BHK_R_Arithmetic/C002__Additive_Hilbert_System/P5_T__Proof_Theory.v
 theories/M002__BHK_R_Arithmetic/C002__Additive_Hilbert_System/P6_P__Effectivity.v
-
-# --- M003: Carryless Proof Theory ---
-
-# C003
 theories/M003__Carryless_Proof_Theory/C003__Carryless_Diagonal_Lemma/P2_T__Diagonal.v
 theories/M003__Carryless_Proof_Theory/C003__Carryless_Diagonal_Lemma/P3_T__Flip_Instance.v
-
-# C004
 theories/M003__Carryless_Proof_Theory/C004__Mirror_Lemma/P3_T__Weakforcing.v
-
-# --- M004: Delian Barrier ---
-
-# C005
 theories/M004__Delian_Barrier/C005__Adversarial_Barrier/P2_T__Barrier.v
 theories/M004__Delian_Barrier/C005__Adversarial_Barrier/P2_T__Mirror_Instance.v
-
-# C006
 theories/M004__Delian_Barrier/C006__Audit_Barrier/P2_T__Audit_Adapter.v
 theories/M004__Delian_Barrier/C006__Audit_Barrier/P2_T__Audit_Barrier.v
 theories/M004__Delian_Barrier/C006__Audit_Barrier/P3_A__Provability_Logic.v
-
-# --- M005: Conservation of Hardness ---
-
 theories/M005__Conservation_of_Hardness/C007__Resistance_Law/P2_T__Resistance.v
-
-# C008
 theories/M005__Conservation_of_Hardness/C008__Reflexica_Normalization/P2_T__Public_Surface.v
 theories/M005__Conservation_of_Hardness/C008__Reflexica_Normalization/P2_T__Reflexica_Derived.v
-
-# C009
 theories/M005__Conservation_of_Hardness/C009__SAT_Reduction/P3_T__FOL.v
 theories/M005__Conservation_of_Hardness/C009__SAT_Reduction/P3_T__Structural_Integrity.v
 theories/M005__Conservation_of_Hardness/C009__SAT_Reduction/P4_T__Kernel_Sanity.v
 theories/M005__Conservation_of_Hardness/C009__SAT_Reduction/P4_T__Mechanism.v
-
-# C010
 theories/M005__Conservation_of_Hardness/C010__Solvability_Thesis/P2_T__Normalization.v
-
-# C011
 theories/M005__Conservation_of_Hardness/C011__Quintic_Hardness/P1_S__Diophantine_Basis.v
 theories/M005__Conservation_of_Hardness/C011__Quintic_Hardness/P2_T__The_Quintic_Barrier.v
-
-# C012
 theories/M005__Conservation_of_Hardness/C012__Cubic_Incompleteness/P1_S__Structure.v
 theories/M005__Conservation_of_Hardness/C012__Cubic_Incompleteness/P2_S__Barrier.v
 theories/M005__Conservation_of_Hardness/C012__Cubic_Incompleteness/P3_T__Theorem.v
-
-# C014
 theories/M005__Conservation_of_Hardness/C014__Fermat_Machine/P4_T__The_Fermat_Barrier.v
 theories/M005__Conservation_of_Hardness/C014__Fermat_Machine/P5_T__Implication.v
-
-# C015
 theories/M005__Conservation_of_Hardness/C015__Wythoff_Barrier/P1_S__Fermat_Interface.v
 theories/M005__Conservation_of_Hardness/C015__Wythoff_Barrier/P2_T__The_Wythoff_Barrier.v
 theories/M005__Conservation_of_Hardness/C015__Wythoff_Barrier/P3_T__Semantic_Horizon.v
 theories/M005__Conservation_of_Hardness/C015__Wythoff_Barrier/P4_T__Reflexica_Bridge.v
-
-# --- M006: Logical Cryptography ---
-
-# C013
 theories/M006__Logical_Cryptography/C013__Trapdoor_Lemma/P1_T__Trapdoor_Lemma.v
-
-# C017
 theories/M006__Logical_Cryptography/C017__Reflexica_Vaults/P1_T__Trapdoor_Thesis.v
