@@ -1,15 +1,13 @@
 (* README *)
                                                                                 
-   ┏━┓┏━┓┏━┓┏━┓┏━╸┏━╸┏━┓┏━┓┏━╸                           
-   ┣━┛┣┳┛┃ ┃┃ ┃┣╸ ┃  ┣━┫┗━┓┣╸                            
-   ╹  ╹┗╸┗━┛┗━┛╹  ┗━╸╹ ╹┗━┛┗━╸                           
+         ┏━┓┏━┓┏━┓┏━┓┏━╸┏━╸┏━┓┏━┓┏━╸                           
+         ┣━┛┣┳┛┃ ┃┃ ┃┣╸ ┃  ┣━┫┗━┓┣╸                            
+         ╹  ╹┗╸┗━┛┗━┛╹  ┗━╸╹ ╹┗━┛┗━╸                           
 
-    We reframe the stalemate of foundations inside a cryptographic semantic
-    layer, and treat mathematical truth not as abstract existence, but as
-    “verifiable access:” the certificate supersedes the axiom as the fundamental
-    unit of authority.
+1 - Repo
+    ----
 
-    In this repository, every global principle is classified as either:
+    In this Rocq repository, every global principle is classified as either:
 
       (i)  Effective device layer: computed inside a minimal constructive core;
 
@@ -19,11 +17,11 @@
     This is the intended “axiom → certificate” shift: devices are computable and
     testable; certificates are auditable single points of failure.
 
- 	The project is inspired by Martin-Löf type theory (MLTT) and
-    realizability interpretations (BHK).
+   	The project is inspired by Martin-Löf type theory (MLTT) and
+    realizability interpretations (BHK) with a Kolmogorow-twist.
 
 
-1 - Files
+2 - Files
     -----
 
     ./theories/                 The primary source directory. Contains all
@@ -38,7 +36,7 @@
                                 exposition.
 
 
-2 - Contribution
+3 - Contribution
     ------------
 
     Thesis. “Hardness” is not an intrinsic property of problems; it is a
@@ -81,7 +79,7 @@
     certificate layer.
 
 
-3 - Falsifiability
+4 - Falsifiability
     --------------
 
     We posit a falsifiability criterion. Since we establish a formal reduction
@@ -103,7 +101,7 @@
     ./builders/
 
 
-4 - Staring Tools
+5 - Staring Tools
     -------------
 
 
@@ -128,7 +126,7 @@
             prove Reflexica) effectively solve the Halting Problem.
 
 
-5 - Organization
+6 - Organization
     ------------
 
     Constructions are explicit, terminating, and fully computable. Proofs
@@ -150,7 +148,7 @@
     `A` = Certificate Layers
 
 
-6 - Literature
+7 - Literature
     ----------
 
     For exposition, consult:
@@ -221,7 +219,7 @@
       }
 
 
-7 - Contact
+8 - Contact
     -------
 
     We are currently seeking collaborators.
