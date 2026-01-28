@@ -58,8 +58,6 @@ Module Kolmogorov_Equivalence.
     [FIXED]: Changed 'Hypothesis' to 'Axiom' for Module compatibility.
   *)
 
-  Axiom P_growth : forall x y, P x y >= x.
-
   (*
     The “radical” unpairing, our machine tries to Unpair what it Reads.
   *)
@@ -79,10 +77,11 @@ Module Kolmogorov_Equivalence.
     Proof by contradiction.
   *)
 
-  Theorem The_Entropic_Crash : ~ Reflexica_Holds.
+  Theorem The_Entropic_Crash :
+    (forall x y, P x y >= x) -> ~ Reflexica_Holds.
   Proof.
     unfold Reflexica_Holds.
-    intro H_Reflexica.
+    intros H_growth H_Reflexica.
     
     (*
       Step 1. We construct two distinct high-entropy inputs.
@@ -103,7 +102,7 @@ Module Kolmogorov_Equivalence.
     assert (H_High1: P x1 y > Capacity).
     { apply PeanoNat.Nat.lt_le_trans with (m := x1).
       - unfold x1. apply PeanoNat.Nat.lt_succ_diag_r.
-      - apply P_growth. }
+      - apply H_growth. }
       
     assert (H_High2: P x2 y > Capacity).
     { apply PeanoNat.Nat.lt_le_trans with (m := x2).
@@ -111,7 +110,7 @@ Module Kolmogorov_Equivalence.
         apply PeanoNat.Nat.lt_trans with (m := S Capacity).
         + apply PeanoNat.Nat.lt_succ_diag_r.
         + apply PeanoNat.Nat.lt_succ_diag_r.
-      - apply P_growth. }
+      - apply H_growth. }
 
     (* Analyze the Machine Read (The Collapse).
       Since P x1 y > Capacity, Machine_Read (P x1 y) = 0.

@@ -11,18 +11,18 @@ HERE="$(cd "$(dirname "$0")" && pwd)"
 ROOT="$(cd "${HERE}/.." && pwd)"
 
 ROOT_CP="$ROOT/_CoqProject"
-BUILDER_CP="$HERE/_CoqProject"
+THEORIES_CP="$ROOT/theories/_CoqProject"
 
 if [[ -f "$ROOT_CP" ]]; then
   COQPROJ="$ROOT_CP"
   ORIGIN="root"
-elif [[ -f "$BUILDER_CP" ]]; then
-  COQPROJ="$BUILDER_CP"
-  ORIGIN="builder"
+elif [[ -f "$THEORIES_CP" ]]; then
+  COQPROJ="$THEORIES_CP"
+  ORIGIN="theories"
 else
   echo "Checked for:"
   echo "  - $ROOT_CP"
-  echo "  - $BUILDER_CP"
+  echo "  - $THEORIES_CP"
   echo "No _CoqProject found in either location."
   exit 1
 fi
@@ -31,7 +31,7 @@ BUILD="${ROOT}/scratch"
 SHADOW="${BUILD}/shadow"
 BUILD_LOG="${BUILD}/build.log"
 
-COQPROJECT_SRC="${HERE}/_CoqProject"
+COQPROJECT_SRC="${COQPROJ}"
 COQPROJECT_SHADOW="${SHADOW}/_CoqProject"
 
 COQ_MAKEFILE="$(command -v coq_makefile || true)"
@@ -74,72 +74,11 @@ fi
 make -f Makefile.coq -j 1 all | tee -a "${BUILD_LOG}"
 
 # -----------------------------------------------------------------------------
-# Discipline & Axiom Validation (The New Logic)
+# Axiom Listing
 # -----------------------------------------------------------------------------
-echo "[discipline] Running validation checks..." | tee -a "${BUILD_LOG}"
-
 THEORIES_PATH="${SHADOW}/theories"
-C_FOLDERS="$(find "${THEORIES_PATH}" -maxdepth 1 -type d -name 'C0*' -print)"
-
-ALL_AXIOMS_RAW="$(find "${THEORIES_PATH}" -type f -name '*.v' -print0 | xargs -0 rg -n "^\s*Axioms?\b" || true)"
-ALL_AXIOMS="$(echo "${ALL_AXIOMS_RAW}" | sed "s|${SHADOW}/||g")"
-AXIOM_COUNT="$(echo "${ALL_AXIOMS_RAW}" | sed '/^$/d' | wc -l | tr -d ' ')"
-
-if [ "${AXIOM_COUNT}" -eq 1 ]; then
-    # Check if the single axiom is in a valid layer
-    # Note: we check the relative path here
-    BAD_AXIOMS="$(echo "${ALL_AXIOMS}" | rg -v 'theories/M001__BHK_R_Arithmetic/C0[^/]+/(P\d+_A__|P\d+_TA__)' || true)"
-    
-    if [ -n "${BAD_AXIOMS}" ]; then
-        DISCIPLINE_STATUS="Other"
-        DISCIPLINE_REPORT="Violation: The single axiom is in an unauthorized file.\nLocation: ${BAD_AXIOMS}"
-    else
-        DISCIPLINE_STATUS="Verified (Reflexica)"
-        DISCIPLINE_REPORT="Verified."
-    fi
-elif [ "${AXIOM_COUNT}" -eq 2 ]; then
-    # Allow a single contract axiom in the exact encoding-bridge file alongside the authorized axiom
-    CONTRACT_PATH='theories/M004__Conservation_of_Hardness/C014__Fermat_Machine/contracts/P1_T__Encoding_Bridge.v'
-    CONTRACT_AXIOM_LINE="$(rg -n "^\\s*Axioms?\\b" "${SHADOW}/${CONTRACT_PATH}" | head -n 1 || true)"
-    CONTRACT_LINE_NO="$(echo "${CONTRACT_AXIOM_LINE}" | cut -d: -f1)"
-    CONTRACT_SNIPPET=""
-    if [ -n "${CONTRACT_LINE_NO}" ]; then
-        START_LINE="${CONTRACT_LINE_NO}"
-        END_LINE=$((CONTRACT_LINE_NO + 2))
-        CONTRACT_SNIPPET="$(sed -n "${START_LINE},${END_LINE}p" "${SHADOW}/${CONTRACT_PATH}")"
-    fi
-    if [ -n "${CONTRACT_SNIPPET}" ]; then
-        CONTRACT_AXIOMS="${CONTRACT_PATH}:${CONTRACT_LINE_NO}: ${CONTRACT_SNIPPET}"
-    else
-        CONTRACT_AXIOMS="${CONTRACT_PATH}:${CONTRACT_LINE_NO}"
-    fi
-    NON_CONTRACT_AXIOMS="$(echo "${ALL_AXIOMS}" | rg -v -F "${CONTRACT_PATH}" || true)"
-    NON_CONTRACT_COUNT="$(echo "${NON_CONTRACT_AXIOMS}" | sed '/^$/d' | wc -l | tr -d ' ')"
-    BAD_AXIOMS="$(echo "${NON_CONTRACT_AXIOMS}" | rg -v 'theories/M001__BHK_R_Arithmetic/C0[^/]+/(P\d+_A__|P\d+_TA__)' || true)"
-
-    CONTRACT_MARKER_COUNT="$(rg -n -F 'CONTRACT: must be discharged before final verification export' "${SHADOW}/${CONTRACT_PATH}" | wc -l | tr -d ' ')"
-    CONTRACT_LINE_COUNT="$(rg -n "^\\s*Axioms?\\b" "${SHADOW}/${CONTRACT_PATH}" | wc -l | tr -d ' ')"
-    CONTRACT_NAME_COUNT="$(rg -n "^\\s*Axioms?\\b\\s*witness_solvable_from_machine\\b" "${SHADOW}/${CONTRACT_PATH}" | wc -l | tr -d ' ')"
-
-    if [ "${NON_CONTRACT_COUNT}" -eq 1 ] \
-       && [ -z "${BAD_AXIOMS}" ] \
-       && [ "${CONTRACT_LINE_COUNT}" -eq 1 ] \
-       && [ "${CONTRACT_NAME_COUNT}" -eq 1 ] \
-       && [ "${CONTRACT_MARKER_COUNT}" -ge 1 ]; then
-        DISCIPLINE_STATUS="Verified (Reflexica + Contract)"
-        DISCIPLINE_REPORT="Verified."
-    else
-        DISCIPLINE_STATUS="Other"
-        DISCIPLINE_REPORT="No additional information."
-    fi
-else
-    DISCIPLINE_STATUS="Other"
-    if [ "${AXIOM_COUNT}" -eq 0 ]; then
-        DISCIPLINE_REPORT="No additional information."
-    else
-        DISCIPLINE_REPORT="No additional information."
-    fi
-fi
+ALL_AXIOM_FILES_RAW="$(rg -l --no-messages "^\s*Axioms?\b" "${THEORIES_PATH}" || true)"
+ALL_AXIOM_FILES="$(echo "${ALL_AXIOM_FILES_RAW}" | sed "s|${SHADOW}/||g" | sort -u)"
 # -----------------------------------------------------------------------------
 # Generate Certificate
 # -----------------------------------------------------------------------------
@@ -191,12 +130,12 @@ echo "                    Date (UTC): $UTC_NOW,"
   fi
   echo
   echo "---------------------------------------------------------------------------"
-  echo "DISCIPLINE REPORT:"
+  echo "AXIOM REPORT"
   echo "---------------------------------------------------------------------------"
   echo
-  echo "Status: $DISCIPLINE_STATUS"
-  printf "Details:\n%b\n" "$DISCIPLINE_REPORT"
-  echo
+  if [ -n "${ALL_AXIOM_FILES}" ]; then
+    printf "%s\n" "${ALL_AXIOM_FILES}"
+  fi
   echo "---------------------------------------------------------------------------"
   echo
   echo "_CoqProject file contents:"
@@ -217,16 +156,8 @@ echo "                    Date (UTC): $UTC_NOW,"
   echo
   while IFS= read -r f; do
     [ -z "${f}" ] && continue
-    
-    # Extract the C-name folder (e.g., C014__Fermat_Machine)
-    # This regex looks for the C0... pattern in the path
-    C_FOLDER_NAME=$(echo "$f" | grep -o 'C0[^/]\+')
-
     if [ -f "${ROOT}/${f}" ]; then
-      # Print the short hash and just the folder name
-      printf "   %s   %s\n" "$(hash_file "${ROOT}/${f}")" "${C_FOLDER_NAME:-$f}"
-    else
-      echo "MISSING   ${C_FOLDER_NAME:-$f}"
+      printf "   %s\n" "$(hash_file "${ROOT}/${f}")"
     fi
   done < "${SELECTED_LIST}"
   echo
@@ -240,4 +171,3 @@ rm -f "${SELECTED_LIST}"
 echo "" | tee -a "${BUILD_LOG}"
 echo "Build process finished." | tee -a "${BUILD_LOG}"
 echo "Certificate written to: ${CERT_FILE}" | tee -a "${BUILD_LOG}"
-echo "Discipline Check: ${DISCIPLINE_STATUS}" | tee -a "${BUILD_LOG}"

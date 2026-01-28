@@ -1,0 +1,23 @@
+
+		Wythoff/Carryless Vault Challenge (Preliminary)
+
+1 - Files
+    -----
+    
+    challange.md                 challenge.md: full challenge description,
+				primitives, protocol, tiers, solver.
+
+
+2 - Quick overview
+    --------------
+
+    This folder contains the public challenge spec for the Carryless/Wythoff vault.
+
+        (i)  challenge.md and includes the threat model, horizon idea, and
+ 	     the exact keygen/forward/invert sketches plus test tiers and
+   	     a reference solver
+
+       (ii)  the exact keygen/forward/invert sketches plus test tiers and a
+	     reference solver.
+
+      (iii)  Intended as a self-contained appendix artifact, not a build input.

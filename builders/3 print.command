@@ -32,7 +32,7 @@ OUT="$ROOT/builders/v.context.txt"
 LISTING="$BUILD/selected_files.txt"
 
 ROOT_CP="$ROOT/_CoqProject"
-BUILDER_CP="$HERE/_CoqProject"
+THEORIES_CP="$ROOT/theories/_CoqProject"
 # We define the directory to search for _Textslect files
 TEXTSLECT_DIR="$ROOT/builders"
 
@@ -115,11 +115,11 @@ else
   if [[ -f "$ROOT_CP" ]]; then
     SRC_NAME="_CoqProject (root)"
     SRC_PATH="$ROOT_CP"
-  elif [[ -f "$BUILDER_CP" ]]; then
-    SRC_NAME="_CoqProject (builder)"
-    SRC_PATH="$BUILDER_CP"
+  elif [[ -f "$THEORIES_CP" ]]; then
+    SRC_NAME="_CoqProject (theories)"
+    SRC_PATH="$THEORIES_CP"
   else
-    die "No _CoqProject found at $ROOT_CP or $BUILDER_CP"
+    die "No _CoqProject found at $ROOT_CP or $THEORIES_CP"
   fi
 fi
 

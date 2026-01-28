@@ -9,6 +9,17 @@ set -e
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
+ROOT_CP="$PROJECT_ROOT/_CoqProject"
+THEORIES_CP="$PROJECT_ROOT/theories/_CoqProject"
+
+if [ -f "$ROOT_CP" ]; then
+    COQPROJ="$ROOT_CP"
+elif [ -f "$THEORIES_CP" ]; then
+    COQPROJ="$THEORIES_CP"
+else
+    echo "[extract] No _CoqProject found at $ROOT_CP or $THEORIES_CP."
+    exit 1
+fi
 
 cd "$PROJECT_ROOT"
 

@@ -15,8 +15,7 @@ Module Radical_Machine_Def.
 
   (** 1. The Ideal Constant (The Target) *)
   (* This exists in the "Mind of God" (Coq's Prop), but not on the Tape. *)
-  Parameter Phi : R.
-  Axiom Phi_Def : Phi = ((1 + sqrt 5) / 2)%R.
+  Definition Phi : R := ((1 + sqrt 5) / 2)%R.
 
   (** 2. The Machine Definition *)
   (* The machine is defined by its "Gas" (Precision).
