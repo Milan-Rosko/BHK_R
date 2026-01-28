@@ -33,7 +33,7 @@
 
 # M006: Logical Cryptography
 -Q theories/M006__Logical_Cryptography/C013__Trapdoor_Lemma C013
--Q theories/M006__Logical_Cryptography/C017__Reflexica_Vaults C017
+-Q theories/M006__Logical_Cryptography/C017__Carryless_Vault C017
 
 # ----------------------------------------------------------------------------
 # FILE LIST
@@ -167,6 +167,7 @@ theories/M005__Conservation_of_Hardness/C015__Wythoff_Barrier/P4_T__Reflexica_Br
 
 # C013
 theories/M006__Logical_Cryptography/C013__Trapdoor_Lemma/P1_T__Trapdoor_Lemma.v
+theories/M006__Logical_Cryptography/C013__Trapdoor_Lemma/P1_T__Trapdoor_Thesis.v
 
 # C017
-theories/M006__Logical_Cryptography/C017__Reflexica_Vaults/P1_T__Trapdoor_Thesis.v
+theories/M006__Logical_Cryptography/C017__Carryless_Vault/P1_T__Carryless_Vault.v

@@ -8,7 +8,6 @@ From C012 Require Import P2_S__Barrier.
 Set Implicit Arguments.
 Unset Strict Implicit.
 
-
 (*************************************************************************)
 (*                                                                       *)
 (*  C013 / Phase 1 (T) : The Conservation of Hardness (Trapdoor)         *)
