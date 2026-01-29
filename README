@@ -7,20 +7,22 @@
 1 - Repo
     ----
 
-    The project is inspired by Martin-Löf type theory (MLTT) and
-    realizability interpretations (BHK).
+    Our project is inspired by “Martin-Löf type theory” (MLTT) and
+    “realizability interpretation” (BHK).
 
-
-    In this Rocq repository, every global principle is classified as either:
+    Every global principle is classified as either:
 
       (i)  Effective device layer: computed inside a minimal constructive core;
 
-      (ii) Reflexica core (uniformity): imported explicitly as a named
+      (ii) “Reflexica certificate” (uniformity): imported explicitly as a named
            certificates whose consequences are fully tracked.
 
-    It is this intended “axiom →  cryptographic certificate” shift that is our
-    main contribution. Devices are computable and testable; certificates are
-    auditable single points of failure.
+    It is this intended “entropy → axiom/semantics →  cryptographic certificate”
+    shift that is our main contribution. Devices are computable and testable;
+    certificates are auditable single points of failure.
+
+    Axioms become thus falsifiable.
+
 
 2 - Files
     -----
@@ -33,9 +35,8 @@
 
     ./builders/_CoqProject      Identifies the logical path.
 
-    ./appendix/                 Accompanying technical artifacts and further
-                                exposition.
-
+    ./appendix/                 Accompanying technical artifacts and
+				cryptographic challanges.
 
 3 - Contribution
     ------------
@@ -83,11 +84,12 @@
 4 - Falsifiability
     --------------
 
-    We posit a falsifiability criterion. Since we establish a formal reduction
-    between logical undecidability and “entropy”, we allow ourselves
-    an epistemic wager, in that we assert that every “Reflexica certificate”
-    (as a distilled obstruction) corresponds to, or admits, a secure
-    cryptographic primitive.
+    We posit a falsifiability criterion.
+
+    Since we establish a formal reduction between logical undecidability
+    and “entropy”, we allow ourselves an epistemic wager, in that we assert
+    that every “Reflexica certificate” (as a distilled obstruction) corresponds
+    to, or admits, a secure cryptographic primitive.
 
     This gives us a strict falsifiability criterion:
 
@@ -97,32 +99,32 @@
     In other words, we move foundational debate away from ontology into
     verifiable adversarial evidence.
 
-    A first preliminary “challange” can be found in:
+    A first preliminary “chellange” can be found in:
 
-    ./builders/
+    ./appendix/challange/carryless_vault
 
 
 5 - Staring Tools
     -------------
 
 
-    To enforce these results without relying on classical assumptions, we
-    implement the following constructive tools:
+    To enforce these results without relying on classical assumptions, while
+    we implement the following constructive tools:
 
-        (i) “BHK_R Semantics:” A lambda-definable local logic that serves as
+        (i) “BHK_R Semantics.” A lambda-definable local logic that serves as
             the organizing principle for the entire repository, enforcing
             constructive validity.
 
-       (ii) “Carryless Pairing:” A structural arithmetic coding scheme that
+       (ii) “Carryless Pairing.” A structural arithmetic coding scheme that
             avoids prime factorization and multiplicative number theory,
             relying instead on Fibonacci growth and Zeckendorf supports.
             See: https://milanrosko.com/carryless.html
 
-      (iii) “The Mirror Lemma:” A mechanism for weak local forcing derived
+      (iii) “The Mirror Lemma.” A mechanism for weak local forcing derived
             strictly from reflection principles, permitting “as-if” reasoning
             within the constructive core.
 
-       (iv) “The Adversarial Barrier:” Impossibility results for certified
+       (iv) “The Adversarial Barrier.” Impossibility results for certified
             separators, demonstrating that self-auditing systems (those that
             prove Reflexica) effectively solve the Halting Problem.
 
