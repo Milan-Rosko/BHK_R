@@ -1,11 +1,15 @@
 (* README *)
 
-┏┓  ╻ ╻ ╻┏    ┏━┓
-┣┻┓ ┣━┫ ┣┻┓   ┣┳┛
-┗━┛ ╹ ╹ ╹ ╹╺━╸╹┗╸
+    ┏┓  ╻ ╻ ╻┏    ┏━┓
+    ┣┻┓ ┣━┫ ┣┻┓   ┣┳┛
+    ┗━┛ ╹ ╹ ╹ ╹╺━╸╹┗╸
 
 1 - Repo
     ----
+
+    The project is inspired by Martin-Löf type theory (MLTT) and
+    realizability interpretations (BHK).
+
 
     In this Rocq repository, every global principle is classified as either:
 
@@ -14,12 +18,9 @@
       (ii) Reflexica core (uniformity): imported explicitly as a named
            certificates whose consequences are fully tracked.
 
-    This is the intended “axiom → certificate” shift: devices are computable and
-    testable; certificates are auditable single points of failure.
-
-   	The project is inspired by Martin-Löf type theory (MLTT) and
-    realizability interpretations (BHK) with a Kolmogorow-twist.
-
+    It is this intended “axiom →  cryptographic certificate” shift that is our
+    main contribution. Devices are computable and testable; certificates are
+    auditable single points of failure.
 
 2 - Files
     -----
