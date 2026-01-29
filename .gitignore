@@ -61,3 +61,7 @@ Desktop.ini
 *.swo
 *.tmp
 *.bak
+
+# --- Scratch (keep folder, ignore contents) ---
+scratch/*
+!scratch/.gitkeep

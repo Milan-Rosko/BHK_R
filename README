@@ -35,8 +35,8 @@
 
     ./builders/_CoqProject      Identifies the logical path.
 
-    ./appendix/                 Accompanying technical artifacts and
-				cryptographic challanges.
+    ./appendix/                 Accompanying technical artifacts, e.g., 
+                                Ocaml files, cryptographic challanges.
 
 3 - Contribution
     ------------
