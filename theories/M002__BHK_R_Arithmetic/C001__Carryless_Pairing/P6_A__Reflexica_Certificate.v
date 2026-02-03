@@ -24,15 +24,16 @@ Unset Strict Implicit.
 (*   Downstream theories (C002+) that require correctness properties     *)
 (*   (e.g. injectivity) must import this file.                           *)
 (*                                                                       *)
-(*    (i) Opt-in: This file is separated from P5_T.                      *)
-(*        One can use the device computationally without accepting this. *)
+(*     (i)    Opt-in: This file is separated from P5_T. One can use the  *)
+(*            device computationally without accepting                   *)
+(*            this.                                                      *)
 (*                                                                       *)
-(*   (ii) Minimal: We assume only the single record instance. All other  *)
-(*        theorems (injectivity, projections) are derived constructively *)
-(*        from that single point of failure.                             *)
+(*     (i)    Minimal: We assume only the single record instance. All    *)
+(*            other theorems (injectivity, projections) are derived      *)
+(*            constructively from that single point of failure.          *)
 (*                                                                       *)
-(*  (iii) We provide a method of switching between models of             *)
-(*        “arithmetic truth”.                                            *)
+(*     (i)    We provide a method of switching between models of         *)
+(*            “arithmetic truth”.                                        *)
 (*                                                                       *)
 (*************************************************************************)
 
@@ -49,15 +50,12 @@ Module Carryless_Reflexica.
   Module Sig <: P0__Reflexica.Reflexica.PAIRING_SIG.
     Definition nat : Type := N.nat.
 
-  (*************************************************************************)
-  (*                                                                       *)
-  (*  Remark. Reflexica expects a return type of (nat * nat), so we map    *)
-  (*  the device's custom product type to the standard tuple.              *)
-  (*                                                                       *)
-  (*  We adapt the Carryless Pairing device to match the input signature   *)
-  (*  expected by the generic Reflexica functor.                           *)
-  (*                                                                       *)
-  (*************************************************************************)
+  (*
+    Remark. Reflexica expects a return type of (nat * nat), so we map the
+    device's custom product type to the standard tuple. We adapt the Carryless
+    Pairing device to match the input signature expected by the generic
+    Reflexica functor.
+  *)
 
     Definition pair : nat -> nat -> nat := P.pair CarrylessPair.
     Definition unpair (z : nat) : nat * nat :=
@@ -183,9 +181,10 @@ Module Carryless_Reflexica.
          This demonstrates: the "heavy" approach doesn't eliminate axioms,
          it just scatters them across admitted lemmas and type conversions.
 
-         Either way, by isolating the "source of truth" behind a single boolean switch (USE_BHK_R),
-         we establish that the rest of the system (the "Additive Theory" and "Mirror Lemma")
-         is completely agnostic to how arithmetic truth is established, provided it is established.
+         Either way, by isolating the "source of truth" behind a single boolean
+         switch (USE_BHK_R), we establish that the rest of the system (the
+         “Additive Theory“ and “Mirror Lemma”) is completely agnostic to how
+         arithmetic truth is established, provided it is established.
       *)
 
       admit.

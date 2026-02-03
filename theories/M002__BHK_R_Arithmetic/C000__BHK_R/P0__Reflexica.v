@@ -15,10 +15,10 @@
 (*     It must remain parametric and must not depend on any later             *)
 (*     constructions. The guiding discipline is:                              *)
 (*                                                                            *)
-(*        (i) Effective computation lives in R/S layers of                    *)
+(*     (i)    Effective computation lives in R/S layers of                    *)
 (*            later constructions (definitions compute).                      *)
 (*                                                                            *)
-(*       (ii) Uniform correctness laws that are not derivable                 *)
+(*     (ii)   Uniform correctness laws that are not derivable                 *)
 (*            in pure core are isolated behind a single named                 *)
 (*            inhabitant, never assumed implicitly.                           *)
 (*                                                                            *)
@@ -41,6 +41,7 @@
 (*                                                                            *)
 (******************************************************************************)
 
+    
 From Coq Require Import Init.Logic.
 From C000 Require Export P0__BHK.
 
@@ -49,35 +50,33 @@ Unset Strict Implicit.
 
   Module Reflexica.
 
-  (*************************************************************************)
-  (*                                                                       *)
-  (*  Remark: we use the canonical product nat * nat, which has            *)
-  (*  definitional projections fst and snd, avoiding additional            *)
-  (*  “pair type” bureaucracy in the base layer.                           *)
-  (*                                                                       *)
-  (*************************************************************************)
+  (*
+    Remark: we use the canonical product nat * nat, which has definitional
+    projections [fst] and [snd], avoiding additional “pair type” bureaucracy
+    in the base layer.
+  *)
 
   Module Type PAIRING_SIG.
     Parameter nat : Type.
 
-    (* The coding operations under certification. *)
+    (*
+      The coding operations under certification.
+    *)
 
     Parameter pair   : nat -> nat -> nat.
     Parameter unpair : nat -> nat * nat.
 
   End PAIRING_SIG.
 
-  (*************************************************************************)
-  (*                                                                       *)
-  (*  Many constructions can implement pair/unpair effectively (total      *)
-  (*  recursion), but cannot prove the global inversion law inside the     *)
-  (*  pure BHK_R core without additional structure.                        *)
-  (*                                                                       *)
-  (*  Reflexica packages exactly one missing inhabitant, so that later     *)
-  (*  developments can depend on it explicitly and locally, rather than    *)
-  (*  importing untracked arithmetic or classical principles.              *)
-  (*                                                                       *)
-  (*************************************************************************)
+  (*
+    Remark. Many constructions can implement pair/unpair effectively (totalr
+    recursion), but cannot prove the global inversion law inside the pure
+    BHK_R core without additional structure.
+
+    Reflexica packages exactly one missing inhabitant, so that later
+    developments can depend on it explicitly and locally, rather than
+    importing untracked arithmetic or classical principles.
+  *)
 
   Module Make (P : PAIRING_SIG).
 
@@ -100,29 +99,23 @@ Unset Strict Implicit.
           P.unpair (P.pair x y) = (x, y)
     }.
 
-    (*************************************************************************)
-    (*                                                                       *)
-    (*  Exported form of the certificate field.                              *)
-    (*                                                                       *)
-    (*  This is merely a projection, but naming it makes downstream          *)
-    (*  dependencies explicit: “this proof uses Reflexica”.                  *)
-    (*                                                                       *)
-    (*************************************************************************)
+    (*
+      Exported form of the certificate field.
+      This is merely a projection, but naming it makes downstream dependencies
+      explicit: “this proof holds if Reflexica holds.”
+    *)
 
     Definition unpair_pair_reflexica (r : REFLEXICA) :
       forall x y : P.nat, P.unpair (P.pair x y) = (x, y) :=
       unpair_pair r.
 
-    (*************************************************************************)
-    (*                                                                       *)
-    (*  Derived projections.                                                 *)
-    (*                                                                       *)
-    (*  From the certified round-trip we immediately obtain the ability      *)
-    (*  to recover components of the original pair by applying fst/snd.      *)
-    (*                                                                       *)
-    (*  These lemmas are often the only facts downstream users need.         *)
-    (*                                                                       *)
-    (*************************************************************************)
+    (*
+      Derived projections.
+
+      From the certified round-trip we immediately obtain the ability to recover
+      components of the original pair by applying [ fst/snd ].
+      These lemmas are often the only facts downstream users need.
+    *)
     
     Definition fst_unpair_pair_reflexica (r : REFLEXICA) :
       forall x y : P.nat, fst (P.unpair (P.pair x y)) = x :=
@@ -212,14 +205,11 @@ End Reflexica.
 (*                                                                       *)
 (*************************************************************************)
 
-(*************************************************************************)
-(*                                                                       *)
-(*  “Simple” BHK_R public surface.                                       *)
-(*                                                                       *)
-(*  Policy: re-export only the arithmetic nucleus and the Reflexica      *)
-(*  interface, without assuming any certificate.                         *)
-(*                                                                       *)
-(*************************************************************************)
+(*
+  “Simple” BHK_R public surface.
+  Policy: re-export only the arithmetic nucleus and the Reflexica 
+  interface, without assuming any certificate.
+*)
 
 Module Prelude := C000.P0__BHK.BHK.
 

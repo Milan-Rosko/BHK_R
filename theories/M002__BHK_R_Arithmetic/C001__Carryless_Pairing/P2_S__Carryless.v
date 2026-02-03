@@ -24,24 +24,35 @@ Unset Strict Implicit.
 
 Module Carryless_Semantics.
 
-  Module N := P1_S__Substrate.Prelude.
-  Module R := P2_R__Carryless.Fib_Realization. (* Short aliases for the Nucleus (N) *) (* and Realization (R) *)
+  (*
+    Short aliases for the Nucleus (N) and Realization (R)
+  *)
 
-  (*************************************************************************)
-  (*                                                                       *)
-  (*  The Fibonacci Specification                                          *)
-  (*                                                                       *)
-  (*  A "Fibonacci sequence" is defined here as any function satisfying    *)
-  (*  the standard recurrence laws. This Type Class-style record allows    *)
-  (*  us to prove theorems based on the specification alone.               *)
-  (*                                                                       *)
-  (*************************************************************************)
+  Module N := P1_S__Substrate.Prelude.
+  Module R := P2_R__Carryless.Fib_Realization.
+
+
+  (*
+    A "Fibonacci sequence" is defined here as any function satisfying the
+    standard recurrence laws. This Type Class-style record allows us to prove
+    theorems based on the specification alone.
+  *)
 
   Record FIB : Type := { 
-    fib : N.nat -> N.nat; (* The operation: maps a natural number to a natural number *)
+    fib : N.nat -> N.nat;
+
+    (*
+      The operation: maps a natural number to a natural number
+    *)
+    
     fib_0  : fib N.O = N.O; (* Law: F(0) = 0 *)
     fib_1  : fib (N.S N.O) = N.S N.O; 
-    fib_SS : forall n, fib (N.S (N.S n)) = N.add (fib n) (fib (N.S n)) (* Law: F(n+2) = F(n) + F(n+1). This recurrence defines the sequence structure used for Zeckendorf *)
+    fib_SS : forall n, fib (N.S (N.S n)) = N.add (fib n) (fib (N.S n))
+
+    (*
+      Law: F(n+2) = F(n) + F(n+1).
+      This recurrence defines the sequence structure used for Zeckendorf
+    *)
   }.
 
   (*************************************************************************)

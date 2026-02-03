@@ -10,12 +10,12 @@
 (*     This defines the “BHK meaning nucleus” shared by all later phase.      *)
 (*     The methodology is repository-wide and project-agnostic.               *)
 (*                                                                            *)
-(*        (i) A proposition is identified with the type of its proof.         *)
+(*     (i)    A proposition is identified with the type of its proof.         *)
 (*                                                                            *)
-(*       (ii) To prove a proposition is to construct an inhabitant            *)
+(*     (ii)   To prove a proposition is to construct an inhabitant            *)
 (*            of that type.                                                   *)
 (*                                                                            *)
-(*      (iii) Logical connectives and quantifiers are understood via          *)
+(*     (iii)  Logical connectives and quantifiers are understood via          *)
 (*            their introduction forms and corresponding proof objects;       *)
 (*            functions, dependent pairs, tagged alternatives, etc.           *)
 (*                                                                            *)
@@ -27,11 +27,11 @@
 (*      BHK remains the informal proof-theoretic semantics, whereas           *)
 (*      BHK_R denotes an additional discipline:                               *)
 (*                                                                            *)
-(*        (i) A minimal inductive core,                                       *)
+(*     (i)    A minimal inductive core,                                       *)
 (*                                                                            *)
-(*       (ii) Explicit primitive recursion,                                   *)
+(*     (ii)    Explicit primitive recursion,                                  *)
 (*                                                                            *)
-(*      (iii) A fixed phase structure.                                        *)
+(*     (iii)    A fixed phase structure.                                      *)
 (*                                                                            *)
 (*      The preferred notion of reasoning is kernel conversion:               *)
 (*      definitional equality via β, ι, ζ, and transparent δ, together        *)
@@ -41,10 +41,10 @@
 (*                                                                            *)
 (*      Phase structure.                                                      *)
 (*                                                                            *)
-(*        (i) A construction is the first-class organizing principle          *)
+(*     (i)    A construction is the first-class organizing principle          *)
 (*            (hence folders start with 'C').                                 *)
 (*                                                                            *)
-(*       (ii) For each phase,                                                 *)
+(*     (ii)    For each phase,                                                *)
 (*                                                                            *)
 (*            (a) Realizations ('R') provide concrete constructions           *)
 (*                (Fixpoint/Definition plus explicit proof terms);            *)
@@ -56,13 +56,13 @@
 (*                theorems intended for downstream use.                       *)
 (*            (d) Certificates ('A') form a recursive loop.                   *)
 (*                                                                            *)
-(*      Design.                                                               *)
+(*      Design Principles.                                                    *)
 (*                                                                            *)
-(*        (i) No classical axioms (LEM, Compactness) at this level.           *)
+(*     (i)    No classical axioms (LEM, Compactness) at this level.           *)
 (*                                                                            *)
-(*       (ii) Avoid large numeric towers and heavyweight libraries.           *)
+(*     (ii)   Avoid large numeric towers and heavyweight libraries.           *)
 (*                                                                            *)
-(*      (iii) Prefer small “façades” (records/modules) over large             *)
+(*     (iii)  Prefer small “façades” (records/modules) over large             *)
 (*            signatures to reduce coupling between realizations and          *)
 (*            keep computation explicit, sequential, and intensional.         *)
 (*                                                                            *)
@@ -114,13 +114,13 @@ Module BHK.
 
   (*
     A minimal Arithmetic Kernel (nat) with explicit primitive recursion
-    This is intentionally not Coq.Init.Datatypes.nat. BHK reading:
+    This is intentionally not [ Coq.Init.Datatypes.nat ]. BHK reading:
 
-      (i) The inductive type nat is a canonical constructive object,
+    (i)    The inductive type [ nat ] is a canonical constructive object,
 
-     (ii) O and S are constructors giving the canonical proofs,
+    (ii)   [ O ] and [ S ] are constructors giving the canonical proofs,
 
-    (iii) Induction / recursion corresponds to case analysis on proofs.
+    (iii)  Induction / recursion corresponds to case analysis on proofs.
 
     The “goal” is to keep the computational behavior fully transparent
     and independent of any larger library abstractions.
@@ -130,16 +130,16 @@ Module BHK.
     | O : nat
     | S : nat -> nat.
 
-  (*************************************************************************)
-  (*                                                                       *)
-  (*  Primitive recursive definitions                                      *)
-  (*                                                                       *)
-  (*     (i) add and mul are not axiomatic relations but algorithms.       *)
-  (*    (ii) To know add m n is to be able to compute it by reducing m.    *)
-  (*   (iii) These definitions serve as witnesses of existence claims      *)
-  (*         about sums and products.                                      *)
-  (*                                                                       *)
-  (*************************************************************************)
+  (*
+    Primitive recursive definitions
+
+    (i)    [ add ] and [ mul ] are not axiomatic relations but algorithms.
+
+    (ii)   To know [ add m n ] is to be able to compute it by reducing [ m ].
+
+    (iii)  These definitions serve as witnesses of existence claims about sums
+           and products.
+  *)
 
   Fixpoint add (m n : nat) : nat :=
     match m with
@@ -153,53 +153,45 @@ Module BHK.
     | S m' => add n (mul m' n)
     end.
 
-  (*************************************************************************)
-  (*                                                                       *)
-  (*     (i) Each theorem below asserts an equality whose proof is         *)
-  (*         computationally trivial.                                      *)
-  (*    (ii) The proof object is eq_refl, witnessing that both sides       *)
-  (*         reduce to the same normal form.                               *)
-  (*                                                                       *)
-  (*************************************************************************)
+  (*
+    Each theorem below asserts an equality whose proof is computationally
+    trivial. The proof object is eq_refl, witnessing that both sides reduce
+    to the same normal form.
+  *)
 
   Theorem add_O_l : forall n, add O n = n.
   Proof.
     intro n; simpl; exact (eq_refl _).
   Qed.
 
-  (*************************************************************************)
-  (*                                                                       *)
-  (*  add (S m) n computes by one step of successor introduction.          *)
-  (*  Under BHK, this expresses how a proof of add (S m) n is constructed  *)
-  (*  from a proof of add m n.                                             *)
-  (*                                                                       *)
-  (*************************************************************************)
+  (*
+    [ add (S m) n ] computes by one step of successor introduction.
+    Under BHK, this expresses how a proof of [ add (S m) n ] is constructed
+    from a proof of [ add m n ].
+  *)
 
   Theorem add_S_l : forall m n, add (S m) n = S (add m n).
   Proof.
     intro m; intro n; simpl; exact (eq_refl _).
   Qed.
 
-  (*************************************************************************)
-  (*                                                                       *)
-  (*  Multiplication with zero reduces immediately.                        *)
-  (*  This corresponds to the canonical computation witnessing that        *)
-  (*  zero times any number is zero.                                       *)
-  (*                                                                       *)
-  (*************************************************************************)
+  (*
+    Multiplication with zero reduces immediately.
+    This corresponds to the canonical computation witnessing that
+    zero times any number is zero.
+  *)
 
   Theorem mul_O_l : forall n, mul O n = O.
   Proof.
     intro n; simpl; exact (eq_refl _).
   Qed.
 
-  (*************************************************************************)
-  (*                                                                       *)
-  (*  Successor case for multiplication.                                   *)
-  (*  The equation expresses the recursive construction of a product:      *)
-  (*  (S m) * n is witnessed by n + (m * n).                               *)
-  (*                                                                       *)
-  (*************************************************************************)
+  (*
+    Successor case for multiplication. The equation expresses the recursive
+    construction of a product:
+
+    [ (S m) * n ] is witnessed by [ n + (m * n) ].
+  *)
 
   Theorem mul_S_l : forall m n, mul (S m) n = add n (mul m n).
   Proof.

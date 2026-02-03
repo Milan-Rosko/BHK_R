@@ -4,7 +4,7 @@
 (*                                                                       *)
 (*  C015: The Kolmogorov Equivalence                                     *)
 (*                                                                       *)
-(*   ...as in: A “Kolmogorov-style” limit due to algorithmic entropy.    *)
+(*   ...as in: A “Kolmogorov-style” limit.                               *)
 (*                                                                       *)
 (*  A finite machine has a fixed capacity a priori (tape or RAM).        *)
 (*  Any number n > Capacity cannot be represented distinctly from noise. *)
@@ -91,12 +91,14 @@ Module Kolmogorov_Equivalence.
     *)
 
     assert (H_Read1 : Machine_Read (P x1 y) = 0).
+
     { unfold Machine_Read.
       assert (Hleb : (P x1 y <=? Capacity) = false).
       { apply (proj2 (Nat.leb_gt (P x1 y) Capacity)). exact H_High1. }
       rewrite Hleb. reflexivity. }
 
     assert (H_Read2 : Machine_Read (P x2 y) = 0).
+
     { unfold Machine_Read.
       assert (Hleb : (P x2 y <=? Capacity) = false).
       { apply (proj2 (Nat.leb_gt (P x2 y) Capacity)). exact H_High2. }
@@ -131,7 +133,6 @@ Module Kolmogorov_Equivalence.
     exact H_Conflict.
   Qed.
 
-
 (*************************************************************************)
 (*                                                                       *)
 (*  This locates Reflexica at the entry point: “arithmetic truth”        *)
@@ -143,6 +144,5 @@ Module Kolmogorov_Equivalence.
 (*  ...an external certificate whose downstream use is tracked.          *)
 (*                                                                       *)
 (*************************************************************************)
-
 
 End Kolmogorov_Equivalence.

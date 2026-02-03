@@ -4,229 +4,194 @@
     ┣┻┓ ┣━┫ ┣┻┓   ┣┳┛
     ┗━┛ ╹ ╹ ╹ ╹╺━╸╹┗╸
 
-1 - Repo
-    ----
-
-    Our project is inspired by “Martin-Löf type theory” (MLTT) and
-    “realizability interpretation” (BHK).
-
-    Every global principle is classified as either:
-
-      (i)  Effective device layer: computed inside a minimal constructive core;
-
-      (ii) “Reflexica certificate” (uniformity): imported explicitly as a named
-           certificates whose consequences are fully tracked.
-
-    It is this intended “entropy → axiom/semantics →  cryptographic certificate”
-    shift that is our main contribution. Devices are computable and testable;
-    certificates are auditable single points of failure.
-
-    Axioms become thus falsifiable.
+    A constructive framework for computational
+    realizability and formal falsifiability.
 
 
-2 - Files
-    -----
+1 - Overview
+    --------
 
-    ./theories/                 The primary source directory. Contains all
-                                `.v` (Rocq) files organized by semantic units.
+    BHK_R is a formal verification project leaning on realizability 
+    interpretation, or Brouwer-Heyting-Kolmogorow-Interpretation (BHK). We
+    propose a shift in how foundations of problems structured: axioms must
+    become satisfiable through cryptographic challenges.
 
-    ./builders/                 Automation tools. Contains `.command` scripts
-                                (tested on macOS) that streamline the process.
+    Core Thesis.
 
-    ./builders/_CoqProject      Identifies the logical path.
+    “Hardness” is not an intrinsic property of problems; it is a structural
+    effect in any finite observer's ability to losslessly encode “Domains with
+    Totality” (cf. Kleene). We call the resulting displacement phenomenon
+    “Reflexica”. Thus, we cannot solve some hard problem by proof, but we can
+    subsume two or more by lambda-invariance.
 
-    ./appendix/                 Accompanying technical artifacts, e.g., 
-                                Ocaml files, cryptographic challanges.
 
-3 - Contribution
+2 - Architecture
     ------------
 
-    Thesis. “Hardness” is not an intrinsic property of problems; it is a
-    structural defect in any finite observer’s ability to losslessly encode
-    “Domains with Totality” (cf. Kleene). We call the resulting displacement
-    phenomenon “Reflexica”.
+    The project organizes all global principles into two layers:
 
-                   “We do not solve hard problems by proof;
-                   we solve them by invariance.”
+    (i)         Effective Device Layer: Computed inside a minimal constructive
+                core; fully computable and testable.
 
-    Here, we formalize a method of problem reduction on grounds of λ-invariance.
-    Several major obstructions might be corollary manifestations of a single
-    failure mode, once focus shifts from “truth” semantics to verifiable access.
+    (ii)        Reflexica Certificates: Explicitly imported as named
+                certificates whose consequences are fully tracked; auditable
+                single points of failure.
 
-    The following are suspected as the corollary manifestations of a failure
-    by “entropy:”
-
-        (i) The failure of a verifier to simulate a solver without aliasing
-            temporal resources;
-
-       (ii) The failure of a rational tape to address irrational geometry
-            without aliasing coordinates;
-
-      (iii) The failure of a system to decide set emptiness due to encoding
-            ambiguities;
-
-       (iv) The failure of a system to externalize its own renormalization;
-
-        (v) ... etc.
-
-    Our first canonical limit is synchronized to additive pairing:
-
-    For a chosen effective pairing device, the “global inversion law” (uniform
-    recovery for all inputs) is not derivable inside the pure constructive
-    nucleus; it must be isolated as an explicit certificate, until proven
-    otherwise.
-
-    This is not the claim that pairing functions do not exist. It is a claim
-    about where uniform correctness lives under this semantics: in the
-    certificate layer.
+    This shift from “axiom/semantics → cryptographic certificate” transforms
+    semantics from untestable assumptions into falsifiable claims.
 
 
-4 - Falsifiability
-    --------------
+3 - What Makes This Different
+    --------------------------
 
-    We posit a falsifiability criterion.
+    Traditional approaches treat computational hardness as intrinsic. We
+    formalize it as a structural property of observation systems, then reduce
+    logical undecidability to "entropy" phenomena.
 
-    Since we establish a formal reduction between logical undecidability
-    and “entropy”, we allow ourselves an epistemic wager, in that we assert
-    that every “Reflexica certificate” (as a distilled obstruction) corresponds
-    to, or admits, a secure cryptographic primitive.
+    Falsifiability Criterion.
 
-    This gives us a strict falsifiability criterion:
+    We establish formal reductions between logical undecidability and entropy,
+    allowing a strict empirical test:
 
-    “If a cryptographic scheme derived from this framework is broken,
-    but the underlying problem is not solved, then the framework is false.”
+    “If a cryptographic scheme derived from this framework is broken, but the
+    underlying problem is not solved, then the framework is false.”
 
-    In other words, we move foundational debate away from ontology into
-    verifiable adversarial evidence.
-
-    A first preliminary “chellange” can be found in:
-
-    ./appendix/challange/carryless_vault
+    This moves foundational debate from ontology to verifiable adversarial
+    evidence.
 
 
-5 - Staring Tools
-    -------------
+4 - Project Structure
+    -----------------
+
+    ./theories/         Primary source (.v Rocq files) organized by semantic
+                        units.
+
+    ./builders/         Automation scripts
+                                
+    ./_CoqProject       Standard logic path configuration.
+
+    ./appendix/         Technical artifacts, OCaml code, challenges.
+                                
+
+5 - File Naming Convention.
+
+    Files use lexical phase ordering:
+
+        [ <Phase>_<Role>__Unit.v ]
+
+        e.g., “P1_R__Pairing.v”
+
+    Roles are:
+    
+        S for Proof Semantics
+        R for Realization
+        T for Façades / Theorems
+        A for Certificate Layers
+
+6 - Core Contributions
+    ------------------
+
+    We propose that several major computational barriers are corollary
+    manifestations of an entropy governed failure:
+
+    (i)     A calculus cannot simulate a solver without aliasing temporal
+            resources.
+
+    (ii)    Rational tape cannot address irrational geometry without
+            aliasing coordinates.
+
+    (iii)   A system unable to decide set emptiness due to encoding
+            ambiguities.
+
+    (iv)    A calculus unable to externalize its own renormalization.
+
+    (v)     ... and more.
 
 
-    To enforce these results without relying on classical assumptions, while
-    we implement the following constructive tools:
+    We implement the following without classical assumptions:
 
-        (i) “BHK_R Semantics.” A lambda-definable local logic that serves as
-            the organizing principle for the entire repository, enforcing
-            constructive validity.
+    (i)     BHK_R Semantics. A λ-definable local logic serving as the organizing
+            principle, enforcing constructive validity throughout.
 
-       (ii) “Carryless Pairing.” A structural arithmetic coding scheme that
-            avoids prime factorization and multiplicative number theory,
-            relying instead on Fibonacci growth and Zeckendorf supports.
-            See: https://milanrosko.com/carryless.html
+    (ii)    Carryless Pairing. A structural arithmetic coding scheme avoiding
+            prime factorization and multiplicative number theory. Instead
+            relies on Fibonacci growth and Zeckendorf supports.
 
-      (iii) “The Mirror Lemma.” A mechanism for weak local forcing derived
-            strictly from reflection principles, permitting “as-if” reasoning
-            within the constructive core.
+            Learn more: https://milanrosko.com/carryless.html
 
-       (iv) “The Adversarial Barrier.” Impossibility results for certified
-            separators, demonstrating that self-auditing systems (those that
-            prove Reflexica) effectively solve the Halting Problem.
+    (iii)   Weak local forcing derived strictly from reflection principles,
+            permitting "as-if" reasoning within the constructive core.
+
+    (iv)    Impossibility results for certified separators, demonstrating that
+            self-auditing systems (those that prove Reflexica) must be
+            inconsistent.
 
 
-6 - Organization
-    ------------
+7 - Design Principles
+    -----------------
 
-    Constructions are explicit, terminating, and fully computable. Proofs
-    do not rely on hidden axioms or untracked gaps.
+    (i)     Explicit constructions. All constructions are terminating and fully
+            computable.
 
-    Files are named so the filename alone indicates phase, role, and semantic
-    unit. We use a phase prefix to maintain lexical ordering:
+    (ii)    Proofs don't rely on untracked gaps or implicit
+            assumptions.
 
-        [ P<Phase>_<Role>__Unit.v ]
+    (iii)   Certificate isolation. Every non-constructive principle is
+            explicitly tracked.
 
-    `P<Phase>` is a nonnegative phase index (`P0`, `P1`, `P2`, …).
-    `<Role>` indicates the file’s function within the phase.
-    `Unit` is a stable identifier for the component/topic.
+    A preliminary challenge demonstrating the framework's falsifiability:
 
-    Roles:
-    `S` = Proof Semantics
-    `R` = Realization
-    `T` = Stable Façades / Theorems
-    `A` = Certificate Layers
+        ./appendix/challenge/carryless_vault
+
+    If one breaks the scheme, non trivially, without solving the underlying
+    problem, the framework is refuted.
 
 
-7 - Literature
-    ----------
 
-    For exposition, consult:
+8 - Research Context
+    ----------------
 
-      @book{russell27,
+    This work builds on classical foundational literature.
+
+    @book{whitehead27,
         title        = {{Principia Mathematica}},
         author       = {Whitehead, A. N. and Russell, B.},
         year         = 1927,
         publisher    = {Cambridge University Press},
         address      = {Cambridge},
         edition      = {2d ed.}
-      }
+    }
 
-      @book{kleene52,
+    @book{kleene52,
         title        = {{Introduction to Metamathematics}},
         author       = {Kleene, S. C.},
         year         = 1952,
         publisher    = {North-Holland}
-      }
+    }
 
-      @book{troelstra88,
+    @book{troelstra88,
         title        = {{Constructivism in Mathematics, Vol. 2}},
         author       = {Troelstra, A. S. and van Dalen, D.},
         year         = 1988,
         publisher    = {North-Holland},
         series       = {Studies in Logic and the Foundations of Mathematics},
         volume       = 123
-      }
+    }
 
-      @book{boolos07,
+    @book{boolos07,
         title        = {{Computability and Logic}},
         author       = {Boolos, G. and Burgess, J. P. and Jeffrey, R. C.},
         year         = 2007,
         publisher    = {Cambridge University Press},
         edition      = {5th}
-      }
-
-    For motivation, consult our previous work:
-
-      @misc{rosko2025fractal,
-        title        = {{The Fractal Logic of $\Phi$-adic Recursion}},
-        author       = {Rosko, M.},
-        year         = 2025,
-        note         = {arXiv preprint},
-        url          = {http://doi.org/10.48550/arXiv.2510.08934}
-      }
-
-      @misc{rosko2025adversarial,
-        title        = {{Adversarial Barrier in Uniform Class Separation}},
-        author       = {Rosko, M.},
-        year         = 2025,
-        note         = {arXiv preprint},
-        url          = {http://doi.org/10.48550/arXiv.2512.08149}
-      }
-
-      @misc{rosko2025solverparadox,
-        title        = {{The Solver's Paradox in Formal Problem Spaces}},
-        author       = {Rosko, M.},
-        year         = 2025,
-        url          = {http://doi.org/10.48550/arXiv.2511.14665}
-      }
-      @misc{rosko2025primeconjectures,
-        title        = {{On the Realizability of Prime Conjectures in Heyting
-                        Arithmetic}},
-        author       = {Rosko, M.},
-        year         = 2025,
-        url          = {http://doi.org/10.48550/arXiv.2511.07774}
-      }
+    }
 
 
-8 - Contact
+9 - Contact
     -------
 
-    We are currently seeking collaborators.
+    Milan Rosko
 
     www.milanrosko.com
 
-    hi "at" milanrosko "dot" com
+    hi “at” milanrosko “dot” com
