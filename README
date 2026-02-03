@@ -4,8 +4,8 @@
     ┣┻┓ ┣━┫ ┣┻┓   ┣┳┛
     ┗━┛ ╹ ╹ ╹ ╹╺━╸╹┗╸
 
-    A constructive framework for computational
-    realizability and formal falsifiability.
+    A constructive framework for computational realizability that asks:
+    “what structural property makes some problems resist closure?”
 
 
 1 - Overview
@@ -25,24 +25,45 @@
     subsume two or more by lambda-invariance.
 
 
-2 - Architecture
-    ------------
+2 - Key Intuition
+    -------------
 
-    The project organizes all global principles into two layers:
+    A problem P is "Reflexica-bound" if and only if deciding P uniformly
+    requires deciding its own decidability.
 
-    (i)         Effective Device Layer: Computed inside a minimal constructive
-                core; fully computable and testable.
+    This self-iterating structure is isomorphic to a non-normalizing λ-term.
 
-    (ii)        Reflexica Certificates: Explicitly imported as named
-                certificates whose consequences are fully tracked; auditable
-                single points of failure.
+    Definition.
 
-    This shift from “axiom/semantics → cryptographic certificate” transforms
-    semantics from untestable assumptions into falsifiable claims.
+        Reflexica(P) := Turing_Definable(P) ∧ ¬ Known_λ_Definable(P)
 
+    Turing-definability admits a TM computing P given unbounded resources;
+    the finite-state component may be postulated without explicit construction.
+    λ-definability requires a normalizing term: the solution must be fully
+    exhibited, not quantified over.
 
-3 - What Makes This Different
-    --------------------------
+    Church-Turing equivalence holds extensionally (which functions are
+    computable) but fails intensionally (what must be exhibited to compute
+    them). Reflexica problems inhabit this gap: TM-expressible promises that
+    λ-calculus cannot close.
+
+    Reflexica status is defeasible. A constructive witness collapses the
+    certificate and refutes the bound.
+
+    Architecture.
+
+    (i)         Effective Device Layer: λ-definable operations inside a
+                minimal constructive core; fully computable, fully explicit.
+
+    (ii)        Reflexica Certificates: Named markers where Turing-definability
+                exceeds known λ-definability; auditable single points of
+                refutation.
+
+    This transforms foundational axioms into falsifiable cryptographic
+    challenges: if a scheme is broken without solving the underlying problem,
+    the framework is refuted.
+
+    What Makes This Different?
 
     Traditional approaches treat computational hardness as intrinsic. We
     formalize it as a structural property of observation systems, then reduce
@@ -60,7 +81,7 @@
     evidence.
 
 
-4 - Project Structure
+3 - Project Structure
     -----------------
 
     ./theories/         Primary source (.v Rocq files) organized by semantic
@@ -73,7 +94,7 @@
     ./appendix/         Technical artifacts, OCaml code, challenges.
                                 
 
-5 - File Naming Convention.
+4 - File Naming Convention.
 
     Files use lexical phase ordering:
 
@@ -88,7 +109,7 @@
         T for Façades / Theorems
         A for Certificate Layers
 
-6 - Core Contributions
+5 - Core Contributions
     ------------------
 
     We propose that several major computational barriers are corollary
@@ -127,7 +148,7 @@
             inconsistent.
 
 
-7 - Design Principles
+6 - Design Principles
     -----------------
 
     (i)     Explicit constructions. All constructions are terminating and fully
@@ -148,7 +169,7 @@
 
 
 
-8 - Research Context
+7 - Research Context
     ----------------
 
     This work builds on classical foundational literature.
@@ -187,7 +208,7 @@
     }
 
 
-9 - Contact
+8 - Contact
     -------
 
     Milan Rosko
