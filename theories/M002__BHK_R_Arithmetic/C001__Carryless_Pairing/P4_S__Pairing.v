@@ -84,7 +84,7 @@ Module Pairing_Semantics.
 
   (*************************************************************************)
   (*                                                                       *)
-  (*  The Device Interface: CL_PAIR                                        *)
+  (*  The Device Interface [ CL_PAIR ]                                     *)
   (*                                                                       *)
   (*  This record exposes the operational internals of the pairing         *)
   (*  scheme without exposing their implementation code.                   *)

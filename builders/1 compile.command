@@ -118,13 +118,14 @@ COUNT="$(grep -c . "${SELECTED_LIST}" || true)"
   echo "---------------------------------------------------------------------------"
   echo 
   echo "                    Date (UTC): $UTC_NOW,"
-  echo ""  if [ -n "${COQC}" ]; then
+  echo ""
+  if [ -n "${COQC}" ]; then
   echo "                   Rocq version: $(${COQC} --version 2>/dev/null | head -n 1)"
   echo "                   Method: isolated shadow, scratch folder"
   fi
   echo
   echo "---------------------------------------------------------------------------"
-  echo "Discipline analysis"
+  echo "Axioms"
   echo "---------------------------------------------------------------------------"
   echo
   if [ -n "${ALL_AXIOM_FILES}" ]; then

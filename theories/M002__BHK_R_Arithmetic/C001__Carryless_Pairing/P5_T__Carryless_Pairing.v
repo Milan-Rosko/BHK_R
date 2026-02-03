@@ -19,7 +19,7 @@ Unset Strict Implicit.
 (*  facades and canonical instances required by downstream developments  *)
 (*  (C002+), hiding all internal realization details.                    *)
 (*                                                                       *)
-(*  Policy (The "Lean" Discipline):                                      *)
+(*  Policy,                                                              *)
 (*                                                                       *)
 (*    (i) Single Canonical Reality: We export exactly one effective      *)
 (*        realization for Fibonacci (StandardFib) and one for            *)
@@ -75,7 +75,7 @@ Definition StandardNatInj : NAT_INJ := NatInj.StandardNatInj.
 Definition CarrylessPair : CL_PAIR := Pairing.CarrylessPair.
 
 (*
-  Public (Constructive destructors for the arithmetic nucleus)
+  Constructive destructors for the arithmetic nucleus
 *)
 
 (*

@@ -12,7 +12,7 @@ Unset Strict Implicit.
 (*  chain (C002+). It is an effectivity witness and executable           *)
 (*  documentation, not a theory module.                                  *)
 (*                                                                       *)
-(*   C001.P5_T__Carryless_Pairing                      *)
+(*   C001.P5_T__Carryless_Pairing                                        *)
 (*                                                                       *)
 (*   It serves three roles:                                              *)
 (*                                                                       *)
@@ -29,12 +29,12 @@ Unset Strict Implicit.
 (*                                                                       *)
 (*   Methodology note (BHK_R discipline):                                *)
 (*                                                                       *)
-(*   All correctness statements here are witnessed by computation        *)
-(*   (vm_compute), not by propositional reasoning or axioms.             *)
+(*   All correctness statements here are witnessed by computation, that  *)
+(*   is by [ vm_compute ], not by propositional reasoning or axioms.     *)
 (*                                                                       *)
 (*   In particular:                                                      *)
 (*                                                                       *)
-(*    (i) unpair (pair x y) reduces definitionally to (x, y);            *)
+(*    (i) [ unpair (pair x y) ] reduces definitionally to (x, y);        *)
 (*                                                                       *)
 (*   (ii) Fibonacci ranks, bands, and Zeckendorf supports are            *)
 (*        observed as concrete normal forms.                             *)
@@ -81,12 +81,15 @@ Module Test_Pairing_Small.
   (*           even_band={4}; odd_band={9};                                *)
   (*           Z(pair)= {9,4}; unpair(pair)= (1,1).                        *)
   (*                                                                       *)
-  (*  We verify the entire pipeline:                                       *)
+  (*  We verify the entire pipeline,                                       *)
   (*                                                                       *)
-  (*    (i) Zeckendorf support Z(1)                                        *)
-  (*   (ii) Rank r(1) and Band B(1)                                        *)
-  (*  (iii) Even/Odd band construction                                     *)
-  (*   (iv) final pairing value and Unpairing round-trip                   *)
+  (*    (i) Zeckendorf support Z(1);                                       *)
+  (*                                                                       *)
+  (*   (ii) Rank r(1) and Band B(1);                                       *)
+  (*                                                                       *)
+  (*  (iii) Even/Odd band construction;                                    *)
+  (*                                                                       *)
+  (*   (iv) final pairing value and Unpairing round-trip.                  *)
   (*                                                                       *)
   (*************************************************************************)
 
@@ -98,7 +101,7 @@ Module Test_Pairing_Small.
   Definition y11 : N.nat := of_nat 1.
 
   (*
-    Check exact value: pair(1,1) should correspond to index 37
+    Check exact value: [ pair(1,1) ] should correspond to [ index 37 ].
   *)
 
   Example test_pair_1_1_value :
@@ -130,7 +133,7 @@ Module Test_Pairing_Small.
   Proof. vm_compute. reflexivity. Qed.
 
   (*
-    Verify round-trip: unpair(pair(1,1)) reduces to (1,1)
+    Verify round-trip: [ unpair(pair(1,1)) ] reduces to [ (1,1) ]
   *)
 
   Example test_even_band_1 :
@@ -155,7 +158,7 @@ Module Test_Pairing_Small.
 
   (*
     TEST 2: x=5, y=3
-    Expected: pair(5,3)=4236; unpair(pair)= (5,3).
+    Expected: pair(5,3) = 4236; unpair(pair) = (5,3).
   *)
 
   Definition x53 : N.nat := of_nat 5.

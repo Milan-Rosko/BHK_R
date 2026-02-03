@@ -33,7 +33,7 @@ Module Carryless_Semantics.
 
 
   (*
-    A "Fibonacci sequence" is defined here as any function satisfying the
+    A “Fibonacci sequence” is defined here as any function satisfying the
     standard recurrence laws. This Type Class-style record allows us to prove
     theorems based on the specification alone.
   *)
