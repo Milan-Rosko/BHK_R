@@ -14,24 +14,22 @@ Unset Strict Implicit.
 (*                                                                       *)
 (*  C001 / Phase 5 (T): Carryless Pairing (Public Surface)               *)
 (*                                                                       *)
-(*  Purpose.                                                             *)
 (*  This is the phase-free entry point for C001. It exposes the stable   *)
 (*  facades and canonical instances required by downstream developments  *)
 (*  (C002+), hiding all internal realization details.                    *)
 (*                                                                       *)
 (*  Policy,                                                              *)
 (*                                                                       *)
-(*    (i) Single Canonical Reality: We export exactly one effective      *)
-(*        realization for Fibonacci (StandardFib) and one for            *)
-(*        (StandardNatInj). No redundant "A/B" implementations exist.    *)
+(*   (i)    Single Canonical Reality: We export exactly one effective    *)
+(*          realization for Fibonacci (StandardFib) and one for          *)
+(*          (StandardNatInj). No redundant "A/B" implementations exist.  *)
 (*                                                                       *)
-(*   (ii) Device Access: The Pairing device is exposed via the CL_PAIR   *)
-(*        interface, backed by the Zeckendorf realization                *)
+(*   (ii)   Device Access: The Pairing device is exposed via the         *)
+(*          [ CL_PAIR ] interface, backed by the Zeckendorf realization. *)
 (*                                                                       *)
-(*  (iii) No Axioms: All theorems here are proven by kernel computation  *)
-(*        (eq_refl) or direct destructor elimination.                    *)
-(*        The Global Inversion Law is NOT present here;                  *)
-(*        it lives exclusively in Phase 6 (Reflexica).                   *)
+(*   (iii)  No Axioms: All theorems here are proven by kernel            *)
+(*          computation (eq_refl) or direct destructor elimination.      *)
+(*          The Global Inversion Law is NOT present here;                *)
 (*                                                                       *)
 (*************************************************************************)
 
@@ -76,9 +74,6 @@ Definition CarrylessPair : CL_PAIR := Pairing.CarrylessPair.
 
 (*
   Constructive destructors for the arithmetic nucleus
-*)
-
-(*
   Injectivity: S m = S n -> m = n
 *)
 

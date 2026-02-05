@@ -17,15 +17,21 @@ Unset Strict Implicit.
 (*                                                                       *)
 (*  Role.                                                                *)
 (*                                                                       *)
-(*    (i) This module exports the stable API for the Additive Theory of  *)
-(*   (ii) Provability. It hides the distinction between R (Realization)  *)
-(*  (iii) S (Semantic) layers, presenting a unified view of the logic.   *)
+(*   (i)    This module exports the stable API for the “Additive         *)
+(*          Theory Provability”                                          *)
+(*                                                                       *)
+(*   (ii)   It hides the distinction between R (Realization)             *)
+(*                                                                       *)
+(*   (iii)  S (Semantic) layers, presenting a unified view of the        *)
+(*          logic.                                                       *)
 (*                                                                       *)
 (*  Components.                                                          *)
 (*                                                                       *)
-(*    (i) Prelude: The arithmetic nucleus (re-exported).                 *)
-(*   (ii) ATP: The core logic (formulas, implication, provability).      *)
-(*  (iii) Coding: The canonical codec (formulas <-> nat).                *)
+(*   (i)    Prelude: The arithmetic nucleus (re-exported).               *)
+(*                                                                       *)
+(*   (ii)   ATP: The core logic (formulas, implication, provability).    *)
+(*                                                                       *)
+(*   (iii)  Coding: The canonical codec (formulas <-> nat).              *)
 (*                                                                       *)
 (*************************************************************************)
 
@@ -73,7 +79,7 @@ Proof.
 Qed.
 
 (*
-  This section exposes the "Checker-First" nature of the logic.
+  This section exposes the “Checker-First” nature of our logic.
   It allows users to prove theorems by computation:
   If 'check pf phi' returns true, then 'Prov phi' holds.
 *)

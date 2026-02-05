@@ -20,20 +20,18 @@ Unset Strict Implicit.
 (*   computes correctly (witnessed by regression tests), they do NOT     *)
 (*   export a logical proof that 'unpair' inverts 'pair' for ALL inputs. *)
 (*                                                                       *)
-(*   We introduce a guarantee as an explicit Axiom (Reflexica).          *)
-(*   Downstream theories (C002+) that require correctness properties     *)
-(*   (e.g. injectivity) must import this file.                           *)
+(*   Modularity:                                                         *)
 (*                                                                       *)
-(*     (i)    Opt-in: This file is separated from P5_T. One can use the  *)
-(*            device computationally without accepting                   *)
-(*            this.                                                      *)
+(*   (i)    Opt-in: This file is separated from P5_T. One can use the    *)
+(*          device computationally without accepting                     *)
+(*          this.                                                        *)
 (*                                                                       *)
-(*     (ii)   Minimal: We assume only the single record instance. All    *)
-(*            other theorems (injectivity, projections) are derived      *)
-(*            constructively from that single point of failure.          *)
+(*   (ii)   Minimal: We assume only the single record instance. All      *)
+(*          other theorems (injectivity, projections) are derived        *)
+(*          constructively from that single point of failure.            *)
 (*                                                                       *)
-(*     (iii)  We provide a method of switching between models of         *)
-(*            “arithmetic truth”.                                        *)
+(*   (iii)  We provide a method of switching between models of           *)
+(*          “arithmetic truth”.                                          *)
 (*                                                                       *)
 (*************************************************************************)
 
@@ -68,23 +66,14 @@ Module Carryless_Reflexica.
 
   (*************************************************************************)
   (*                                                                       *)
-  (*  CONFIGURATION SWITCH                                                 *)
-  (*                                                                       *)
-  (*  Set to [true]  for BHK_R approach: single structural axiom           *)
-  (*  Set to [false] for Rocq approach:  Standard Library methodology      *)
+  (*  Set to [ true ]  for the BHK_R approach: single structural axiom     *)
+  (*  Set to [ false ] for the Rocq approach: “tactics“                    *)
   (*                                                                       *)
   (*************************************************************************)
 
   Definition USE_BHK_R : bool := false.
 
   (*************************************************************************)
-  (*                                                                       *)
-  (*  Approach One: BHK_R Structural Axiom                                 *)
-  (*                                                                       *)
-  (*  This approach introduces a single axiom expressing the global        *)
-  (*  inversion property of the pairing construction.                      *)
-  (*                                                                       *)
-  (*  Philosophical Justification:                                         *)
   (*                                                                       *)
   (*  The axiom is motivated by the structural correspondence between      *)
   (*  logical inference (Modus Ponens) and the geometric limit (Golden     *)
@@ -102,22 +91,6 @@ Module Carryless_Reflexica.
   End BHK_R_Approach.
 
   (*************************************************************************)
-  (*                                                                       *)
-  (*  Approach Two: Standard Library Methodology                           *)
-  (*                                                                       *)
-  (*  This approach demonstrates certification using Rocq's standard       *)
-  (*  library techniques. The development proceeds in three stages:        *)
-  (*                                                                       *)
-  (*    (i)   Formalize the correctness statement as a Section with        *)
-  (*          explicit hypotheses about Zeckendorf representation          *)
-  (*                                                                       *)
-  (*    (ii)  Derive the inversion theorem constructively from these       *)
-  (*          hypotheses using standard arithmetic lemmas                  *)
-  (*                                                                       *)
-  (*    (iii) Close the Section, revealing the theorem's dependencies      *)
-  (*          as explicit parameters                                       *)
-  (*                                                                       *)
-  (*  Methodological Note:                                                 *)
   (*                                                                       *)
   (*  While this approach appears to avoid axioms by using Section         *)
   (*  hypotheses, the resulting theorem requires inhabitants of these      *)
@@ -156,9 +129,6 @@ Module Carryless_Reflexica.
       Import P.R.
 
       (*
-        Zeckendorf Representation Specification
-        ========================================
-
         The following three hypotheses capture the essential properties
         of Zeckendorf representation required for correctness:
 
@@ -190,20 +160,11 @@ Module Carryless_Reflexica.
                      (P.Z CarrylessPair (P.pair CarrylessPair x y))
           = P.odd_band CarrylessPair x y.
 
-      (*
-        Arithmetic Infrastructure
-        =========================
-
-        The following lemmas establish the algebraic properties of the
-        encoding/decoding operations. These results depend on properties
-        of the BHK arithmetic nucleus (add, monus, div2) and would require
-        additional development of arithmetic theory beyond the minimal
-        constructive core.
-
-        For the purposes of this methodological demonstration, we admit
-        these lemmas to focus on the structural comparison between
-        certification approaches.
-      *)
+      (*************************************************************************)
+      (*                                                                       *)
+      (*  We assume arithmetic consistency bellow.                             *)
+      (*                                                                       *)
+      (*************************************************************************)
 
       Lemma two_S : forall n, P.R.two (N.S n) = N.S (N.S (P.R.two n)).
       Proof.
@@ -255,9 +216,6 @@ Module Carryless_Reflexica.
       Admitted.
 
       (*
-        Recovery Lemmas
-        ===============
-
         These lemmas establish that the unpairing operation correctly
         recovers the original components. They follow directly from
         the Zeckendorf hypotheses combined with the arithmetic
@@ -288,9 +246,6 @@ Module Carryless_Reflexica.
       Qed.
 
       (*
-        Main Correctness Theorem
-        ========================
-
         The inversion property follows from the recovery lemmas.
         The proof requires navigating the product type conversions
         between the custom P.R.prod and standard Coq pairs.
@@ -310,9 +265,6 @@ Module Carryless_Reflexica.
     End Carryless_Correctness.
 
     (*
-      Section Closure Analysis
-      ========================
-
       Upon closing the Section, the theorem unpair_pair_thm acquires
       the following type:
 
@@ -321,15 +273,6 @@ Module Carryless_Reflexica.
 
       The hypotheses become explicit parameters. To instantiate the
       certificate, we require inhabitants of these three propositions.
-
-      Complete proofs would require:
-      - Zeckendorf uniqueness theorem
-      - Band separation correctness
-      - Fibonacci growth properties
-
-      This constitutes substantial number-theoretic development beyond
-      the minimal constructive core. For this methodological comparison,
-      we introduce these as axioms, making the dependencies explicit.
     *)
 
     Axiom Z_sound_ax :
@@ -356,46 +299,17 @@ Module Carryless_Reflexica.
     Qed.
 
     (*
-      Methodological Comparison: ConstructiveEpsilon Analysis
-      =======================================================
-
-      The Rocq Standard Library provides constructive_indefinite_description:
-
-        forall P : nat -> Prop,
-          (forall n, {P n} + {~P n}) ->    (* decidability *)
-          (exists n, P n) ->                (* existence *)
-          {n : nat | P n}                   (* witness *)
-
-      This is proven via linear search over the natural numbers, not
-      introduced as an axiom. However, its application to our certificate
-      reveals a fundamental circularity:
-
-      Application Attempt:
-
-      1. Define the predicate:
-         P(n) := Sig.unpair n = (x, y)
-
-      2. Establish decidability:
-         Requires decidable equality on Sig.nat
-         Status: ✓ Achievable via standard induction
-
-      3. Prove existence:
-         Required: exists n, Sig.unpair n = (x, y)
-         Obstacle: This is equivalent to the inversion property we
-                   seek to certify. Proving it requires the Zeckendorf
-                   properties (Z_sound, Z_even_split, Z_odd_split).
-
-      Observation:
-
-      ConstructiveEpsilon does not eliminate the need for foundational
-      assumptions. It provides a mechanism to extract constructive witnesses
-      from existence proofs, but the existence proof itself must be
+     
+      Observation. [ ConstructiveEpsilon ] does not eliminate the need for
+      foundational assumptions. It provides a mechanism to extract constructive
+      witnesses from existence proofs, but the existence proof itself must be
       established through other means.
 
       Comparative Summary:
 
-      - BHK_R_Approach: 1 axiom (structural, philosophically motivated)
-      - Rocq_Approach: 3 axioms (technical, computationally specific)
+      BHK_R_Approach: 1 axiom (structural, philosophically motivated)
+      
+      Rocq_Approach: 3 axioms (technical, computationally specific)
 
       Both approaches formalize the same underlying mathematical content
       regarding Zeckendorf representation. The distinction lies in
@@ -411,9 +325,6 @@ Module Carryless_Reflexica.
   End Rocq_Approach.
 
   (*
-    Certificate Selection
-    =====================
-
     The following definition implements the configuration switch,
     selecting between the two certification approaches based on
     the USE_BHK_R boolean flag.
@@ -427,15 +338,9 @@ Module Carryless_Reflexica.
 
   (*************************************************************************)
   (*                                                                       *)
-  (*  Foundational Perspective                                             *)
-  (*                                                                       *)
-  (*  From the BHK interpretation, the method of certification             *)
-  (*  (structural axiom vs. computational hypotheses) is of secondary      *)
-  (*  importance to the realizability of the proposition itself.           *)
-  (*                                                                       *)
   (*  The acceptance of an initial realization establishes constructive    *)
-  (*  validity. The absence of a realization for the absurd (⊥) serves     *)
-  (*  as the consistency witness. Within this framework, well-founded      *)
+  (*  validity. The absence of a realization for the absurd serves as the  *)
+  (*  de facto consistency witness. Within this framework, well-founded    *)
   (*  recursion provides the structural guarantee of termination.          *)
   (*                                                                       *)
   (*************************************************************************)
@@ -466,8 +371,6 @@ Module Carryless_Reflexica.
 End Carryless_Reflexica.
 
 (*************************************************************************)
-(*                                                                       *)
-(*  Public Interface                                                     *)
 (*                                                                       *)
 (*  The following module and theorems constitute the phase-free          *)
 (*  public surface for the Reflexica certificate. These results are      *)

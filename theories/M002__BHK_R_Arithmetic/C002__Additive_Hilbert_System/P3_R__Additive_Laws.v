@@ -184,7 +184,7 @@ Module C_002_Additive_Laws_R.
       }
 
       (*
-        Now append final line B by MP from A and (A->B) present in ctx.
+        Append final line B by MP from A and (A->B) present in ctx.
       *)
       
       apply Prf_lines_app with (pf1 := pfAB ++ pfA) (pf2 := sing B).

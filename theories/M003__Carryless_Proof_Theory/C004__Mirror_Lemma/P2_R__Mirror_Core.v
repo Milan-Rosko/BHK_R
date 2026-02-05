@@ -86,16 +86,8 @@ Module C_004_Mirror_Core_R.
 
         AsIF(φ) ≜ "φ acts as-if provable under bound b"
 
-        The "forced" state where φ behaves as-if true within bound b.
-  *)
+    The "forced" state where φ behaves as-if true within bound b.
 
-  (*************************************************************************)
-  (*                                                                       *)
-  (*  Philosophical Interlude: The Story Analogy                           *)
-  (*                                                                       *)
-  (*************************************************************************)
-
-  (*
     Analogy. Characters inside the story could derive the Diagonal Lemma and
     conclude that their formal system is incomplete, a “book”.
 
@@ -103,17 +95,6 @@ Module C_004_Mirror_Core_R.
     "as if" complete, because they do not have access to a richer theory.
 
     Whatever they do, it will always be relatively consistent to the book.
-
-    Key Insight:
-
-      Consistent agents confined to a delimited informational horizon
-      construct internally coherent models that omit what lies beyond reach.
-
-    The Mirror Lemma is epistemic, but also structural:
-
-      - Derive the Diagonal Lemma at object level.
-      - Treat the accessible fragment "as if" complete.
-      - Acknowledge that its boundary is intrinsic, not eliminable.
   *)
 
   (*************************************************************************)
@@ -140,15 +121,17 @@ Module C_004_Mirror_Core_R.
 
     This is "weak forcing" because:
 
-        (i) No axioms added (unlike Cohen forcing).
-       (ii) No model extension (stays in current universe).
-      (iii) Purely proof-theoretic (syntactic bounds, not semantic).
-       (iv) Incompleteness guarantees witness existence.
+    (i)     No axioms added (unlike Cohen forcing).
 
-    The regulator plays a crucial role: it provides the "regulation"
-    that incompleteness exploits. When a separator tries to regulate
-    the diagonal sentence, the Mirror Lemma forces it into an As-If
-    state that clashes with the separator's certificate.
+    (ii)    No model extension (stays in current universe).
+
+    (iii)   Purely proof-theoretic (syntactic bounds, not semantic).
+
+    (iv)    Incompleteness guarantees witness existence.
+
+    The regulator provides the "regulation" that incompleteness “hijacks.”
+    When a separator tries to regulate the diagonal sentence, the Mirror Lemma
+    forces it into an As-If state that clashes with the separator's certificate.
   *)
 
   Record MirrorParams : Type := {
@@ -199,9 +182,9 @@ Module C_004_Mirror_Core_R.
   (*                                                                       *)
   (*  The Mirror Lemma — Fixed-Witness Form                                *)
   (*                                                                       *)
-  (*  Given a fixed regulator (i₀, b₀) and universal bounding:            *)
+  (*  Given a fixed regulator (i₀, b₀) and universal bounding:             *)
   (*                                                                       *)
-  (*    ∀φ. ¬Prov(¬φ) → AsIF(φ)                                           *)
+  (*                       ∀φ. ¬Prov(¬φ) → AsIF(φ)                         *)
   (*                                                                       *)
   (*  This is the core bridge theorem.                                     *)
   (*                                                                       *)
@@ -260,8 +243,6 @@ Module C_004_Mirror_Core_R.
   End FixedWitness.
 
   (*************************************************************************)
-  (*                                                                       *)
-  (*  Diagonal Interface — Representable Transformers                      *)
   (*                                                                       *)
   (*  This interface abstracts the diagonal construction for use with      *)
   (*  the Mirror Lemma in the recursive extension (P3).                    *)

@@ -35,8 +35,6 @@ Module C_002_Provability_S.
 
   (*************************************************************************)
   (*                                                                       *)
-  (*  Object Language Mapping.                                             *)
-  (*                                                                       *)
   (*  We map the abstract Form/Imp/Bot types to the concrete inductive     *)
   (*  types defined in the R-layer.                                        *)
   (*                                                                       *)
@@ -53,14 +51,11 @@ Module C_002_Provability_S.
 
   (*************************************************************************)
   (*                                                                       *)
-  (*  The Soundness Bridge.                                                *)
-  (*                                                                       *)
   (*  This lemma allows us to prove 'Prov phi' by simply running the       *)
   (*  kernel checker. If 'check pf phi' returns true, we immediately       *)
   (*  have a witness for 'Prov phi'.                                       *)
   (*                                                                       *)
-  (*  Usage: apply Prov_from_check with (pf := my_script).                 *)
-  (*  vm_compute. reflexivity.                                             *)
+  (*  Usage: [ apply Prov_from_check ] with [ pf := my_script ].           *)
   (*                                                                       *)
   (*************************************************************************)
 

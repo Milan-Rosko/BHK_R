@@ -13,10 +13,7 @@ Unset Strict Implicit.
 (*                                                                       *)
 (*  C002 / Phase 3 (S) : Additive Theory Packaging                       *)
 (*                                                                       *)
-(*  Role.                                                                *)
-(*                                                                       *)
 (*  This module builds the final "Container" for the proof system.       *)
-(*                                                                       *)
 (*  It takes the raw components,                                         *)
 (*                                                                       *)
 (*    (i) The Kernel Spec (P1_S)                                         *)
@@ -25,9 +22,7 @@ Unset Strict Implicit.
 (*                                                                       *)
 (*  (iii) The Modus Ponens Realization (P3_R)                            *)
 (*                                                                       *)
-(*   and packages them into a single ”Additive Provability” record.      *)
-(*                                                                       *)
-(*   Analogy. A “CSS Class“, or this “box”                               *)
+(*  and packages them into a single ”Additive Provability” record.       *)
 (*                                                                       *)
 (*************************************************************************)
 
@@ -36,15 +31,6 @@ Module C_002_Additive_Theory_S.
   Import C_002_Prelim.
   Import C_002_Provability_S.
   Import C_002_Additive_Laws_R. (* Contains the constructive proof of MP *)
-
-  (*************************************************************************)
-  (*                                                                       *)
-  (*  The Additive Theory Container                                        *)
-  (*                                                                       *)
-  (*  Here we instantiate the 'AdditiveProvability' record defined in P1.  *)
-  (*  We are filling the "div" with concrete content.                      *)
-  (*                                                                       *)
-  (*************************************************************************)
 
   Definition C_002_ATP : AdditiveProvability :=
     {|

@@ -13,9 +13,8 @@ Unset Strict Implicit.
 (*                                                                       *)
 (*  This phase provides a concrete, total compile_delta that produces    *)
 (*  a COMPILED witness for any template via a structural compiler.       *)
-(*                                                                       *)
 (*  The compiled expression computes the code of subst0 t w. The only    *)
-(*  w-dependence is in the Hole case, via UnpairL Var.                   *)
+(*  w-dependence is in the [ Hole ] case, via [ UnpairL Var ].           *)
 (*                                                                       *)
 (*************************************************************************)
 
