@@ -94,7 +94,8 @@
     ./appendix/         Technical artifacts, OCaml code, challenges.
                                 
 
-4 - File Naming Convention.
+4 - File Naming Convention
+    ----------------------
 
     Files use lexical phase ordering:
 
@@ -113,39 +114,33 @@
     ------------------
 
     We propose that several major computational barriers are corollary
-    manifestations of an entropy governed failure:
+    manifestations of an entropy governed failure. Examples include,
 
-    (i)     A calculus cannot simulate a solver without aliasing temporal
-            resources.
+    (i)     a calculus that cannot simulate a solver without aliasing temporal
+            resources;
 
-    (ii)    Rational tape cannot address irrational geometry without
-            aliasing coordinates.
+    (ii)    a rational tape that cannot address irrational geometry without
+            aliasing coordinates;
 
-    (iii)   A system unable to decide set emptiness due to encoding
-            ambiguities.
+    (iii)   A system unable to decide set emptiness due to impredicativity;
 
-    (iv)    A calculus unable to externalize its own renormalization.
+    (iv)    A calculus unable to externalize its own renormalization;
 
     (v)     ... and more.
 
 
-    We implement the following without classical assumptions:
+    We implement the following tools, among others.
 
     (i)     BHK_R Semantics. A λ-definable local logic serving as the organizing
             principle, enforcing constructive validity throughout.
 
     (ii)    Carryless Pairing. A structural arithmetic coding scheme avoiding
-            prime factorization and multiplicative number theory. Instead
-            relies on Fibonacci growth and Zeckendorf supports.
+            prime factorization and multiplicative number theory, cf.
+            www.milanrosko.com/carryless.html
 
-            Learn more: https://milanrosko.com/carryless.html
+    (iii)   “Weak forcing” derived strictly from local reflection principles.
 
-    (iii)   Weak local forcing derived strictly from reflection principles,
-            permitting "as-if" reasoning within the constructive core.
-
-    (iv)    Impossibility results for certified separators, demonstrating that
-            self-auditing systems (those that prove Reflexica) must be
-            inconsistent.
+    (iv)    Various limitative theorems.
 
 
 6 - Design Principles
