@@ -10,7 +10,7 @@ From C000 Require Import P0__Reflexica.
 (*   (i)    Scope,                                                       *)
 (*                                                                       *)
 (*        	(a) This file establishes a closed arithmetic environment    *)
-(*        	for C001;                                                    *)
+(*        		for C001;                                                *)
 (*          (b) It re-exports the C000 “BHK Nucleus.”                    *)
 (*                                                                       *)
 (*   (ii)   Discipline. “Lean” Realization: Subsequent constructions     *)

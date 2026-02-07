@@ -38,9 +38,7 @@
 		│             └── C004__Mirror_Lemma
 		│                 ├── P1_S__Context.v
 		│                 ├── P2_R__Mirror_Core.v
-		│                 ├── P2_R__Mirror_Transport.v
 		│                 ├── P2_S__Mirror_Lemma.v
-		│                 ├── P3_S__Recursive_Mirror_Lemma.v
 		│                 └── P3_T__Weakforcing.v
 		├── M004__Delian_Barrier
 		│             ├── C005__Adversarial_Barrier

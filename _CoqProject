@@ -77,9 +77,7 @@ theories/M003__Carryless_Proof_Theory/C003__Carryless_Diagonal_Lemma/P3_T__Flip_
 
 theories/M003__Carryless_Proof_Theory/C004__Mirror_Lemma/P1_S__Context.v
 theories/M003__Carryless_Proof_Theory/C004__Mirror_Lemma/P2_R__Mirror_Core.v
-theories/M003__Carryless_Proof_Theory/C004__Mirror_Lemma/P2_R__Mirror_Transport.v
 theories/M003__Carryless_Proof_Theory/C004__Mirror_Lemma/P2_S__Mirror_Lemma.v
-theories/M003__Carryless_Proof_Theory/C004__Mirror_Lemma/P3_S__Recursive_Mirror_Lemma.v
 theories/M003__Carryless_Proof_Theory/C004__Mirror_Lemma/P3_T__Weakforcing.v
 
 # --- M004 ---

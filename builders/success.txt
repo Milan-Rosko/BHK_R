@@ -19,7 +19,7 @@
  . . . . . . ... ........ .......**                                        
 ---------------------------------------------------------------------------
 
-                    Date (UTC): 2026-02-05T12:27:07Z,
+                    Date (UTC): 2026-02-07T01:34:34Z,
 
                    Rocq version: The Coq Proof Assistant, version 8.20.1
                    Method: isolated shadow, scratch folder
@@ -115,9 +115,7 @@ _CoqProject file contents:
     
    theories/M003__Carryless_Proof_Theory/C004__Mirror_Lemma/P1_S__Context.v 
    theories/M003__Carryless_Proof_Theory/C004__Mirror_Lemma/P2_R__Mirror_Core.v 
-   theories/M003__Carryless_Proof_Theory/C004__Mirror_Lemma/P2_R__Mirror_Transport.v 
    theories/M003__Carryless_Proof_Theory/C004__Mirror_Lemma/P2_S__Mirror_Lemma.v 
-   theories/M003__Carryless_Proof_Theory/C004__Mirror_Lemma/P3_S__Recursive_Mirror_Lemma.v 
    theories/M003__Carryless_Proof_Theory/C004__Mirror_Lemma/P3_T__Weakforcing.v 
     
    # --- M004 --- 
@@ -191,12 +189,12 @@ _CoqProject file contents:
 === END ===
 
 ---------------------------------------------------------------------------
-Hash(es) (Short SHA-256) of 87 Files:
+Hash(es) (Short SHA-256) of 85 Files:
 ---------------------------------------------------------------------------
    CxVuJiQiN/tEIgutP504fMkcLSHqCCYTEwbNl+7Vjc4=
    tZHgvvitv9lJNwDfw6sMQuUJ2b4U8K+CryqMgiEemTI=
    z2xvE/UbaFr7jOjBxyOwoTCxQE+EbmPCoBuwSXT2GAI=
-   hIx0ynJQLzn9yjWigOIS6uWX558H9cIuaRU95rfGHAQ=
+   4f9PGz21jdp8+ZbG2zr19IAxV0YJfMO9cemd4g6Q3ZM=
    O3bRkPMEcvGfNPqRnSSnZwimzB+f0L3JMw1ZOVjOhCk=
    tmlvnFA1nG4kigwOgvtcfMrmbHrF/wB3khDly4YhP0E=
    sndjmlWyE3fI5UShmIptkzKZnW2cOWlcrPiFT9CsicI=
@@ -221,12 +219,10 @@ Hash(es) (Short SHA-256) of 87 Files:
    aN9J8PG2TQlYcOfJW4B6+TmcKH9h0/8Ijos/bKqoQ24=
    avhyeGbKx3yxi7mR7ncLN4xpEY4u7ojUeYl9EHDq9r4=
    DvBKLJmThsdIvh7u+QMkCnYOQkSABvkV7UixiaJSuKQ=
-   6ejxfO+eXsjq7S2xRwXO8F8jsVNziT8Ju0+s0V6Y3S0=
-   vUsg+V5xnQX4VWPX2kOJy59x0bffh+3JZ9jlorFOgf8=
-   ZiB3ykNtdduJ/whhhY+U0Wb9NCrCnBTSipC44Qbwp6E=
-   wAMl4+Tqy4APNOdyJhbSwhquSv4cGg/xYZhtaBBsI8s=
-   xcAP5XaocrVD9HuUjmuHRnvukeUTGQlWq1HFnTompSM=
-   uZrOV3V3mi9rDOBAHNrhaZmtQRuU0yvckNUCmqVRe7c=
+   D3/ivmHLF54n0UfxtraL10lSt7ERst9ZqY5tg+meZwQ=
+   npTMHYYqq2J0OpfTvPVVcaeLKM0UvSAoHeZU4f0WzWI=
+   swcRT1BySlNhT/Ad2qCwojuVIpJl8eTB4DGHAguYC4k=
+   7pegNj06vLsS2HSYFMFFkzxH5eWYmkZjs6GwrocaqrE=
    es/F0DDVNu7fpfLrBjOid2FlZurEZtZuF5dpVqU6HoA=
    9BySxWXTwXYkosBHROCEsz+BPDF5DoOsH6sF6UNAj0A=
    ubaUbLR+o1/4SK1uo8py9LisFSCBsnkciWw+z2gseEc=

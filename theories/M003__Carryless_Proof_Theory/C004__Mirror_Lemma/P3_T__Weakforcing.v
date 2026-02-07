@@ -4,32 +4,21 @@
 (*                                                                       *)
 (*  C004 / Phase 3 (T): Weak Forcing (Public Surface)                    *)
 (*                                                                       *)
-(*  What is "Weak Forcing"?                                              *)
-(*                                                                       *)
-(*  Consider “Standard Cohen Forcing.” We extend our universe to make a  *)
-(*  statement true.                                                      *)
-(*                                                                       *)
-(*  “Weak Forcing” or “As-If.” We locate a bounded state within the      *)
-(*  existing universe where there are statements that are "As-If" true.  *)
-(*                                                                       *)
-(*  We do NOT add axioms. We discover that incompleteness itself         *)
-(*  “forces” the existence of bounded witnesses.                         *)
-(*                                                                       *)
-(*  Downstream API                                                       *)
+(*  Downstream.                                                          *)
 (*                                                                       *)
 (*   (i)    MirrorParams — Interface for regulators/separators.          *)
 (*                                                                       *)
 (*   (ii)   AsIF(φ) — The predicate identifying "forced" statements:     *)
 (*                                                                       *)
-(*          ∃i. REG(i, b) ∧ BND(φ, b)                                    *)
+(*                       ∃i. REG(i, b) ∧ BND(φ, b)                       *)
 (*                                                                       *)
-(*   (iii)  Mirror_fixed_witness — The main engine:                      *)
+(*   (iii)  Mirror_fixed_witness:                                        *)
 (*                                                                       *)
-(*          ¬Prov(¬φ) + Regulator → AsIF(φ)                              *)
+(*                    ¬Prov(¬φ) + Regulator → AsIF(φ)                    *)
 (*                                                                       *)
-(*   (iv)   Recursive_Mirror_Lemma — Extension for diagonal sentences:   *)
+(*   (iv)   Recursive_Mirror_Lemma:                                      *)
 (*                                                                       *)
-(*          Prov(θ ↔ MirrorPoint(θ))                                     *)
+(*                        Prov(θ ↔ MirrorPoint(θ))                       *)
 (*                                                                       *)
 (*************************************************************************)
 
@@ -42,8 +31,7 @@ From Coq Require Import Init.Logic.
 
 From C004 Require Export
   P1_S__Context
-  P2_S__Mirror_Lemma
-  P3_S__Recursive_Mirror_Lemma.
+  P2_S__Mirror_Lemma.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -54,7 +42,7 @@ Unset Strict Implicit.
 
 Module Prelude := C004.P1_S__Context.C_004_Context.
 Module Mirror  := C004.P2_S__Mirror_Lemma.C_004_Mirror_S.
-Module RecMirror := C004.P3_S__Recursive_Mirror_Lemma.C_004_Recursive_Mirror_S.
+Module RecMirror := C004.P2_S__Mirror_Lemma.C_004_Mirror_S.
 
   (*
     Type Re-exports
@@ -133,24 +121,3 @@ Theorem Recursive_Mirror_Lemma
 Proof.
   exact (RecMirror.Recursive_Mirror_Lemma PF D rep).
 Qed.
-
-(******************************************)
-(******************************************)
-(******************************************)
-(******************************************)
-(******************************************)
-(******************************************)
-(******      ****          *          *****)
-(****   ░░░░   *░░   ░░░░░ ░░   ░░░░   ****)
-(***   ****░░   *░   ** *░**░   ***░░   ***)
-(**░   *****░   *░      ****░   ****░   ***)
-(**░   ***  ░   *░   ░░ ****░   ****░   ***)
-(**░░   *░░    **░   *░*** *░   ****   ****)
-(***░░░      ░  *          *          *****)
-(*****░░░░░░*░░*░░░░░░░░░░*░░░░░░░░░░******)
-(******************************************)
-(******************************************)
-(******************************************)
-(******************************************)
-(******************************************)
-(******************************************)
