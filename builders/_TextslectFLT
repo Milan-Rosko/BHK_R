@@ -16,8 +16,8 @@ theories/M002__BHK_R_Arithmetic/C002__Additive_Hilbert_System/P6_P__Effectivity.
 # --- M003 ---
 theories/M003__Carryless_Proof_Theory/C003__Carryless_Diagonal_Lemma/P2_T__Diagonal.v
 theories/M003__Carryless_Proof_Theory/C003__Carryless_Diagonal_Lemma/P3_T__Flip_Instance.v
-theories/M003__Carryless_Proof_Theory/C004__Mirror_Lemma/P2_R__Mirror_Core.v
 theories/M003__Carryless_Proof_Theory/C004__Mirror_Lemma/P2_S__Mirror_Lemma.v
+theories/M003__Carryless_Proof_Theory/C004__Mirror_Lemma/P3_S__Recursive_Mirror_Lemma.v
 theories/M003__Carryless_Proof_Theory/C004__Mirror_Lemma/P3_T__Weakforcing.v
 
 # --- M004 ---

@@ -4,7 +4,15 @@
 (*                                                                       *)
 (*  C004 / Phase 3 (T): Weak Forcing (Public Surface)                    *)
 (*                                                                       *)
-(*  Downstream.                                                          *)
+(*  This file is the stable API intended for reuse.                      *)
+(*  It re-exports a minimal surface without importing any A/TA modules.  *)
+(*                                                                       *)
+(*  Thus the forcing phenomenon survives in arithmetic not as an         *)
+(*  ontological construction but as a structural principle.              *)
+(*  By extracting and formalizing the genericity pattern implicit in     *)
+(*  forcing, we obtain a purely syntactic analogue that mirrors the      *)
+(*  external behaviour of forcing without reproducing its set-theoretic  *)
+(*  ontology.                                                            *)
 (*                                                                       *)
 (*   (i)    MirrorParams — Interface for regulators/separators.          *)
 (*                                                                       *)
@@ -18,7 +26,7 @@
 (*                                                                       *)
 (*   (iv)   Recursive_Mirror_Lemma:                                      *)
 (*                                                                       *)
-(*                        Prov(θ ↔ MirrorPoint(θ))                       *)
+(*                       Prov(θ ↔ MirrorPoint(θ))                        *)
 (*                                                                       *)
 (*************************************************************************)
 
@@ -38,6 +46,7 @@ Unset Strict Implicit.
 
   (*
     Conceptual Namespaces
+    Short local aliases for the re-exported layers.
   *)
 
 Module Prelude := C004.P1_S__Context.C_004_Context.
@@ -46,6 +55,7 @@ Module RecMirror := C004.P2_S__Mirror_Lemma.C_004_Mirror_S.
 
   (*
     Type Re-exports
+    These are the object-language types/connectives used downstream.
   *)
 
 Definition nat  : Type := Prelude.nat.
@@ -57,6 +67,7 @@ Definition NotF (phi : Form) : Form := Prelude.NotF phi.
 
   (*
     Mirror Core API
+    Re-exported from the core module for convenience.
   *)
 
 Definition MirrorParams : Type := Mirror.MirrorParams.
@@ -66,6 +77,7 @@ Definition Mir         : MirrorParams -> Form -> Prop := Mirror.Mir.
 
   (*
     Fixed-witness Lemma
+    A direct alias of the core theorem with explicit parameters.
   *)
 
 Definition Mirror_fixed_witness
@@ -78,6 +90,7 @@ Definition Mirror_fixed_witness
 
   (*
     Restricted Diagonal Interface
+    Only the minimal diagonal API is exposed here.
   *)
 
 Definition Transformer : Type := Mirror.Transformer.
@@ -86,6 +99,7 @@ Definition trF   (G : Transformer) : Form -> Form := Mirror.trF G.
 
   (*
     Recursive Mirror Extensions
+    MP and D are unused in these wrappers, but retained for interface stability.
   *)
 
 Definition ProvFormer : Type := RecMirror.ProvFormer.

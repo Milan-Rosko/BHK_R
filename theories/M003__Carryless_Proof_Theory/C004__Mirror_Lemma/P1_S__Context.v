@@ -15,15 +15,18 @@ Unset Strict Implicit.
 (*  proof theory (C002) under stable local names and defines             *)
 (*  object-language negation as implication to bottom.                   *)
 (*                                                                       *)
-(*                  NotF(phi) := Imp phi Bot                             *)
+(*                       NotF(phi) := Imp phi Bot                        *)
 (*                                                                       *)
 (*************************************************************************)
 
 Module C_004_Context.
 
+  (* Stable aliases to the underlying proof theory components. *)
+  (* This avoids long paths and keeps later refactors localized. *)
   Module Prelude := C002.P5_T__Proof_Theory.Prelude.
   Module ATP     := C002.P5_T__Proof_Theory.ATP.
 
+  (* Object-language types and connectives used throughout C004. *)
   Definition nat  : Type := Prelude.nat.
   Definition Form : Type := ATP.ATP_Form.
 
@@ -32,7 +35,11 @@ Module C_004_Context.
   Definition Prov : Form -> Prop := ATP.ATP_Prov.
 
   (*
-    Object-language negation: ¬phi := phi -> ⊥
+    Object-language negation (syntactic):
+
+        [ NotF(phi) := Imp phi Bot ]
+   
+    This is a “formula former”, not a meta-level negation.
   *)
  
   Definition NotF (phi : Form) : Form := Imp phi Bot.

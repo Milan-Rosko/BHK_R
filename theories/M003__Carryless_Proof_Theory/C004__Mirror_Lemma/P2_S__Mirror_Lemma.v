@@ -27,10 +27,10 @@ Unset Strict Implicit.
 
 (*************************************************************************)
 (*                                                                       *)
-(* Reader Walkthrough (Step by Step)                                     *)
+(* Summary.                                                              *)
 (*                                                                       *)
 (*   (i)   Formal constraint.                                            *)
-(*         A consistent r.e. theory T cannot prove a global reflection   *)
+(*         A consistent RE theory T cannot prove a global reflection     *)
 (*         bridge (Prov -> True) about itself. This is the Gödel–Löb     *)
 (*         barrier to internal self-certification.                       *)
 (*                                                                       *)
@@ -38,6 +38,11 @@ Unset Strict Implicit.
 (*         A system that must act under incompleteness cannot remain     *)
 (*         purely syntactic; it needs a disciplined way to treat some    *)
 (*         unrefuted statements as admissible.                           *)
+(*         A theory restricted to limited information constructs         *)
+(*         internally coherent yet incomplete models. The AsIF operator  *)
+(*         formalizes the stance in which accessible information is      *)
+(*         treated as if complete, while structural limits block access  *)
+(*         to the unobservable.                                          *)
 (*                                                                       *)
 (*   (iii) Regulator mechanism (formal).                                 *)
 (*         The core file defines AsIF and Mir:                           *)
@@ -47,7 +52,7 @@ Unset Strict Implicit.
 (*                                                                       *)
 (*   (iv)  Observational AsIF (level distinction).                       *)
 (*         AsIF is an external, observational predicate: it captures     *)
-(*         a stance the system enacts but cannot, in general, assert      *)
+(*         a stance the system enacts but cannot, in general, assert     *)
 (*         about itself. The stance is enacted, not stated.              *)
 (*                                                                       *)
 (*   (v)   AsIF as systemhood (interpretive layer).                      *)
@@ -66,6 +71,8 @@ Unset Strict Implicit.
 (*                                                                       *)
 (*************************************************************************)
 
+(* Usage: import this file to bring the full Mirror machinery into scope. *)
+(* The Include commands below re-export the context, core, and recursive layers. *)
 Module C_004_Mirror_S.
   Include C_004_Context.
   Include C_004_Mirror_Core_R.

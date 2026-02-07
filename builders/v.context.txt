@@ -1,6 +1,6 @@
 (* Note. This is a concatenation for establishing context. *)
 (* Source: _TextslectFLT *)
-(* Generated (UTC): 2026-02-07T01:36:19Z *)
+(* Generated (UTC): 2026-02-05T12:28:02Z *)
 
 (* ---- BEGIN _TextslectFLT ---- *)
 (*  *)
@@ -21,8 +21,8 @@
 (* # --- M003 --- *)
 (* theories/M003__Carryless_Proof_Theory/C003__Carryless_Diagonal_Lemma/P2_T__Diagonal.v *)
 (* theories/M003__Carryless_Proof_Theory/C003__Carryless_Diagonal_Lemma/P3_T__Flip_Instance.v *)
-(* theories/M003__Carryless_Proof_Theory/C004__Mirror_Lemma/P2_R__Mirror_Core.v *)
 (* theories/M003__Carryless_Proof_Theory/C004__Mirror_Lemma/P2_S__Mirror_Lemma.v *)
+(* theories/M003__Carryless_Proof_Theory/C004__Mirror_Lemma/P3_S__Recursive_Mirror_Lemma.v *)
 (* theories/M003__Carryless_Proof_Theory/C004__Mirror_Lemma/P3_T__Weakforcing.v *)
 (*  *)
 (* # --- M004 --- *)
@@ -1998,198 +1998,6 @@ End C003_Flip_Instance.
 Export C003_Flip_Instance.
 
 
-(* ---- theories/M003__Carryless_Proof_Theory/C004__Mirror_Lemma/P2_R__Mirror_Core.v ---- *)
-
-(* P2_R__Mirror_Core.v *)
-
-(*************************************************************************)
-(*                                                                       *)
-(*  C004 / Phase 2 (R): Mirror Core + Recursive Extension                *)
-(*                                                                       *)
-(*  This file concentrates the formal content for the Mirror Lemma:      *)
-(*                                                                       *)
-(*   (i)    Mirror core                                                  *)
-(*                                                                       *)
-(*          (a) “Regulator” Parameters: REG, BND, ProvT_P                *)
-(*          (b) AsIF predicate and Mirror schema                         *)
-(*          (c) Fixed-witness lemma                                      *)
-(*                                                                       *)
-(*   (ii)   Diagonal interface                                           *)
-(*                                                                       *)
-(*          (a) Transformer, DiagDevice                                  *)
-(*                                                                       *)
-(*   (iii)  Recursive mirror point                                       *)
-(*                                                                       *)
-(*          (a) MirrorPointF, theta, Recursive_Mirror_Lemma              *)
-(*                                                                       *)
-(*************************************************************************)
-
-From Coq Require Import Init.Logic.
-From C004 Require Import P1_S__Context.
-
-Set Implicit Arguments.
-Unset Strict Implicit.
-
-Module C_004_Mirror_Core_R.
-
-  Import C_004_Context.
-
-  (*************************************************************************)
-  (*                                                                       *)
-  (*  parameters, AsIF, Mir                                                *)
-  (*                                                                       *)
-  (*************************************************************************)
-
-  Record MirrorParams : Type := {
-    REG      : nat -> Form -> Prop;
-    BND      : Form -> Form -> Prop;
-    ProvT_P  : Form -> Prop
-  }.
-
-  (*
-    AsIF(φ) := ∃ i, b.
-    BND(φ, b) ∧ REG(i, b) ∧ Prov(φ → b) ∧ ¬ProvT_P(¬φ)
-  *)
-
-  Definition AsIF (MP : MirrorParams) (phi : Form) : Prop :=
-    exists i : nat,
-    exists b : Form,
-      MP.(BND) phi b /\
-      MP.(REG) i b /\
-      Prov (Imp phi b) /\
-      ~ MP.(ProvT_P) (NotF phi).
-
-  (*
-    AsIF_simple(φ) := ¬ProvT_P(¬φ)
-    Used when regulator context is “suppressed”.
-  *)
-
-  Definition AsIF_simple (MP : MirrorParams) (phi : Form) : Prop :=
-    ~ MP.(ProvT_P) (NotF phi).
-
-  (*
-    Mir(φ) := ¬ProvT_P(¬φ) → AsIF(φ)
-  *)
-  
-  Definition Mir (MP : MirrorParams) (phi : Form) : Prop :=
-    ~ MP.(ProvT_P) (NotF phi) -> AsIF MP phi.
-
-  (*************************************************************************)
-  (*                                                                       *)
-  (*  Fixed-witness Lemma                                                  *)
-  (*                                                                       *)
-  (*************************************************************************)
-
-  Section FixedWitness.
-    Context (MP : MirrorParams).
-
-    Variable i0 : nat.
-    Variable b0 : Form.
-
-    Hypothesis REG0 : MP.(REG) i0 b0.
-    Hypothesis BND0 : forall phi : Form, MP.(BND) phi b0.
-    Hypothesis PRV0 : forall phi : Form, Prov (Imp phi b0).
-
-    Theorem Mirror_fixed_witness :
-      forall phi : Form,
-        ~ MP.(ProvT_P) (NotF phi) -> AsIF MP phi.
-    Proof.
-      intros phi Hnr.
-      exists i0. exists b0.
-      repeat split.
-      - apply BND0.
-      - exact REG0.
-      - apply PRV0.
-      - exact Hnr.
-    Qed.
-
-    Theorem Mir_schema_fixed_witness :
-      forall phi : Form, Mir MP phi.
-    Proof.
-      intro phi; unfold Mir.
-      intro Hnr; apply Mirror_fixed_witness; exact Hnr.
-    Qed.
-
-  End FixedWitness.
-
-  (*************************************************************************)
-  (*                                                                       *)
-  (*  Diagonal Interface                                                   *)
-  (*                                                                       *)
-  (*************************************************************************)
-
-  Record Transformer : Type := {
-    trF   : Form -> Form;
-    trRep : Prop
-  }.
-
-  Definition applyT (G : Transformer) : Form -> Form := trF G.
-
-  Record DiagDevice : Type := {
-    diag : Transformer -> Form;
-    diag_fwd :
-      forall (G : Transformer),
-        Prov (Imp (diag G) (applyT G (diag G)));
-    diag_bwd :
-      forall (G : Transformer),
-        Prov (Imp (applyT G (diag G)) (diag G))
-  }.
-
-End C_004_Mirror_Core_R.
-
-Export C_004_Mirror_Core_R.
-
-(*************************************************************************)
-(*                                                                       *)
-(*  Recursive Mirror Point (diagonalization)                             *)
-(*                                                                       *)
-(*************************************************************************)
-
-Module C_004_Recursive_Mirror_R.
-
-  Import C_004_Context.
-  Module Core := C_004_Mirror_Core_R.
-  Import Core.
-
-  Record ProvFormer : Type := {
-    ProvT_F : Form -> Form
-  }.
-
-  Section RecursiveMirrorPoint.
-
-    Context (MP : MirrorParams).
-    Context (PF : ProvFormer).
-    Context (D  : DiagDevice).
-
-    (*
-      MirrorPointF(phi) := (notF ProvT_F(notF phi)) -> phi
-    *)
-
-    Definition MirrorPointF (phi : Form) : Form :=
-      Imp (NotF (PF.(ProvT_F) (NotF phi))) phi.
-
-    Variable MirrorPointF_rep : Prop.
-
-    Definition MirrorPointT : Transformer :=
-      {| trF := MirrorPointF; trRep := MirrorPointF_rep |}.
-
-    Definition theta : Form := D.(diag) MirrorPointT.
-
-    Theorem Recursive_Mirror_Lemma :
-      Prov (Imp theta (MirrorPointF theta)) /\ Prov (Imp (MirrorPointF theta) theta).
-    Proof.
-      split.
-      - exact (D.(diag_fwd) MirrorPointT).
-      - exact (D.(diag_bwd) MirrorPointT).
-    Qed.
-
-  End RecursiveMirrorPoint.
-
-End C_004_Recursive_Mirror_R.
-
-Export C_004_Recursive_Mirror_R.
-
-
 (* ---- theories/M003__Carryless_Proof_Theory/C004__Mirror_Lemma/P2_S__Mirror_Lemma.v ---- *)
 
 (* P2_S__Mirror_Lemma.v *)
@@ -2203,70 +2011,91 @@ Unset Strict Implicit.
 
 (*************************************************************************)
 (*                                                                       *)
-(*  C004 / Phase 2 (S): Mirror Facade (Core + Recursive)                 *)
+(*  C004 / Phase 2 (S): Mirror Lemma Façade                              *)
 (*                                                                       *)
-(*  This facade is the primary entry point for the Mirror Lemma          *)
-(*  machinery. It re-exports:                                            *)
+(*  What This File Provides                                              *)
 (*                                                                       *)
-(*   (i)    Context (Form, Prov, Imp, Bot, NotF)                         *)
+(*   (i)    Semantic Façade for the Mirror Core. Aggregates the Context  *)
+(*          (P1) and the Realization (P2_R) into a single module.        *)
 (*                                                                       *)
-(*   (ii)   Mirror (AsIF, Mir, fixed-witness lemma)                      *)
+(*   (ii)   This layer hides the internal R-file organization.           *)
+(*          Consumers of the fixed-witness theorem should import this    *)
+(*          file (or the T-layer), not the P2_R realization directly.    *)
 (*                                                                       *)
-(*   (iii)  Recursive Mirror (MirrorPointF, theta, Recursive_Mirror)     *)
-(*                                                                       *)
-(*  The Phase-3 facade (P3_S) remains for compatibility, but this file   *)
-(*  is the recommended semantic import.                                  *)
-(*                                                                       *)
-(*************************************************************************)
-
-(*************************************************************************)
-(*                                                                       *)
-(* Reader Walkthrough (Step by Step)                                     *)
-(*                                                                       *)
-(*   (i)   Formal constraint.                                            *)
-(*         A consistent r.e. theory T cannot prove a global reflection   *)
-(*         bridge (Prov -> True) about itself. This is the Gödel–Löb     *)
-(*         barrier to internal self-certification.                       *)
-(*                                                                       *)
-(*   (ii)  Operational consequence.                                      *)
-(*         A system that must act under incompleteness cannot remain     *)
-(*         purely syntactic; it needs a disciplined way to treat some    *)
-(*         unrefuted statements as admissible.                           *)
-(*                                                                       *)
-(*   (iii) Regulator mechanism (formal).                                 *)
-(*         The core file defines AsIF and Mir:                           *)
-(*           AsIF(phi) := exists i,b. REG(i,b) /\ BND(phi,b) /\          *)
-(*                        Prov(phi -> b) /\ not ProvT_P(not phi).        *)
-(*         This is not a truth relation; it is admissibility.            *)
-(*                                                                       *)
-(*   (iv)  Observational AsIF (level distinction).                       *)
-(*         AsIF is an external, observational predicate: it captures     *)
-(*         a stance the system enacts but cannot, in general, assert      *)
-(*         about itself. The stance is enacted, not stated.              *)
-(*                                                                       *)
-(*   (v)   AsIF as systemhood (interpretive layer).                      *)
-(*         Systemhood is the ability to maintain coherence under         *)
-(*         undecidability. AsIF is the minimal formal operator that      *)
-(*         accomplishes this without violating consistency: it upgrades  *)
-(*         non-refutability into a regulated stance.                     *)
-(*                                                                       *)
-(*   (vi)  Operational surrogate and propagation (interpretive).         *)
-(*         Let sigma express "this system is globally coherent." T       *)
-(*         cannot prove sigma, but operational coherence forces an       *)
-(*         AsIF(sigma) stance. Observers “see” the stable AsIF-pattern   *)
-(*         and treat the systemhood claim as admissible. The identity    *)
-(*         is practical, not provable: a stable as-if equivalence, not a *)
-(*         theorem.                                                      *)
+(*    This is the semantic foundation for the Recursive Mirror Lemma.    *)
 (*                                                                       *)
 (*************************************************************************)
 
 Module C_004_Mirror_S.
   Include C_004_Context.
+
+  (*
+    The Core Lemma, fixed-Witness pattern:
+    for any formula φ, there exists a fixed point ψ such that
+
+                          Prov(ψ ↔ φ(⌜ψ⌝))                            
+
+    Remark. Imported from the realization layer [ P2_R__Mirror_Core ].
+  *)
+
   Include C_004_Mirror_Core_R.
-  Include C_004_Recursive_Mirror_R.
 End C_004_Mirror_S.
 
 Export C_004_Mirror_S.
+
+
+(* ---- theories/M003__Carryless_Proof_Theory/C004__Mirror_Lemma/P3_S__Recursive_Mirror_Lemma.v ---- *)
+
+(* P3_S__Recursive_Mirror_Lemma.v *)
+
+(*************************************************************************)
+(*                                                                       *)
+(*  C004 / Phase 3 (S): Recursive Mirror Façade                          *)
+(*                                                                       *)
+(*  What This File Provides                                              *)
+(*                                                                       *)
+(*   (i)    Semantic Façade for the Recursive Extension.                 *)
+(*          Exposes the machinery required to apply the Mirror Lemma     *)
+(*          to self-referential sentences (via the Diagonal Device).     *)
+(*                                                                       *)
+(*   (ii)   Why separate?                                                *)
+(*                                                                       *)
+(*          Core (P2):       Static formulas φ                           *)
+(*          Recursive (P3):  Dynamic fixed points ψ ≜ diag(φ)            *)
+(*                                                                       *)
+(*          This separation ensures that the core "As-If" logic is not   *)
+(*          entangled with the complexity of diagonal construction.      *)
+(*                                                                       *)
+(*  The Recursive Mirror Schema combines the Mirror Lemma with the       *)
+(*  Diagonal Device, given template φ(□), construct ψ ≜ diag(φ):         *)
+(*                                                                       *)
+(*                           Prov(ψ ↔ φ(⌜ψ⌝)).                           *)
+(*                                                                       *)
+(*   This is the semantic foundation for “Gödel's First Incompleteness   *)
+(*   Theorem” and “Löb's Theorem.”                                          *)
+(*                                                                       *)
+(*************************************************************************)
+
+From Coq Require Import Init.Logic.
+From C004 Require Import P1_S__Context.
+From C004 Require Import P2_R__Mirror_Transport.
+
+Set Implicit Arguments.
+Unset Strict Implicit.
+
+Module C_004_Recursive_Mirror_S.
+  Include C_004_Context.
+
+  (*
+    The Recursive Extension,
+    Mirror + Diagonal
+    Imported from the realization layer (P2_R__Mirror_Transport).
+  *)
+
+  Include C_004_Recursive_Mirror_R.
+End C_004_Recursive_Mirror_S.
+
+Export C_004_Recursive_Mirror_S.
 
 
 (* ---- theories/M003__Carryless_Proof_Theory/C004__Mirror_Lemma/P3_T__Weakforcing.v ---- *)
@@ -2277,21 +2106,32 @@ Export C_004_Mirror_S.
 (*                                                                       *)
 (*  C004 / Phase 3 (T): Weak Forcing (Public Surface)                    *)
 (*                                                                       *)
-(*  Downstream.                                                          *)
+(*  What is "Weak Forcing"?                                              *)
+(*                                                                       *)
+(*  Consider “Standard Cohen Forcing.” We extend our universe to make a  *)
+(*  statement true.                                                      *)
+(*                                                                       *)
+(*  “Weak Forcing” or “As-If.” We locate a bounded state within the      *)
+(*  existing universe where there are statements that are "As-If" true.  *)
+(*                                                                       *)
+(*  We do NOT add axioms. We discover that incompleteness itself         *)
+(*  “forces” the existence of bounded witnesses.                         *)
+(*                                                                       *)
+(*  Downstream API                                                       *)
 (*                                                                       *)
 (*   (i)    MirrorParams — Interface for regulators/separators.          *)
 (*                                                                       *)
 (*   (ii)   AsIF(φ) — The predicate identifying "forced" statements:     *)
 (*                                                                       *)
-(*                       ∃i. REG(i, b) ∧ BND(φ, b)                       *)
+(*          ∃i. REG(i, b) ∧ BND(φ, b)                                    *)
 (*                                                                       *)
-(*   (iii)  Mirror_fixed_witness:                                        *)
+(*   (iii)  Mirror_fixed_witness — The main engine:                      *)
 (*                                                                       *)
-(*                    ¬Prov(¬φ) + Regulator → AsIF(φ)                    *)
+(*          ¬Prov(¬φ) + Regulator → AsIF(φ)                              *)
 (*                                                                       *)
-(*   (iv)   Recursive_Mirror_Lemma:                                      *)
+(*   (iv)   Recursive_Mirror_Lemma — Extension for diagonal sentences:   *)
 (*                                                                       *)
-(*                        Prov(θ ↔ MirrorPoint(θ))                       *)
+(*          Prov(θ ↔ MirrorPoint(θ))                                     *)
 (*                                                                       *)
 (*************************************************************************)
 
@@ -2304,7 +2144,8 @@ From Coq Require Import Init.Logic.
 
 From C004 Require Export
   P1_S__Context
-  P2_S__Mirror_Lemma.
+  P2_S__Mirror_Lemma
+  P3_S__Recursive_Mirror_Lemma.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -2315,7 +2156,7 @@ Unset Strict Implicit.
 
 Module Prelude := C004.P1_S__Context.C_004_Context.
 Module Mirror  := C004.P2_S__Mirror_Lemma.C_004_Mirror_S.
-Module RecMirror := C004.P2_S__Mirror_Lemma.C_004_Mirror_S.
+Module RecMirror := C004.P3_S__Recursive_Mirror_Lemma.C_004_Recursive_Mirror_S.
 
   (*
     Type Re-exports
@@ -2394,6 +2235,27 @@ Theorem Recursive_Mirror_Lemma
 Proof.
   exact (RecMirror.Recursive_Mirror_Lemma PF D rep).
 Qed.
+
+(******************************************)
+(******************************************)
+(******************************************)
+(******************************************)
+(******************************************)
+(******************************************)
+(******      ****          *          *****)
+(****   ░░░░   *░░   ░░░░░ ░░   ░░░░   ****)
+(***   ****░░   *░   ** *░**░   ***░░   ***)
+(**░   *****░   *░      ****░   ****░   ***)
+(**░   ***  ░   *░   ░░ ****░   ****░   ***)
+(**░░   *░░    **░   *░*** *░   ****   ****)
+(***░░░      ░  *          *          *****)
+(*****░░░░░░*░░*░░░░░░░░░░*░░░░░░░░░░******)
+(******************************************)
+(******************************************)
+(******************************************)
+(******************************************)
+(******************************************)
+(******************************************)
 
 
 (* ---- theories/M004__Delian_Barrier/C005__Adversarial_Barrier/P2_T__Barrier.v ---- *)

@@ -16,6 +16,7 @@
 # M003: Carryless Proof Theory
 -Q theories/M003__Carryless_Proof_Theory/C003__Carryless_Diagonal_Lemma C003
 -Q theories/M003__Carryless_Proof_Theory/C004__Mirror_Lemma C004
+-Q theories/M003__Carryless_Proof_Theory/C018__Symbolic_Regulation C018
 
 # M004: Delian Barrier
 -Q theories/M004__Delian_Barrier/C005__Adversarial_Barrier C005
@@ -79,6 +80,14 @@ theories/M003__Carryless_Proof_Theory/C004__Mirror_Lemma/P1_S__Context.v
 theories/M003__Carryless_Proof_Theory/C004__Mirror_Lemma/P2_R__Mirror_Core.v
 theories/M003__Carryless_Proof_Theory/C004__Mirror_Lemma/P2_S__Mirror_Lemma.v
 theories/M003__Carryless_Proof_Theory/C004__Mirror_Lemma/P3_T__Weakforcing.v
+
+theories/M003__Carryless_Proof_Theory/C018__Symbolic_Regulation/P1_R__Core.v
+theories/M003__Carryless_Proof_Theory/C018__Symbolic_Regulation/P2_S__Interfaces.v
+theories/M003__Carryless_Proof_Theory/C018__Symbolic_Regulation/P3_R__Provability_Inclusion.v
+theories/M003__Carryless_Proof_Theory/C018__Symbolic_Regulation/P4_S__Mirror_Bridge.v
+theories/M003__Carryless_Proof_Theory/C018__Symbolic_Regulation/P5_T__Symbolic_Regulation.v
+theories/M003__Carryless_Proof_Theory/C018__Symbolic_Regulation/P6_A__Provability_Inclusion.v
+theories/M003__Carryless_Proof_Theory/C018__Symbolic_Regulation/P7_T__Limitative_Combinatorics.v
 
 # --- M004 ---
 theories/M004__Delian_Barrier/C005__Adversarial_Barrier/P1_S__Barrier_Definition.v

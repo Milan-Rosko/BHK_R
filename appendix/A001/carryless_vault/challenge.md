@@ -1,7 +1,4 @@
-# Wythoff/Carryless Vault Challenge
-
-**Status:** Hard / Structurally Bound
-**Theoretical Basis:** C011 (Quintic Hardness), C015 (Wythoff Barrier), P3_T__Semantic_Horizon
+# The “Carryless” Vault Challenge
 
 Break the parametric pairing scheme. Given `(pk, ct)`, recover the full witness `(x, y, p, q)`.
 
@@ -9,9 +6,13 @@ Break the parametric pairing scheme. Given `(pk, ct)`, recover the full witness 
 
 Standard Wythoff sequences ($A_k = \lfloor k\phi \rfloor$) are robust. However, **Reflexica** relies on the divergence between the ideal $\phi$ and the certificate $p/q$.
 
-For small indices $k$ and high-precision $p/q$, the map is linear and indistinguishable from $\phi$. To enforce **Hardness**, we must operate at the **Semantic Horizon**—a large numerical offset $\Delta$ where the cumulative error of the rational approximation creates unique, slope-dependent permutations.
+For small indices $k$ and high-precision $p/q$, the map is linear and indistinguishable from $\phi$. To enforce *Hardness*, we must operate at the *Semantic Horizon*—a large numerical offset $\Delta$ where the cumulative error of the rational approximation creates unique, slope-dependent permutations.
 
-$$\text{Error} \approx (k + \Delta) \cdot \left| \phi - \frac{p}{q} \right| \ge 1$$
+```latex
+
+\text{Error} \approx (k + \Delta) \cdot \left| \phi - \frac{p}{q} \right| \ge 1$$
+
+```
 
 At this horizon, even a 1-bit difference in $p$ or $q$ completely scrambles the ciphertext indices (The "Aliasing Event").
 

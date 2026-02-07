@@ -11,19 +11,16 @@
 1 - Overview
     --------
 
-    BHK_R is a formal verification project leaning on realizability 
-    interpretation, or Brouwer-Heyting-Kolmogorow-Interpretation (BHK). We
-    propose a shift in how foundations of problems structured: axioms must
-    become satisfiable through cryptographic challenges.
+    BHK_R is a finitistic formal verification project leaning on realizability 
+    interpretation (Brouwer-Heyting-Kolmogorow-Interpretation or BHK). We
+    propose a shift in how problems are structured and admitted.
 
     Core Thesis.
 
     “Hardness” is not an intrinsic property of problems; it is a structural
     effect in any finite observer's ability to losslessly encode “Domains with
     Totality” (cf. Kleene). We call the resulting displacement phenomenon
-    “Reflexica”. Thus, we cannot solve some hard problem by proof, but we can
-    subsume two or more by lambda-invariance.
-
+    “Reflexica”.
 
 2 - Key Intuition
     -------------
@@ -47,8 +44,8 @@
     them). Reflexica problems inhabit this gap: TM-expressible promises that
     λ-calculus cannot close.
 
-    Reflexica status is defeasible. A constructive witness collapses the
-    certificate and refutes the bound.
+    Reflexica status is defeasible. A novel λ-definable witness collapses the
+    certificate and refutes the bound,
 
     Architecture.
 
@@ -65,20 +62,11 @@
 
     What Makes This Different?
 
-    Traditional approaches treat computational hardness as intrinsic. We
-    formalize it as a structural property of observation systems, then reduce
-    logical undecidability to "entropy" phenomena.
-
-    Falsifiability Criterion.
-
-    We establish formal reductions between logical undecidability and entropy,
-    allowing a strict empirical test:
+    We equate esoteric impossibilities to an unidetified source of entropy,
+    while providing a falsifiability criterion:
 
     “If a cryptographic scheme derived from this framework is broken, but the
-    underlying problem is not solved, then the framework is false.”
-
-    This moves foundational debate from ontology to verifiable adversarial
-    evidence.
+    underlying problem is not solved, then the framework is inconsistent.”
 
 
 3 - Project Structure
@@ -128,7 +116,6 @@
 
     (v)     ... and more.
 
-
     We implement the following tools, among others.
 
     (i)     BHK_R Semantics. A λ-definable local logic serving as the organizing
@@ -138,7 +125,8 @@
             prime factorization and multiplicative number theory, cf.
             www.milanrosko.com/carryless.html
 
-    (iii)   “Weak forcing” derived strictly from local reflection principles.
+    (iii)   “Weak forcing” and “Symbolic Regulation“ derived strictly from local
+            reflection principles.
 
     (iv)    Various limitative theorems.
 

@@ -1,0 +1,36 @@
+(* README *)
+
+1 - Files
+    -----
+
+    .../FLT.ml                Raw OCaml extracted directly from Rocq. Contains
+                              the sumbool-based decider and the
+                              machine-to-solver transformation logic.
+
+    .../FLT.mli               The OCaml Interface file (generated).
+
+    .../FLT.context.txt       Record of the backhround proof context.
+
+    .../c005.txt              Record of the local proof context.
+
+    .../p.dependency          Raw graph of internal module dependencies.
+ 
+
+2 - Overview
+    --------
+
+    The result constitutes not a proof of FLT, rather, a result understood as
+    “reverse mathematical” necessity.
+
+    This directory contains:
+
+    (i)         Extracted computational artifacts (deterministic programs
+                obtained from the formal development).
+
+    (ii)        Audit trails intended for simple reproducibility checks.
+
+    The `FLT.ml` file is a mechanical artifact extracted from the verified logic
+    of the C014 proof stack. It contains a "Missing Arrow" logic: the 
+    constructive procedure that would transform a hypothetical Fermat reductio
+    into a “forbidden result within the  `Fermat_Check_Witness` decidability
+    kernel.

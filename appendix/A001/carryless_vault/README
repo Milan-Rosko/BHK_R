@@ -1,0 +1,23 @@
+(* REDME *)
+
+“Carryless/Fibonacci” (Preliminary) Vault
+
+1 - Files
+    -----
+
+    challenge.md                Technical specification of the “challenge”
+                                (primitives, protocol, tiers, solving).
+
+
+2 - Overview
+    --------
+
+    This folder contains the public challenge spec for the “Carryless/Fibonacci”
+    vault.
+
+    (i)         challenge.md includes the threat model, the horizon, and
+                the exact keygen/forward/invert sketches plus test tiers and
+                a reference solver.
+
+    (ii)        The exact keygen/forward/invert sketches plus test tiers and a
+                reference solver.
