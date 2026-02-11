@@ -7,12 +7,15 @@
 1 - Overview
     --------
 
-    BHK_R is a constructive framework for computational realizability that asks:
-    “what structural property makes some problems resist closure?”
+    BHK_R is an experimental framework for problem-dependent realizability
+    interpretation. It investigates the structural features that cause certain
+    problems to resist closure under natural proof-theoretic operations.
 
-    The finitistic formal verification project is leaning on realizability 
-    interpretation (Brouwer-Heyting-Kolmogorow-Interpretation or BHK). We
-    propose a shift in how problems are structured and admitted.
+    We build on the Brouwer–Heyting–Kolmogorov (BHK) interpretation and examine
+    how impredicativity interacts with the notion of realization. We propose a
+    systematic reformulation of how problems are structured, classified, and
+    admitted, with the aim of making realizability constraints explicit at the
+    level of problem formation rather than derivation.
 
 
 2 - Key Intuition
@@ -23,14 +26,14 @@
     Totality” (cf. Kleene). We call the resulting displacement phenomenon
     “Reflexica”.
 
-    A problem P is "Reflexica-bound" if and only if deciding P uniformly
+    A problem P is “Reflexica-bound” if and only if deciding P uniformly
     requires deciding its own decidability.
 
     This self-iterating structure is isomorphic to a non-normalizing λ-term.
 
     Definition.
 
-        Reflexica(P) := Turing_Definable(P) ∧ ¬ Known_λ_Definable(P)
+        Reflexica(P) := Turing_Definable(P) ∧ ¬Known_λ_Definable(P)
 
     Turing-definability admits a TM computing P given unbounded resources;
     the finite-state component may be postulated without explicit construction.
@@ -97,8 +100,8 @@
         T for Façades / Theorems
         A for Certificate Layers
 
-5 - Core Contributions
-    ------------------
+5 - Core Principles
+    ---------------
 
     We propose that several major computational barriers are corollary
     manifestations of an entropy governed failure. Examples include,
@@ -115,7 +118,7 @@
 
     (v)     ... and more.
 
-    We implement the following tools, among others.
+    We implement the following tools,
 
     (i)     BHK_R Semantics. A λ-definable local logic serving as the organizing
             principle, enforcing constructive validity throughout.
@@ -129,25 +132,20 @@
 
     (iv)    Various limitative theorems.
 
+    Under the following constrains,
 
-6 - Design Principles
-    -----------------
+    (i)     All constructions are terminating and fully computable.
 
-    (i)     Explicit constructions. All constructions are terminating and fully
-            computable.
+    (ii)    Proofs must not rely on untracked implicit assumptions.
 
-    (ii)    Proofs don't rely on untracked gaps or implicit
-            assumptions.
-
-    (iii)   Certificate isolation. Every non-constructive principle is
-            explicitly tracked.
+    (iii)   Every axiomatic principle is explicitly tracked.
 
     A preliminary challenge demonstrating the framework's falsifiability:
 
-        ./appendix/challenge/carryless_vault
+                 ./appendix/challenge/carryless_vault
 
-    If one breaks the scheme, non trivially, without solving the underlying
-    problem, the framework is refuted.
+    If one manages to break the scheme, non trivially, without solving the
+    underlying problem, the framework is refuted.
 
 
 
