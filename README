@@ -4,26 +4,24 @@
     ┣┻┓ ┣━┫ ┣┻┓   ┣┳┛
     ┗━┛ ╹ ╹ ╹ ╹╺━╸╹┗╸
 
-    A constructive framework for computational realizability that asks:
-    “what structural property makes some problems resist closure?”
-
-
 1 - Overview
     --------
 
-    BHK_R is a finitistic formal verification project leaning on realizability 
+    BHK_R is a constructive framework for computational realizability that asks:
+    “what structural property makes some problems resist closure?”
+
+    The finitistic formal verification project is leaning on realizability 
     interpretation (Brouwer-Heyting-Kolmogorow-Interpretation or BHK). We
     propose a shift in how problems are structured and admitted.
 
-    Core Thesis.
+
+2 - Key Intuition
+    -------------
 
     “Hardness” is not an intrinsic property of problems; it is a structural
     effect in any finite observer's ability to losslessly encode “Domains with
     Totality” (cf. Kleene). We call the resulting displacement phenomenon
     “Reflexica”.
-
-2 - Key Intuition
-    -------------
 
     A problem P is "Reflexica-bound" if and only if deciding P uniformly
     requires deciding its own decidability.
