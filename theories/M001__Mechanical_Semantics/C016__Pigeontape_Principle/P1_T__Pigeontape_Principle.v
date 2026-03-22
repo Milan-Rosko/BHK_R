@@ -1,10 +1,9 @@
-(* P1_T__Kolgmorov_Equivalence *)
+(* P1_T__Pigeontape_Principle.v *)
 
 (*************************************************************************)
 (*                                                                       *)
-(*  C015: The Kolmogorov Equivalence (Mechanical Blurring)               *)
+(*  C015: The Pigeontape_Principle (Mechanical Blurring)                 *)
 (*                                                                       *)
-(*  (A “Kolmogorov-style” limit.)                                        *)
 (*                                                                       *)
 (*  Consider a finite machine with a capacity (tape or RAM).             *)
 (*  Any number n > Capacity cannot be represented distinctly.            *)
@@ -20,7 +19,7 @@ Require Import Coq.Arith.Arith.
 Require Import Coq.Arith.PeanoNat.
 Require Import Coq.micromega.Lia.
 
-Module Kolmogorov_Equivalence.
+Module Pigeontape_Principle.
 
   (*
     Machine model: a fixed, a priori finite capacity.
@@ -140,4 +139,4 @@ Module Kolmogorov_Equivalence.
 (*                                                                       *)
 (*************************************************************************)
 
-End Kolmogorov_Equivalence.
+End Pigeontape_Principle.

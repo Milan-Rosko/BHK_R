@@ -6,7 +6,7 @@
 # ----------------------------------------------------------------------------
 
 # M001: Mechanical Semantics
--Q theories/M001__Mechanical_Semantics/C016__Kolmogorov_Equivalence C016
+-Q theories/M001__Mechanical_Semantics/C016__Pigeontape_Principle C016
 
 # M002: BHK_R Arithmetic
 -Q theories/M002__BHK_R_Arithmetic/C000__BHK_R C000
@@ -41,7 +41,7 @@
 # ----------------------------------------------------------------------------
 
 # --- M001 ---
-theories/M001__Mechanical_Semantics/C016__Kolmogorov_Equivalence/P1_T__Kolgmorov_Equivalence.v
+theories/M001__Mechanical_Semantics/C016__Pigeontape_Principle/P1_T__Pigeontape_Principle.v
 
 # --- M002 ---
 theories/M002__BHK_R_Arithmetic/C000__BHK_R/P0__BHK.v

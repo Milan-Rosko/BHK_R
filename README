@@ -51,13 +51,12 @@
 
     Architecture.
 
-    (i)         Effective Device Layer: λ-definable operations inside a
-                minimal constructive core; fully computable, fully explicit.
+    (i)     Effective Device Layer: λ-definable operations inside a minimal
+            constructive core; fully computable, fully explicit.
 
-    (ii)        Reflexica Certificates: Named markers where Turing-definability
-                exceeds known λ-definability; auditable single points of
-                refutation.
-
+    (ii)    Reflexica Certificates: Named markers where Turing-definability
+            exceeds known λ-definability; auditable single points of refutation.
+            
     This transforms foundational axioms into falsifiable cryptographic
     challenges: if a scheme is broken without solving the underlying problem,
     the framework is refuted.
